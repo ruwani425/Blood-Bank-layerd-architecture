@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="675.0" prefWidth="1182.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.SupplierPageController">
+   <children>
+      <ImageView fitHeight="724.0" fitWidth="1194.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround3.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblSupplier" layoutX="68.0" layoutY="250.0" prefHeight="344.0" prefWidth="978.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colSupplierID" prefWidth="159.0" text="Supplier ID" />
+          <TableColumn fx:id="colSupplierName" prefWidth="205.0" text="Name" />
+            <TableColumn fx:id="colSupplierAddress" prefWidth="177.0" text="Address" />
+            <TableColumn fx:id="colSupplierEmail" prefWidth="183.0" text="E-mail" />
+            <TableColumn fx:id="colDescription" prefWidth="193.0" text="Description" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtSearchBar" layoutX="37.0" layoutY="38.0" onKeyPressed="#searchDataSuppliers" prefHeight="28.0" prefWidth="210.0" promptText="search..." />
+      <JFXButton id="bevel" fx:id="btnAddSupplier" layoutX="260.0" layoutY="34.0" onAction="#popUpWindowAddSupplier" prefHeight="36.0" prefWidth="82.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Add">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../lk/ijse/gdse/bbms/assert/icons8-add-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <ImageView fx:id="backArrow" fitHeight="69.0" fitWidth="48.0" layoutX="1116.0" layoutY="14.0" onMouseClicked="#navigateToInventoryPage" onMouseEntered="#onMouseEnterd" onMouseExited="#onMouseExited" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/blueArrow2.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

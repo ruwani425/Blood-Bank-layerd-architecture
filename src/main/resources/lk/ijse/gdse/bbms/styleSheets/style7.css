@@ -1,0 +1,45 @@
+/* Water Drop-Inspired TableView */
+.table-view {
+    -fx-background-color: linear-gradient(to bottom, #ffffff, #c6f0ff); /* Light blue gradient for water-like background */
+    -fx-border-color: #69b3e7; /* Slightly darker blue border */
+    -fx-border-radius: 0; /* Rounded corners for smooth edges */
+    -fx-background-radius: 0;
+    -fx-padding: 0; /* Padding for a comfortable layout */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.4, 0, 2); /* Drop shadow for water drop effect */
+}
+
+/* Styling table header */
+.table-view .column-header-background {
+    -fx-background-color: #b4e0f9; /* Softer blue for the table header */
+}
+
+.table-view .column-header, .table-view .column-header .label {
+    -fx-text-fill: black; /* Black text in the headers */
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Styling table rows */
+.table-row-cell {
+    -fx-background-color: #e0f7ff; /* Light background for rows */
+    -fx-text-fill: black; /* Black text in table cells */
+    -fx-border-color: transparent; /* Removes borders between rows */
+}
+
+/* Hover effect on rows */
+.table-row-cell:hover {
+    -fx-background-color: #cdefff; /* Slightly darker blue on hover */
+    -fx-text-fill: black; /* Keeps text black on hover */
+}
+
+/* Selected row styling */
+.table-row-cell:selected {
+    -fx-background-color: #b4e0f9; /* Highlight the selected row */
+    -fx-text-fill: black;
+}
+
+/* Focused cell effect */
+.table-cell:focused {
+    -fx-background-color: #d1f5ff; /* Slightly lighter blue for focus */
+    -fx-border-color: #3a94d6; /* Focus border color */
+}

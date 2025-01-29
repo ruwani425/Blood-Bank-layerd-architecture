@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="688.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.HealthCheckUpPageController">
+   <children>
+      <ImageView fitHeight="775.0" fitWidth="1238.0" layoutX="-8.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround.png" />
+         </image></ImageView>
+      <ImageView fitHeight="718.0" fitWidth="540.0" layoutX="603.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangle.png" />
+         </image></ImageView>
+      <ImageView fitHeight="104.0" fitWidth="115.0" layoutX="198.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/arrow6.gif" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="showStatusBtn" layoutX="162.0" layoutY="476.0" onAction="#btnNavigateToDonationPage" prefHeight="147.0" prefWidth="164.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/donationBtn.css" text="   " />
+      <JFXButton id="bevel" fx:id="checkStatusBtn" layoutX="384.0" layoutY="258.0" onAction="#btnCheckDonorHealthCheckUpDetail" prefHeight="18.0" prefWidth="78.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Check" />
+      <VBox layoutX="609.0" layoutY="116.0" prefHeight="505.0" prefWidth="523.0" spacing="10.0">
+         <children>
+            <Label fx:id="healthCheckupIdLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="donorIdLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="lastDonationDateLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="ageLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="weightLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="sugerLevelLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="bloodPresureLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="healthStatusLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <Label fx:id="dateOfCheckUpLbl" prefHeight="40.0" prefWidth="500.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label fx:id="lblHealthCheckUpId" layoutX="182.0" layoutY="68.0" prefHeight="30.0" prefWidth="135.0" />
+      <TextField id="bevel" fx:id="txtNicDonor" layoutX="57.0" layoutY="141.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="57.0" layoutY="110.0" text="Donor Nic :" />
+      <TextField id="bevel" fx:id="txtWeight" layoutX="56.0" layoutY="210.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="59.0" layoutY="182.0" text="Weight :" />
+      <TextField id="bevel" fx:id="txtBloodPressure" layoutX="282.0" layoutY="141.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="282.0" layoutY="113.0" text="Blood Pressure :" />
+      <TextField id="bevel" fx:id="txtSugarLevel" layoutX="282.0" layoutY="211.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="282.0" layoutY="189.0" text="Sugar Level :" />
+      <Label layoutX="57.0" layoutY="73.0" text="Health Check ID :" />
+      <Label layoutX="690.0" layoutY="60.0" text="Donor Health Checkup Details">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

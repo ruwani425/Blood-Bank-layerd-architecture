@@ -1,0 +1,37 @@
+/* Common style for all input fields */
+.text-input, .date-picker, .text-area {
+    -fx-background-color: #fcfcfc; /* Light background */
+    -fx-border-color: #707070; /* Light gray border */
+    -fx-border-radius: 10; /* Rounded borders */
+    -fx-background-radius: 10;
+    -fx-padding:0; /* Padding inside */
+    -fx-font-size: 12px; /* Standard font size */
+    -fx-text-fill: black; /* Black text */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 5, 0, 0, 1);
+}
+
+/* Hover effect for input fields */
+.text-input:hover, .date-picker:hover, .text-area:hover {
+    -fx-background-color: #f5f5f5; /* Slightly darker background on hover */
+    -fx-border-color: #3c7fb1; /* Light blue border on hover */
+}
+
+/* Focus effect */
+.text-input:focused, .date-picker:focused, .text-area:focused {
+    -fx-border-color: #3c7fb1; /* Blue border on focus */
+    -fx-border-width: 2; /* Thicker border on focus */
+}
+
+/* Specific styles for TextArea */
+.text-area {
+    -fx-pref-height: 100px; /* Default height for TextArea */
+}
+
+/* Specific styles for DatePicker */
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #3c7fb1; /* Customize the arrow button in DatePicker */
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #3c7fb1; /* Arrow button hover */
+}

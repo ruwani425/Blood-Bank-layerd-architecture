@@ -1,0 +1,92 @@
+
+
+/* table_card.css */
+
+.table-view {
+    -fx-border-color: transparent; /* Border color around the table */
+    -fx-background-color: transparent; /* Background color for the table */
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent; /* Header background color */
+    -fx-text-fill: transparent; /* Header text color */
+    -fx-font-weight: bold; /* Make header text bold */
+    -fx-padding: 10; /* Padding for header */
+    -fx-border-color: transparent; /* Light gray border for header */
+    -fx-border-width: 0 0 1 0; /* Only bottom border */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1); /* Shadow effect for depth */
+    -fx-background-radius: 30; /* Rounded corners for header */
+}
+
+.table-view .table-row-cell {
+    -fx-background-color: white; /* Default background color for each row */
+    -fx-padding: 20 15; /* Increased vertical padding for cells */
+    -fx-border-color: transparent; /* Remove border for each row */
+    -fx-border-width: 0; /* No border width */
+    -fx-background-insets: 5; /* Space around the row content */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1); /* Shadow effect for depth */
+    -fx-background-radius: 30; /* Rounded corners for rows */
+}
+
+/* Alternating row colors */
+.table-view .table-row-cell.even {
+    -fx-background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+.table-view .table-row-cell.odd {
+    -fx-background-color: #85929e; /* White for odd rows */
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #2196F3; /* Change background color for selected row */
+    -fx-text-fill: white; /* Change text color for selected row */
+    -fx-padding: 20 15; /* Keep padding consistent on selection */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1); /* Embossed effect for selected row */
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #BBDEFB; /* Change background color for hovered row */
+    -fx-padding: 20 15; /* Keep padding consistent on hover */
+}
+
+/* Centering the text in table cells */
+.table-view .table-cell {
+    -fx-alignment: CENTER; /* Center align the text */
+}
+
+/* Hide vertical scrollbar */
+.table-view .scroll-bar:vertical {
+    -fx-pref-width: 0;  /* Set preferred width to 0 */
+    -fx-min-width: 0;   /* Set minimum width to 0 */
+    -fx-max-width: 0;   /* Set maximum width to 0 */
+    -fx-opacity: 0;      /* Set opacity to 0 to hide it */
+}
+
+/* Hide horizontal scrollbar */
+.table-view .scroll-bar:horizontal {
+    -fx-pref-height: 0;  /* Set preferred height to 0 */
+    -fx-min-height: 0;   /* Set minimum height to 0 */
+    -fx-max-height: 0;   /* Set maximum height to 0 */
+    -fx-opacity: 0;       /* Set opacity to 0 to hide it */
+}
+
+/* Tooltip styling */
+.tooltip {
+    -fx-background-color: #333333; /* Dark background for tooltip */
+    -fx-text-fill: white; /* White text for tooltip */
+    -fx-padding: 5; /* Padding for tooltip */
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #4CAF50; /* Button background color */
+    -fx-text-fill: white; /* Button text color */
+    -fx-font-weight: bold; /* Make button text bold */
+    -fx-padding: 10; /* Padding for button */
+    -fx-border-radius: 5; /* Rounded corners */
+    -fx-background-radius: 5; /* Rounded corners */
+}
+
+.button:hover {
+    -fx-background-color: #45A049; /* Darker */
+}

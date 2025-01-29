@@ -1,0 +1,117 @@
+<!-- Created with Jaspersoft Studio version 7.0.0.final using JasperReports Library version 7.0.0-b478feaa9aab4375eba71de77b4ca138ad2f62aa  -->
+<jasperReport name="RecivedBloodDetails" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1746803b-4052-4dee-98fd-1c2938497f2c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="BloodBankDBConnection"/>
+	<query language="SQL"><![CDATA[select * from Reserved_blood]]></query>
+	<field name="Reserved_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Reserved_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reserved_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserved_blood"/>
+	</field>
+	<field name="Blood_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Blood_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Blood_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserved_blood"/>
+	</field>
+	<field name="Hospital_id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Hospital_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="Hospital_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserved_blood"/>
+	</field>
+	<field name="Reserved_date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="Reserved_date"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reserved_date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserved_blood"/>
+	</field>
+	<field name="Reserved_qty" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="Reserved_qty"/>
+		<property name="com.jaspersoft.studio.field.label" value="Reserved_qty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Reserved_blood"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="40" splitType="Stretch">
+		<element kind="staticText" uuid="000c332c-0d02-4c04-abf0-c9b80a28e1d9" x="160" y="4" width="220" height="30" fontSize="16.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Reserved Blood Report]]></text>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="71" splitType="Stretch">
+		<element kind="staticText" uuid="f5d622c3-b402-40b9-ab8a-f88921529472" x="0" y="41" width="111" height="30" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Reserved_id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e89ca083-dc36-4b1e-bb56-e6f6beb80c1f"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="782b241b-d09e-436e-9996-3b866acf91c4" x="111" y="41" width="111" height="30" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Blood_id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2351905-92e1-4350-b3aa-b8a85d3eef8e"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="309c0f6e-6cab-4bca-bf32-28dab177bcef" x="222" y="41" width="111" height="30" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Hospital_id]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62a68519-1176-4646-a2ba-32acf4fe3218"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="799585bb-d88f-43d0-ba0e-35efa3b3270d" x="333" y="41" width="111" height="30" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Reserved_date]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="019d7526-68ba-4a5f-bb2d-d80b753486af"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="b6159983-f0d6-4b28-92b3-4b25ea25cade" x="444" y="41" width="111" height="30" fontSize="14.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[Reserved_qty]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51e3c76a-49fc-472e-9967-40a092ced436"/>
+			<box>
+				<pen lineWidth="1.0"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<element kind="textField" uuid="e8fee040-e005-4eb1-b9dd-ba86334160e4" x="0" y="0" width="111" height="30" fontSize="12.0" hTextAlign="Center">
+				<expression><![CDATA[$F{Reserved_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e89ca083-dc36-4b1e-bb56-e6f6beb80c1f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d7b5ccc6-9af3-42b4-b51f-2e9e158ad568" x="111" y="0" width="111" height="30" fontSize="12.0" hTextAlign="Center">
+				<expression><![CDATA[$F{Blood_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b2351905-92e1-4350-b3aa-b8a85d3eef8e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="4da5f9a9-b3d5-4014-9adc-f8f2256254df" x="222" y="0" width="111" height="30" fontSize="12.0" hTextAlign="Center">
+				<expression><![CDATA[$F{Hospital_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="62a68519-1176-4646-a2ba-32acf4fe3218"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="09dd880e-f921-4e67-a916-801063e493a3" x="333" y="0" width="111" height="30" fontSize="12.0" hTextAlign="Center">
+				<expression><![CDATA[$F{Reserved_date}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="019d7526-68ba-4a5f-bb2d-d80b753486af"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="78ff4efc-a624-4e3c-ab6f-2f581bcd8835" x="444" y="0" width="111" height="30" fontSize="12.0" hTextAlign="Center">
+				<expression><![CDATA[$F{Reserved_qty}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="51e3c76a-49fc-472e-9967-40a092ced436"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="114" splitType="Stretch"/>
+	<pageFooter height="54" splitType="Stretch"/>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>

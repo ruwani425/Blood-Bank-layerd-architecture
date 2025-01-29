@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="675.0" prefWidth="1182.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.InventoryPageController">
+   <children>
+      <ImageView fitHeight="699.0" fitWidth="1208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblInventory" layoutX="36.0" layoutY="183.0" prefHeight="492.0" prefWidth="1090.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colInventoryID" prefWidth="169.0" text="Inventory ID" />
+          <TableColumn fx:id="colInventoryName" prefWidth="199.0" text="Name" />
+            <TableColumn fx:id="colStatus" prefWidth="215.0" text="Status" />
+            <TableColumn fx:id="colExpiryDate" prefWidth="239.0" text="Expiry Date" />
+            <TableColumn fx:id="colQty" prefWidth="211.0" text="Qty" />
+        </columns>
+      </TableView>
+      <TextField fx:id="txtSearchBar" layoutX="27.0" layoutY="28.0" onKeyPressed="#searchDataInventory" prefHeight="28.0" prefWidth="210.0" promptText="search..." />
+      <JFXButton id="bevel" fx:id="btnAddInventory" layoutX="250.0" layoutY="24.0" onAction="#popUpNewWindowAddInventory" prefHeight="36.0" prefWidth="82.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Add">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../lk/ijse/gdse/bbms/assert/icons8-add-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton id="bevel" fx:id="btnAddSupplier" layoutX="1000.0" layoutY="131.0" onAction="#navigateToSupplierPage" prefHeight="34.0" prefWidth="120.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Supplier">
+         <graphic>
+            <ImageView fitHeight="21.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../lk/ijse/gdse/bbms/assert/icons8-add-500.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>

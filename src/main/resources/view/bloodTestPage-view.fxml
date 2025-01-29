@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="660.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.BloodTestPageController">
+   <children>
+      <ImageView fitHeight="710.0" fitWidth="1211.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround2.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblBloodTest" layoutX="3.0" layoutY="337.0" prefHeight="291.0" prefWidth="1158.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colTestId" prefWidth="68.0" text="Test ID" />
+          <TableColumn fx:id="colDonationID" prefWidth="100.0" text="Donation ID" />
+            <TableColumn fx:id="coltestdate" prefWidth="85.0" text="Test Date" />
+            <TableColumn fx:id="colCollectedDate" prefWidth="123.0" text="Collected Date" />
+            <TableColumn fx:id="colSerialNum" prefWidth="97.0" text="Report ID" />
+            <TableColumn fx:id="colResult" prefWidth="85.0" text="Result" />
+            <TableColumn fx:id="colHaemoglobin" prefWidth="130.0" text="Haemoglobin" />
+            <TableColumn fx:id="colPlatelets" prefWidth="86.0" text="Platelets" />
+            <TableColumn fx:id="colRedBloodCells" prefWidth="124.0" text="Red Blood Cells" />
+            <TableColumn fx:id="colWhiteBloodCells" prefWidth="134.0" text="White Blood cells" />
+            <TableColumn fx:id="colBloodQty" prefWidth="100.0" text="blood qty" />
+        </columns>
+      </TableView>
+      <Label layoutX="29.0" layoutY="56.0" text="Test ID :" />
+      <Label fx:id="lblTestId" layoutX="136.0" layoutY="50.0" prefHeight="34.0" prefWidth="89.0" />
+      <Label layoutX="29.0" layoutY="99.0" text="Collected Date :" />
+      <Label fx:id="lblCollectedDate" layoutX="133.0" layoutY="94.0" prefHeight="34.0" prefWidth="89.0" />
+      <Label layoutX="32.0" layoutY="190.0" text="Result :" />
+      <Label layoutX="300.0" layoutY="56.0" text="Haemoglobin :" />
+      <TextField id="bevel" fx:id="txtHaemoglobin" layoutX="449.0" layoutY="60.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="729.0" layoutY="58.0" text="Platelets :" />
+      <Label layoutX="300.0" layoutY="160.0" text="Report Serial Number :" />
+      <TextField id="bevel" fx:id="txtSerialNum" layoutX="450.0" layoutY="158.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="300.0" layoutY="118.0" text="Test Date :" />
+      <TextField id="bevel" fx:id="txtPlatelets" layoutX="867.0" layoutY="57.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="730.0" layoutY="120.0" text="Red Blood Cells :" />
+      <TextField id="bevel" fx:id="txtRedBloodCells" layoutX="868.0" layoutY="116.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="731.0" layoutY="186.0" text="White Blood Cells :" />
+      <TextField id="bevel" fx:id="txtWhiteBloodCells" layoutX="869.0" layoutY="182.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label fx:id="lblTestDate" layoutX="449.0" layoutY="114.0" prefHeight="34.0" prefWidth="89.0" />
+      <Label layoutX="30.0" layoutY="138.0" text="Expiry Date :" />
+      <DatePicker fx:id="datePikerExpiryDate" layoutX="132.0" layoutY="136.0" prefHeight="28.0" prefWidth="147.0" />
+      <Label layoutX="303.0" layoutY="215.0" text="Blood Type :" />
+      <Label fx:id="lblBloodType" layoutX="450.0" layoutY="209.0" prefHeight="34.0" prefWidth="180.0" />
+      <ComboBox id="glass" fx:id="cmbResult" layoutX="133.0" layoutY="184.0" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label layoutX="734.0" layoutY="242.0" text="Blood Report  :" />
+      <Label layoutX="305.0" layoutY="261.0" text="Blood Qty :" />
+      <TextField id="bevel" fx:id="txtBloodQty" layoutX="450.0" layoutY="259.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <JFXButton id="bevel" fx:id="BtnUpdate" layoutX="1044.0" layoutY="297.0" onAction="#BtnUpdateBloodTestOnAction" prefHeight="28.0" prefWidth="85.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Update" />
+      <JFXButton id="glass" fx:id="pendingBtn" layoutX="9.0" layoutY="308.0" onAction="#btnPendingOnAction" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/whiteBtn.css" text="pending" />
+      <JFXButton id="glass" fx:id="finishedBtn" layoutX="82.0" layoutY="308.0" onAction="#btnFinishedOnAction" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/whiteBtn.css" text="Finished" />
+      <JFXButton id="glass" fx:id="btnChooseFile" layoutX="869.0" layoutY="237.0" onAction="#btnChooseFileOnFile" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/whiteBtn.css" text="Choose File" />
+   </children>
+</AnchorPane>

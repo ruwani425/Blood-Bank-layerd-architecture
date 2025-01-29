@@ -1,0 +1,31 @@
+#bevel {
+    -fx-background-color:
+            linear-gradient(#D50032, #D50032),
+            linear-gradient(#D50032 0%, #D50032 20%, #ffffff 100%),
+            linear-gradient(#D50032 0%, #ffffff 50%);
+    -fx-background-radius: 8,7,6;
+    -fx-background-insets: 0,1,2;
+    -fx-text-fill: black;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold; /* Bold text */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0.0, 0, 1);
+
+    /* Adjusting width and height */
+    -fx-min-width: 100px;  /* Minimum width */
+    -fx-min-height:30px;  /* Minimum height */
+    -fx-pref-width: 110px; /* Preferred width */
+    -fx-pref-height:30px; /* Preferred height */
+}
+
+#bevel:hover {
+    -fx-background-color:
+            rgba(0,0,0,0.08),
+            linear-gradient(#D50032, #ffffff),
+            linear-gradient(#D50032 0%, #D50032 50%, #D50032 51%, #D50032 100%);
+    -fx-background-insets: 0 0 -1 0,0,1;
+    -fx-background-radius: 5,5,4;
+    -fx-padding: 3 30 3 30;
+    -fx-text-fill: #242d35;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold; /* Bold text */
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.EmployeePopUpViewController">
+   <children>
+      <Label layoutX="35.0" layoutY="67.0" text="Employee ID :" />
+      <Label layoutX="35.0" layoutY="174.0" text="Nic :" />
+      <Label layoutX="36.0" layoutY="113.0" text="Name :" />
+      <Label layoutX="35.0" layoutY="232.0" text="Address :" />
+      <Label layoutX="367.0" layoutY="89.0" text="E-mail :" />
+      <Label layoutX="368.0" layoutY="157.0" text="Role :" />
+      <Label layoutX="368.0" layoutY="227.0" text="Status :" />
+      <Label fx:id="lblEmpId" layoutX="128.0" layoutY="64.0" prefHeight="27.0" prefWidth="94.0" />
+      <TextField id="bevel" fx:id="txtEmpAddress" layoutX="33.0" layoutY="258.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <ComboBox id="glass" fx:id="cmbEmpStatus" layoutX="370.0" layoutY="258.0" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <HBox alignment="TOP_RIGHT" layoutX="367.0" layoutY="372.0" prefHeight="35.0" prefWidth="221.0" spacing="4.0">
+         <children>
+            <JFXButton id="bevel" fx:id="btnDelete" onAction="#btnDeleteEmployeeOnAction" prefHeight="25.0" prefWidth="70.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Delete" />
+            <JFXButton id="bevel" fx:id="btnUpdate" onAction="#btnUpdateEmployeeOnAction" prefHeight="25.0" prefWidth="70.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Update" />
+            <JFXButton id="bevel" fx:id="btnAdd" onAction="#btnAddEmployeeOnAction" prefHeight="25.0" prefWidth="70.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Add" textAlignment="JUSTIFY" textFill="#4f91fc" wrapText="true" />
+         </children>
+      </HBox>
+      <TextField id="bevel" fx:id="txtEmployeeName" layoutX="33.0" layoutY="139.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <TextField id="bevel" fx:id="txtNic" layoutX="33.0" layoutY="195.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <TextField id="bevel" fx:id="txtEmpEmail" layoutX="365.0" layoutY="121.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <TextField id="bevel" fx:id="txtEmpRole" layoutX="369.0" layoutY="188.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <JFXButton id="bevel" fx:id="closeBtn" layoutX="6.0" layoutY="372.0" onAction="#btnCloseOnAction" prefHeight="25.0" prefWidth="70.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Close" textAlignment="JUSTIFY" textFill="#4f91fc" wrapText="true" />
+   </children>
+</AnchorPane>

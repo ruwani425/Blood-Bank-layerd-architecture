@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="688.0" prefWidth="1190.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.DonationPageController">
+   <children>
+      <ImageView fitHeight="797.0" fitWidth="1249.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround.png" />
+         </image></ImageView>
+      <TableView fx:id="tblDonation" layoutX="24.0" layoutY="373.0" prefHeight="340.0" prefWidth="1140.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colDonationId" prefWidth="165.0" text="Donation Id" />
+          <TableColumn fx:id="colBloodCampaignId" prefWidth="153.0" text="Blood_campaign Id" />
+            <TableColumn fx:id="colHealthCheckUpId" prefWidth="155.0" text="HealthCheckUp Id" />
+            <TableColumn fx:id="colBloodGroup" prefWidth="195.0" text="Blood Group" />
+            <TableColumn fx:id="colQty" prefWidth="195.0" text="Qty" />
+            <TableColumn fx:id="colDateOfDonation" prefWidth="218.0" text="Date of Donation" />
+        </columns>
+      </TableView>
+      <Label fx:id="lblDonationId" layoutX="162.0" layoutY="266.0" prefHeight="30.0" prefWidth="116.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField id="bevel" fx:id="txtQty" layoutX="55.0" layoutY="152.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <JFXButton id="bevel" fx:id="btnAdd" layoutX="1079.0" layoutY="328.0" onAction="#btnAddDonationOnAction" prefHeight="28.0" prefWidth="78.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Add" />
+      <ComboBox id="glass" fx:id="cmbSelectCampaign" layoutX="174.0" layoutY="56.0" onAction="#cmbSelectOnAction" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label fx:id="lblBloodGroup" layoutX="159.0" layoutY="198.0" prefHeight="37.0" prefWidth="177.0" />
+      <Label layoutX="53.0" layoutY="58.0" text="Select Campaign :" />
+      <Label layoutX="57.0" layoutY="115.0" text="Blood Quantity :" />
+      <Label layoutX="60.0" layoutY="205.0" text="Blood Group :" />
+      <Label layoutX="60.0" layoutY="272.0" text="Donation ID :" />
+      <ImageView fitHeight="180.0" fitWidth="350.0" layoutX="764.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangle%202.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="344.0" layoutX="412.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangle%202.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="511.0" layoutY="36.0" text="Donor Details" textFill="#140101">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="847.0" layoutY="38.0" text="Campaign Details" textFill="#140101">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="429.0" layoutY="84.0" text="Name :" />
+      <Label layoutX="427.0" layoutY="121.0" text="Address :" />
+      <Label layoutX="431.0" layoutY="165.0" text="NIC :" />
+      <Label fx:id="lblDonorName" layoutX="488.0" layoutY="84.0" prefHeight="28.0" prefWidth="239.0" />
+      <Label fx:id="lblDonorAddress" layoutX="494.0" layoutY="119.0" prefHeight="28.0" prefWidth="239.0" />
+      <Label fx:id="lblDonorNic" layoutX="494.0" layoutY="153.0" prefHeight="28.0" prefWidth="239.0" />
+      <Label layoutX="792.0" layoutY="83.0" text="Name :" />
+      <Label layoutX="793.0" layoutY="112.0" text="ID :" />
+      <Label layoutX="793.0" layoutY="144.0" text="Collected Units :" />
+      <Label fx:id="lblCampaignName" layoutX="842.0" layoutY="78.0" prefHeight="28.0" prefWidth="239.0" />
+      <Label fx:id="lblCampaignID" layoutX="843.0" layoutY="107.0" prefHeight="28.0" prefWidth="239.0" />
+      <Label fx:id="lblCollectedUnits" layoutX="898.0" layoutY="139.0" prefHeight="28.0" prefWidth="85.0" />
+   </children>
+</AnchorPane>

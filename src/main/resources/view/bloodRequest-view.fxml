@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="660.0" prefWidth="1170.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.gdse.bbms.controller.BloodRequestController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1195.0" layoutX="-2.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/whiteBackGround4.png" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tblRequest" layoutX="11.0" layoutY="260.0" prefHeight="378.0" prefWidth="1123.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colRequestID" prefWidth="169.0" text="BloodRequest ID" />
+          <TableColumn fx:id="colHospitalID" prefWidth="185.0" text="Hospital ID" />
+            <TableColumn fx:id="colBloodGroup" prefWidth="201.0" text="Blood Group" />
+            <TableColumn fx:id="colDateOfRequest" prefWidth="183.0" text="Date Of Request" />
+            <TableColumn fx:id="colBloodQty" prefWidth="193.0" text="Blood Quantity" />
+            <TableColumn fx:id="colStatus" prefWidth="172.0" text="Status" />
+        </columns>
+      </TableView>
+      <Label layoutX="31.0" layoutY="59.0" text="Blood Request ID :" />
+      <Label layoutX="33.0" layoutY="129.0" text="Hospital ID :" />
+      <Label layoutX="34.0" layoutY="185.0" text="Blood Group :" />
+      <Label layoutX="553.0" layoutY="59.0" text="Date Of Request :" />
+      <Label layoutX="554.0" layoutY="134.0" text="Blood Quantity :" />
+      <Label layoutX="954.0" layoutY="63.0" text="Status :" />
+      <Label fx:id="lblRequestID" layoutX="148.0" layoutY="47.0" prefHeight="40.0" prefWidth="140.0" />
+      <ComboBox id="glass" fx:id="cmbBloodGroup" layoutX="159.0" layoutY="182.0" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <TextField id="bevel" fx:id="txtBloodQty" layoutX="553.0" layoutY="177.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <Label fx:id="lblRequestDate" layoutX="679.0" layoutY="52.0" prefHeight="40.0" prefWidth="140.0" />
+      <ComboBox id="glass" fx:id="cmbHospital" layoutX="157.0" layoutY="120.0" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <ComboBox id="glass" fx:id="cmbStatus" layoutX="1016.0" layoutY="63.0" prefHeight="28.0" prefWidth="118.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/textFeild.css" />
+      <JFXButton id="bevel" fx:id="btnAddRequest" layoutX="1043.0" layoutY="220.0" onAction="#btnAddrequestOnAction" prefHeight="28.0" prefWidth="85.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Add" textAlignment="JUSTIFY" textFill="#4f91fc" wrapText="true" />
+   </children>
+</AnchorPane>
