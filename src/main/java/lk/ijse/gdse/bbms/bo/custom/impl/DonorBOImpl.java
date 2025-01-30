@@ -48,4 +48,9 @@ public class DonorBOImpl implements DonorBO {
         donor.setLastDonationDate(donorDTO.getLastDonationDate());
         return donorDAO.update(donor);
     }
+
+    @Override
+    public String getNextDonorId() throws Exception {
+        return donorDAO.getNewId();
+    }
 }

@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.CampaignBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.tm.CampaignTM;
@@ -68,6 +70,7 @@ public class CampaignPopUpWindowController implements Initializable {
     CampaignModel model = new CampaignModel();
     CampaignPageController campaignPageController;
     CampaignDTO dto=new CampaignDTO();
+    CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     public void setCampainPageController(CampaignPageController campaignPageController) {
         this.campaignPageController = campaignPageController;
@@ -79,8 +82,10 @@ public class CampaignPopUpWindowController implements Initializable {
         deleteCampaignBtn.setDisable(true);
         updateBtn.setDisable(true);
         try {
-            lblCampaignId.setText(model.getNextCampaignId());
+            lblCampaignId.setText(campaignBO.getNextCampaignId());
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         populateCampaignStatus();

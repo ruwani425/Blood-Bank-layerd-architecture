@@ -9,4 +9,7 @@ public interface DonorBO extends SuperBO {
     public boolean deleteDonor(String donorId) throws Exception;
 
     public boolean updateDonor(DonorDTO donorDTO) throws Exception;
+
+    public String getNextDonorId() throws Exception;
 }
+

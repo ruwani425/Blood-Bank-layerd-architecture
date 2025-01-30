@@ -78,8 +78,10 @@ public class AddDonorPopUpController implements Initializable {
         btnDelete.setDisable(true);
         btnUpdate.setDisable(true);
         try {
-            lblDonorId.setText(model.getNextDonorId());
+            lblDonorId.setText(donorBO.getNextDonorId());
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         populateDonorGender();
