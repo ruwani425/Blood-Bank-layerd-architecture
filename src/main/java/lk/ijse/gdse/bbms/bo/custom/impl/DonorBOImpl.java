@@ -6,13 +6,15 @@ import lk.ijse.gdse.bbms.dao.custom.DonorDAO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.Donor;
 
+import java.util.ArrayList;
+
 public class DonorBOImpl implements DonorBO {
 
     DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
+    Donor donor = new Donor();
 
     @Override
     public boolean addDonor(DonorDTO donorDTO) throws Exception {
-        Donor donor = new Donor();
         donor.setDonorId(donorDTO.getDonorId());
         donor.setDonorName(donorDTO.getDonorName());
         donor.setDonorEmail(donorDTO.getDonorEmail());
@@ -27,16 +29,12 @@ public class DonorBOImpl implements DonorBO {
 
     @Override
     public boolean deleteDonor(String donorId) throws Exception {
-        Donor donor = new Donor();
         donor.setDonorId(donorId);
-        System.out.println(donor.getDonorId());
-        System.out.println(String.valueOf(donor));
         return donorDAO.delete(donor);
     }
 
     @Override
     public boolean updateDonor(DonorDTO donorDTO) throws Exception {
-        Donor donor = new Donor();
         donor.setDonorId(donorDTO.getDonorId());
         donor.setDonorName(donorDTO.getDonorName());
         donor.setDonorEmail(donorDTO.getDonorEmail());
@@ -52,5 +50,25 @@ public class DonorBOImpl implements DonorBO {
     @Override
     public String getNextDonorId() throws Exception {
         return donorDAO.getNewId();
+    }
+
+    @Override
+    public ArrayList<DonorDTO> getAllDonors() throws Exception {
+        ArrayList<Donor>donors=donorDAO.getAllData();
+        ArrayList<DonorDTO> donorDTOS=new ArrayList<>();
+        for (Donor donor : donors) {
+            DonorDTO donorDTO=new DonorDTO();
+            donorDTO.setDonorId(donor.getDonorId());
+            donorDTO.setDonorName(donor.getDonorName());
+            donorDTO.setDonorEmail(donor.getDonorEmail());
+            donorDTO.setDonorAddress(donor.getDonorAddress());
+            donorDTO.setDonorNic(donor.getDonorNic());
+            donorDTO.setBloodGroup(donor.getBloodGroup());
+            donorDTO.setGender(donor.getGender());
+            donorDTO.setDob(donor.getDob());
+            donorDTO.setLastDonationDate(donor.getLastDonationDate());
+            donorDTOS.add(donorDTO);
+        }
+        return donorDTOS;
     }
 }

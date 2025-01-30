@@ -19,6 +19,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.DonorBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.tm.DonorTM;
 import lk.ijse.gdse.bbms.model.DonorModel;
@@ -63,6 +65,7 @@ public class DonorPageViewController implements Initializable {
     private TableColumn<DonorTM, String> colNic;
 
     DonorModel donorModel = new DonorModel();
+    DonorBO donorBO= (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
 
     @Override
@@ -71,6 +74,8 @@ public class DonorPageViewController implements Initializable {
         try {
             refreshTable();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -88,8 +93,8 @@ public class DonorPageViewController implements Initializable {
         colNic.setCellValueFactory(new PropertyValueFactory<>("donorNic"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<DonorDTO> donorDTOS = donorModel.getAllDonors();
+    public void refreshTable() throws Exception {
+        ArrayList<DonorDTO> donorDTOS = donorBO.getAllDonors();
         ObservableList<DonorTM> donorTMS = FXCollections.observableArrayList();
 
         for (DonorDTO donorDTO : donorDTOS) {

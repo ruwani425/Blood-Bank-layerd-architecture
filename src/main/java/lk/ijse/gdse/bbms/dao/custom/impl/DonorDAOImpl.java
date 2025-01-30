@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.DonorDAO;
+import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.Donor;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -11,7 +12,25 @@ import java.util.ArrayList;
 public class DonorDAOImpl implements DonorDAO {
     @Override
     public ArrayList<Donor> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("select * from Donor");
+
+        ArrayList<Donor> donors = new ArrayList<>();
+
+        while (rst.next()) {
+            Donor donor = new Donor(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6),
+                    rst.getString(7),
+                    rst.getDate(8),
+                    rst.getDate(9)
+            );
+            donors.add(donor);
+        }
+        return donors;
     }
 
     @Override
