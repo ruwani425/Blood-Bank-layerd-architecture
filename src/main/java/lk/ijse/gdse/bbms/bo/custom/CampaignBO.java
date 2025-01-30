@@ -7,4 +7,8 @@ public interface CampaignBO extends SuperBO {
     public String getNextCampaignId() throws Exception;
 
     public boolean addCampaign(CampaignDTO campaignDTO) throws Exception;
+
+    public boolean deleteCampaign(String campaignId)throws Exception;
+
+    public boolean updateCampaign(CampaignDTO campaignDTO) throws Exception;
 }

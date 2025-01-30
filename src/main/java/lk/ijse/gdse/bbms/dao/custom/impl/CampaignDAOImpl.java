@@ -30,8 +30,16 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
-    public boolean update(Campaign Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(Campaign campaign) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "update Blood_campaign set Name=?, Address=?, Start_date=?, End_date=?,Status=? where Blood_campaign_id=?",
+                campaign.getCampaign_name(),
+                campaign.getAddress(),
+                campaign.getStartDate(),
+                campaign.getEndDate(),
+                campaign.getStatus(),
+                campaign.getBlood_campaign_id()
+        );
     }
 
     @Override
@@ -40,8 +48,8 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
-    public boolean delete(Campaign id) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean delete(Campaign campaign) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("delete from Blood_campaign where Blood_campaign_id=?",campaign.getBlood_campaign_id());
     }
 
     @Override

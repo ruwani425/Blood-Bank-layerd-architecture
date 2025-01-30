@@ -185,14 +185,14 @@ public class CampaignPopUpWindowController implements Initializable {
     }
 
     @FXML
-    void deleteCampaignOnAction(ActionEvent event) throws SQLException {
+    void deleteCampaignOnAction(ActionEvent event) throws Exception {
         String campaignId = lblCampaignId.getText();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Campaign?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = model.deleteCampaign(campaignId);
+            boolean isDeleted = campaignBO.deleteCampaign(campaignId);
 
             if (isDeleted) {
                 campaignPageController.refreshTable();
@@ -207,7 +207,7 @@ public class CampaignPopUpWindowController implements Initializable {
     }
 
     @FXML
-    void updateCampaignOnAction(ActionEvent event) throws SQLException {
+    void updateCampaignOnAction(ActionEvent event) throws Exception {
         String id = lblCampaignId.getText();
         String name = txtCampaignName.getText();
         String address = txtCampaignAddress.getText();
@@ -234,7 +234,7 @@ public class CampaignPopUpWindowController implements Initializable {
         }
 
         CampaignDTO campaignDTO = new CampaignDTO(id,name,address,startDate,endDate,status,0);
-        boolean isSaved = model.updateCampaign(campaignDTO);
+        boolean isSaved = campaignBO.updateCampaign(campaignDTO);
 
         if (isSaved) {
 

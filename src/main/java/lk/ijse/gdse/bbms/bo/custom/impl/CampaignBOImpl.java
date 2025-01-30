@@ -8,6 +8,7 @@ import lk.ijse.gdse.bbms.entity.Campaign;
 
 public class CampaignBOImpl implements CampaignBO {
 
+    Campaign campaign = new Campaign();
     CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
 
     @Override
@@ -17,7 +18,6 @@ public class CampaignBOImpl implements CampaignBO {
 
     @Override
     public boolean addCampaign(CampaignDTO campaignDTO) throws Exception {
-        Campaign campaign = new Campaign();
         campaign.setCampaign_name(campaignDTO.getCampaign_name());
         campaign.setBlood_campaign_id(campaignDTO.getBlood_campaign_id());
         campaign.setAddress(campaignDTO.getAddress());
@@ -25,5 +25,22 @@ public class CampaignBOImpl implements CampaignBO {
         campaign.setEndDate(campaignDTO.getEndDate());
         campaign.setStartDate(campaignDTO.getStartDate());
         return campaignDAO.save(campaign);
+    }
+
+    @Override
+    public boolean deleteCampaign(String campaignId) throws Exception {
+        campaign.setBlood_campaign_id(campaignId);
+        return campaignDAO.delete(campaign);
+    }
+
+    @Override
+    public boolean updateCampaign(CampaignDTO campaignDTO) throws Exception {
+        campaign.setCampaign_name(campaignDTO.getCampaign_name());
+        campaign.setBlood_campaign_id(campaignDTO.getBlood_campaign_id());
+        campaign.setAddress(campaignDTO.getAddress());
+        campaign.setStatus(campaignDTO.getStatus());
+        campaign.setEndDate(campaignDTO.getEndDate());
+        campaign.setStartDate(campaignDTO.getStartDate());
+        return campaignDAO.update(campaign);
     }
 }
