@@ -125,7 +125,7 @@ public class CampaignPopUpWindowController implements Initializable {
 
 
     @FXML
-    void addCampaignOnAction(ActionEvent event) throws SQLException {
+    void addCampaignOnAction(ActionEvent event) throws Exception {
         String CampId = lblCampaignId.getText();
         String name = txtCampaignName.getText();
         String address = txtCampaignAddress.getText();
@@ -154,7 +154,7 @@ public class CampaignPopUpWindowController implements Initializable {
         int collectedUnits=0;
 
         CampaignDTO campaignDTO = new CampaignDTO(CampId,name,address,startDate,endDate,status,collectedUnits);
-        boolean isSaved = model.addCampaign(campaignDTO);
+        boolean isSaved = campaignBO.addCampaign(campaignDTO);
 
         if (isSaved) {
 

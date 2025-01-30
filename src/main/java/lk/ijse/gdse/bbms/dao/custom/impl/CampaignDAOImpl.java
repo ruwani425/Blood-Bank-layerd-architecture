@@ -15,8 +15,18 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
-    public boolean save(Campaign Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(Campaign campaign) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "insert into Blood_campaign values (?,?,?,?,?,?,?)",
+                campaign.getBlood_campaign_id(),
+                campaign.getCampaign_name(),
+                campaign.getAddress(),
+
+                campaign.getStartDate(),
+                campaign.getEndDate(),
+                campaign.getStatus(),
+                campaign.getCollectedUnits()
+        );
     }
 
     @Override
