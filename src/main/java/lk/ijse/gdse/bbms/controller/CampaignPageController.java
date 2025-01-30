@@ -21,6 +21,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.CampaignBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.tm.CampaignTM;
 import lk.ijse.gdse.bbms.model.CampaignModel;
@@ -65,6 +67,7 @@ public class CampaignPageController implements Initializable {
     private TableColumn<CampaignTM,Integer> colCollectedUnit;
 
     CampaignModel campaignModel = new CampaignModel();
+    CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,6 +76,8 @@ public class CampaignPageController implements Initializable {
         try {
             refreshTable();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -88,8 +93,8 @@ public class CampaignPageController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("Status"));
         colCollectedUnit.setCellValueFactory(new PropertyValueFactory<>("collectedUnits"));
     }
-    public void refreshTable() throws SQLException {
-        ArrayList<CampaignDTO> campaignDTOS = campaignModel.getAllCampaigns();
+    public void refreshTable() throws Exception {
+        ArrayList<CampaignDTO> campaignDTOS = campaignBO.getAllCampaigns();
         ObservableList<CampaignTM> campaignTMS = FXCollections.observableArrayList();
 
         for (CampaignDTO campaignDTO : campaignDTOS) {

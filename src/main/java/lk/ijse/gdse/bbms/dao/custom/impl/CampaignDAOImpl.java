@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.CampaignDAO;
+import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.entity.Campaign;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -11,7 +12,23 @@ import java.util.ArrayList;
 public class CampaignDAOImpl implements CampaignDAO {
     @Override
     public ArrayList<Campaign> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("select * from Blood_campaign");
+
+        ArrayList<Campaign> campaigns = new ArrayList<>();
+
+        while (rst.next()) {
+            Campaign campaign = new Campaign(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getDate(4),
+                    rst.getDate(5),
+                    rst.getString(6),
+                    rst.getInt(7)
+            );
+            campaigns.add(campaign);
+        }
+        return campaigns;
     }
 
     @Override
