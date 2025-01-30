@@ -24,4 +24,28 @@ public class DonorBOImpl implements DonorBO {
         donor.setLastDonationDate(donorDTO.getLastDonationDate());
         return donorDAO.save(donor);
     }
+
+    @Override
+    public boolean deleteDonor(String donorId) throws Exception {
+        Donor donor = new Donor();
+        donor.setDonorId(donorId);
+        System.out.println(donor.getDonorId());
+        System.out.println(String.valueOf(donor));
+        return donorDAO.delete(donor);
+    }
+
+    @Override
+    public boolean updateDonor(DonorDTO donorDTO) throws Exception {
+        Donor donor = new Donor();
+        donor.setDonorId(donorDTO.getDonorId());
+        donor.setDonorName(donorDTO.getDonorName());
+        donor.setDonorEmail(donorDTO.getDonorEmail());
+        donor.setDonorAddress(donorDTO.getDonorAddress());
+        donor.setDonorNic(donorDTO.getDonorNic());
+        donor.setBloodGroup(donorDTO.getBloodGroup());
+        donor.setGender(donorDTO.getGender());
+        donor.setDob(donorDTO.getDob());
+        donor.setLastDonationDate(donorDTO.getLastDonationDate());
+        return donorDAO.update(donor);
+    }
 }

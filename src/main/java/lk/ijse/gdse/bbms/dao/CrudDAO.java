@@ -12,7 +12,7 @@ public interface CrudDAO<T> extends SuperDAO {
 
     public boolean existId(String id) throws SQLException, ClassNotFoundException;
 
-    public void delete(String id) throws SQLException, ClassNotFoundException;
+    public boolean delete(T id) throws SQLException, ClassNotFoundException;
 
     public String getNewId() throws SQLException, ClassNotFoundException;
 

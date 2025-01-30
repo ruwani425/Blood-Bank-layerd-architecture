@@ -30,8 +30,19 @@ public class DonorDAOImpl implements DonorDAO {
     }
 
     @Override
-    public boolean update(Donor Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(Donor donor) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "update Donor set Name=?, Donor_nic=?, Address=?, E_mail=?,Blood_group=?,Gender=?,Dob=?,Last_donation_date=? where Donor_id=?",
+                donor.getDonorName(),
+                donor.getDonorNic(),
+                donor.getDonorAddress(),
+                donor.getDonorEmail(),
+                donor.getBloodGroup(),
+                donor.getGender(),
+                donor.getDob(),
+                donor.getLastDonationDate(),
+                donor.getDonorId()
+        );
     }
 
     @Override
@@ -40,8 +51,8 @@ public class DonorDAOImpl implements DonorDAO {
     }
 
     @Override
-    public void delete(String id) throws SQLException, ClassNotFoundException {
-
+    public boolean delete(Donor donor) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("delete from Donor where Donor_id=?", donor.getDonorId());
     }
 
     @Override

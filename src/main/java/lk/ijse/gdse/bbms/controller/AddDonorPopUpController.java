@@ -171,14 +171,15 @@ public class AddDonorPopUpController implements Initializable {
 //    }
 
     @FXML
-    void btnDeleteDonorOnAction(ActionEvent event) throws SQLException {
+    void btnDeleteDonorOnAction(ActionEvent event) throws Exception {
         String donorId = lblDonorId.getText();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this Donor?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = model.deleteDonor(donorId);
+            //boolean isDeleted = model.deleteDonor(donorId);
+            boolean isDeleted=donorBO.deleteDonor(donorId);
 
             if (isDeleted) {
                 donorPageViewController.refreshTable();
@@ -218,7 +219,7 @@ public class AddDonorPopUpController implements Initializable {
 //    }
 
     @FXML
-    void btnUpdateDonorOnAction(ActionEvent event) throws SQLException {
+    void btnUpdateDonorOnAction(ActionEvent event) throws Exception {
         String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format
         String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Sri Lankan NIC format
@@ -244,7 +245,8 @@ public class AddDonorPopUpController implements Initializable {
         String id = lblDonorId.getText();
 
         DonorDTO donorDTO = new DonorDTO(id, name, nic, address, email, bloodGroup, gender, dob, null);
-        boolean isUpdate = model.updateDonor(donorDTO);
+        //boolean isUpdate = model.updateDonor(donorDTO);
+        boolean isUpdate=donorBO.updateDonor(donorDTO);
 
         if (isUpdate) {
             donorPageViewController.refreshTable();
