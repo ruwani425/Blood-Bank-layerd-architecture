@@ -1,9 +1,6 @@
 package lk.ijse.gdse.bbms.dao;
 
-import lk.ijse.gdse.bbms.dao.custom.impl.CampaignDAOImpl;
-import lk.ijse.gdse.bbms.dao.custom.impl.DonorDAOImpl;
-import lk.ijse.gdse.bbms.dao.custom.impl.EmployeeDAOImpl;
-import lk.ijse.gdse.bbms.dao.custom.impl.SupplierDAOImpl;
+import lk.ijse.gdse.bbms.dao.custom.impl.*;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -16,7 +13,7 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER
+        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER, INVENTORY
     }
 
     public SuperDAO getDAO(DAOType type) {
@@ -29,6 +26,8 @@ public class DAOFactory {
                 return new EmployeeDAOImpl();
             case SUPPLIER:
                 return new SupplierDAOImpl();
+            case INVENTORY:
+                return new InventoryDAOImpl();
             default:
                 return null;
         }

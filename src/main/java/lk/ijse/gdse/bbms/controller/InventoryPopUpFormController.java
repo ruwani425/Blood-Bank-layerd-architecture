@@ -9,6 +9,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.InventoryBO;
 import lk.ijse.gdse.bbms.dto.InventoryDTO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.InventoryTM;
@@ -56,8 +58,8 @@ public class InventoryPopUpFormController {
 
     Stage stage = new Stage();
 
-    private final InventoryModel inventoryModel = new InventoryModel();
     private final SupplierModel supplierModel = new SupplierModel();
+    InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
 
     private InventoryPageController inventoryPageController;
 
@@ -72,11 +74,13 @@ public class InventoryPopUpFormController {
         btnDelete.setDisable(true);
 
         try {
-            lblInventoryID.setText(inventoryModel.getNextInventoryId());
+            lblInventoryID.setText(inventoryBO.getNextInventoryId());
             init();
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error generating Inventory ID.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -96,7 +100,7 @@ public class InventoryPopUpFormController {
         InventoryDTO inventoryDTO = new InventoryDTO(inventoryId, itemName, status, expiryDate, qty);
 
         try {
-            boolean isAdded = inventoryModel.addInventoryItem(inventoryDTO, cmbSupplier.getValue());
+            boolean isAdded = inventoryBO.addInventoryItem(inventoryDTO, cmbSupplier.getValue());
             if (isAdded) {
                 inventoryPageController.refreshTable();
                 new Alert(Alert.AlertType.INFORMATION, "Inventory item added successfully!").show();
@@ -107,6 +111,8 @@ public class InventoryPopUpFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error occurred while adding Inventory item.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -121,7 +127,7 @@ public class InventoryPopUpFormController {
         String inventoryId = lblInventoryID.getText();
 
         try {
-            boolean isDeleted = inventoryModel.deleteInventoryItem(inventoryId);
+            boolean isDeleted = inventoryBO.deleteInventoryItem(inventoryId);
             if (isDeleted) {
                 inventoryPageController.refreshTable();
                 new Alert(Alert.AlertType.INFORMATION, "Inventory item deleted successfully!").show();
@@ -133,6 +139,8 @@ public class InventoryPopUpFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error occurred while deleting Inventory item.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -147,7 +155,7 @@ public class InventoryPopUpFormController {
         InventoryDTO inventoryDTO = new InventoryDTO(inventoryId, itemName, status, expiryDate, qty);
 
         try {
-            boolean isUpdated = inventoryModel.updateInventoryItem(inventoryDTO);
+            boolean isUpdated = inventoryBO.updateInventoryItem(inventoryDTO);
             if (isUpdated) {
                 inventoryPageController.refreshTable();
                 new Alert(Alert.AlertType.INFORMATION, "Inventory item updated successfully!").show();
@@ -156,18 +164,18 @@ public class InventoryPopUpFormController {
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to update Inventory item.").show();
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error occurred while updating Inventory item.").show();
         }
     }
 
-    private void clearFields() throws SQLException {
+    private void clearFields() throws Exception {
         txtName.clear();
         txtQty.clear();
         cmbStatus.setValue(null);
         datePikcerExpiry.setValue(null);
-        lblInventoryID.setText(inventoryModel.getNextInventoryId());
+        lblInventoryID.setText(inventoryBO.getNextInventoryId());
     }
 
     public void setInventoryData(InventoryTM selectedItem) {
