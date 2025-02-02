@@ -8,6 +8,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.SupplierBO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.SupplierTM;
 import lk.ijse.gdse.bbms.model.SupplierModel;
@@ -46,8 +48,7 @@ public class SupplierPopUpController {
 
     Stage stage=new Stage();
 
-    private final SupplierModel supplierModel = new SupplierModel();
-
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
     private SupplierPageController supplierPageController;
 
     public void setSupplierPageController(SupplierPageController supplierPageController) {
@@ -56,17 +57,12 @@ public class SupplierPopUpController {
 
 
     @FXML
-    public void initialize() {
+    public void initialize() throws Exception {
         btnAdd.setDisable(false);
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
 
-        try {
-            lblSupplierID.setText(supplierModel.getNextSupplierId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error generating Supplier ID.").show();
-        }
+        lblSupplierID.setText(supplierBO.getNextSupplierId());
     }
 
     @FXML
@@ -80,7 +76,7 @@ public class SupplierPopUpController {
         SupplierDTO supplierDTO = new SupplierDTO(supplierId, name, address, email, description);
 
         try {
-            boolean isAdded = supplierModel.addSupplier(supplierDTO);
+            boolean isAdded = supplierBO.addSupplier(supplierDTO);
             if (isAdded) {
                 new Alert(Alert.AlertType.INFORMATION, "Supplier added successfully!").show();
                 supplierPageController.refreshTable();
@@ -91,6 +87,8 @@ public class SupplierPopUpController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error occurred while adding Supplier.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -100,14 +98,14 @@ public class SupplierPopUpController {
         stage.close();
     }
     @FXML
-    void btnDeleteSupplierOnAction(ActionEvent event) throws SQLException {
+    void btnDeleteSupplierOnAction(ActionEvent event) throws Exception {
         String supplierID = lblSupplierID.getText();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this supplier?", ButtonType.YES, ButtonType.NO);
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
 
-            boolean isDeleted = supplierModel.deleteSupplier(supplierID);
+            boolean isDeleted = supplierBO.deleteSupplier(supplierID);
 
             if (isDeleted) {
                 supplierPageController.refreshTable();
@@ -133,7 +131,7 @@ public class SupplierPopUpController {
         SupplierDTO supplierDTO = new SupplierDTO(supplierId, name, address, email, description);
 
         try {
-            boolean isUpdated = supplierModel.updateSupplier(supplierDTO);
+            boolean isUpdated = supplierBO.updateSupplier(supplierDTO);
             if (isUpdated) {
                 supplierPageController.refreshTable();
                 new Alert(Alert.AlertType.INFORMATION, "Supplier updated successfully!").show();
@@ -145,15 +143,17 @@ public class SupplierPopUpController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error occurred while updating Supplier.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private void clearFields() throws SQLException {
+    private void clearFields() throws Exception {
         txtName.clear();
         txtAddress.clear();
         txtEmail.clear();
         txtDescription.clear();
-        lblSupplierID.setText(supplierModel.getNextSupplierId());
+        lblSupplierID.setText(supplierBO.getNextSupplierId());
     }
 
     public void setSupplierData(SupplierTM supplier) {
