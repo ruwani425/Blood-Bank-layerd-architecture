@@ -2,6 +2,7 @@ package lk.ijse.gdse.bbms.bo;
 
 import lk.ijse.gdse.bbms.bo.custom.impl.CampaignBOImpl;
 import lk.ijse.gdse.bbms.bo.custom.impl.DonorBOImpl;
+import lk.ijse.gdse.bbms.bo.custom.impl.EmployeeBOImpl;
 
 public class BOFactory {
     private static BOFactory boFactory;
@@ -15,7 +16,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        DONOR, CAMPAIGN
+        DONOR, CAMPAIGN, EMPLOYEE
     }
 
     public SuperBO getBO(BOType type) {
@@ -24,6 +25,8 @@ public class BOFactory {
                 return new DonorBOImpl();
             case CAMPAIGN:
                 return new CampaignBOImpl();
+            case EMPLOYEE:
+                return new EmployeeBOImpl();
             default:
                 return null;
         }

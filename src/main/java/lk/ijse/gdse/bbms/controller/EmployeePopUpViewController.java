@@ -10,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.EmployeeBO;
 import lk.ijse.gdse.bbms.dto.EmployeeDTO;
 import lk.ijse.gdse.bbms.dto.tm.EmployeeTM;
 import lk.ijse.gdse.bbms.model.EmployeeModel;
@@ -55,8 +57,8 @@ public class EmployeePopUpViewController implements Initializable {
     @FXML
     private TextField txtEmpRole;
 
-    private EmployeeModel model = new EmployeeModel();
     private EmployeePageController employeePageController;
+    EmployeeBO employeeBO= (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
 
     public void setEmployeePageViewController(EmployeePageController employeePageController) {
         this.employeePageController = employeePageController;
@@ -70,86 +72,59 @@ public class EmployeePopUpViewController implements Initializable {
         btnUpdate.setDisable(true);
 
         try {
-            lblEmpId.setText(model.getNextEmployeeId());
+            lblEmpId.setText(employeeBO.getNextEmployeeId());
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         cmbEmpStatus.getItems().addAll("ACTIVE", "INACTIVE", "SUSPENDED");
     }
 
-//    @FXML
-//    void btnAddEmployeeOnAction(ActionEvent event) {
-//        // Validation for required fields
-//        String name = txtEmployeeName.getText();
-//        String email = txtEmpEmail.getText();
-//        String nic = txtNic.getText();
-//        String address = txtEmpAddress.getText();
-//        String role = txtEmpRole.getText();
-//        String status = cmbEmpStatus.getValue();
-//
-//        if (name.isEmpty() || email.isEmpty() || nic.isEmpty() || address.isEmpty() || role.isEmpty() || status == null) {
-//            new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
-//            return;
-//        }
-//
-//        // Create DTO and attempt to add employee
-//        EmployeeDTO employeeDTO = new EmployeeDTO(lblEmpId.getText(), name, nic, address, email, role, status);
-//        try {
-//            boolean isAdded = model.addEmployee(employeeDTO);
-//            if (isAdded) {
-//                new Alert(Alert.AlertType.INFORMATION, "Employee added successfully!").show();
-//                employeePageController.refreshTable();  // Refresh table after adding
-//                clearFields();
-//            } else {
-//                new Alert(Alert.AlertType.ERROR, "Failed to add employee!").show();
-//            }
-//        } catch (SQLException e) {
-//            new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
-//        }
-//    }
+    @FXML
+    void btnAddEmployeeOnAction(ActionEvent event) {
+        String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format
+        String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Sri Lankan NIC format
+        String addressRegex = "^.{5,100}$"; // Address should be between 5 and 100 characters
+        String roleRegex = "^[A-Za-z\\s]{3,50}$"; // Role should be between 3 and 50 characters
 
-@FXML
-void btnAddEmployeeOnAction(ActionEvent event) {
-    String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
-    String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format
-    String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Sri Lankan NIC format
-    String addressRegex = "^.{5,100}$"; // Address should be between 5 and 100 characters
-    String roleRegex = "^[A-Za-z\\s]{3,50}$"; // Role should be between 3 and 50 characters
+        boolean isNameValid = Validation.validateTextField(txtEmployeeName, nameRegex, txtEmployeeName.getText());
+        boolean isEmailValid = Validation.validateTextField(txtEmpEmail, emailRegex, txtEmpEmail.getText());
+        boolean isNicValid = Validation.validateTextField(txtNic, nicRegex, txtNic.getText());
+        boolean isAddressValid = Validation.validateTextField(txtEmpAddress, addressRegex, txtEmpAddress.getText());
+        boolean isRoleValid = Validation.validateTextField(txtEmpRole, roleRegex, txtEmpRole.getText());
 
-    boolean isNameValid = Validation.validateTextField(txtEmployeeName, nameRegex, txtEmployeeName.getText());
-    boolean isEmailValid = Validation.validateTextField(txtEmpEmail, emailRegex, txtEmpEmail.getText());
-    boolean isNicValid = Validation.validateTextField(txtNic, nicRegex, txtNic.getText());
-    boolean isAddressValid = Validation.validateTextField(txtEmpAddress, addressRegex, txtEmpAddress.getText());
-    boolean isRoleValid = Validation.validateTextField(txtEmpRole, roleRegex, txtEmpRole.getText());
-
-    if (!isNameValid || !isEmailValid || !isNicValid || !isAddressValid || !isRoleValid) {
-        new Alert(Alert.AlertType.ERROR, "Please correct the highlighted fields.").show();
-        return;
-    }
-
-    String name = txtEmployeeName.getText();
-    String email = txtEmpEmail.getText();
-    String nic = txtNic.getText();
-    String address = txtEmpAddress.getText();
-    String role = txtEmpRole.getText();
-    String status = cmbEmpStatus.getValue();
-    String employeeId = lblEmpId.getText();
-
-    EmployeeDTO employeeDTO = new EmployeeDTO(employeeId, name, nic, address, email, role, status);
-    try {
-        boolean isAdded = model.addEmployee(employeeDTO);
-        if (isAdded) {
-            lblEmpId.setText(model.getNextEmployeeId());
-            new Alert(Alert.AlertType.INFORMATION, "Employee added successfully!").show();
-            employeePageController.refreshTable();
-            clearFields();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Failed to add employee!").show();
+        if (!isNameValid || !isEmailValid || !isNicValid || !isAddressValid || !isRoleValid) {
+            new Alert(Alert.AlertType.ERROR, "Please correct the highlighted fields.").show();
+            return;
         }
-    } catch (SQLException e) {
-        new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
+
+        String name = txtEmployeeName.getText();
+        String email = txtEmpEmail.getText();
+        String nic = txtNic.getText();
+        String address = txtEmpAddress.getText();
+        String role = txtEmpRole.getText();
+        String status = cmbEmpStatus.getValue();
+        String employeeId = lblEmpId.getText();
+
+        EmployeeDTO employeeDTO = new EmployeeDTO(employeeId, name, nic, address, email, role, status);
+        try {
+            boolean isAdded = employeeBO.addEmployee(employeeDTO);
+            if (isAdded) {
+                lblEmpId.setText(employeeBO.getNextEmployeeId());
+                new Alert(Alert.AlertType.INFORMATION, "Employee added successfully!").show();
+                employeePageController.refreshTable();
+                clearFields();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to add employee!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
-}
 
     @FXML
     void btnDeleteEmployeeOnAction(ActionEvent event) {
@@ -159,7 +134,7 @@ void btnAddEmployeeOnAction(ActionEvent event) {
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.YES) {
             try {
-                boolean isDeleted = model.deleteEmployee(employeeId);
+                boolean isDeleted = employeeBO.deleteEmployee(employeeId);
                 if (isDeleted) {
                     new Alert(Alert.AlertType.INFORMATION, "Employee deleted successfully!").show();
                     employeePageController.refreshTable();
@@ -169,40 +144,11 @@ void btnAddEmployeeOnAction(ActionEvent event) {
                 }
             } catch (SQLException e) {
                 new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
     }
-
-//    @FXML
-//    void btnUpdateEmployeeOnAction(ActionEvent event) {
-//        // Validation for required fields
-//        String name = txtEmployeeName.getText();
-//        String email = txtEmpEmail.getText();
-//        String nic = txtNic.getText();
-//        String address = txtEmpAddress.getText();
-//        String role = txtEmpRole.getText();
-//        String status = cmbEmpStatus.getValue();
-//
-//        if (name.isEmpty() || email.isEmpty() || nic.isEmpty() || address.isEmpty() || role.isEmpty() || status == null) {
-//            new Alert(Alert.AlertType.ERROR, "Please fill in all fields").show();
-//            return;
-//        }
-//
-//        // Create DTO and attempt to update employee
-//        EmployeeDTO employeeDTO = new EmployeeDTO(lblEmpId.getText(), name, nic, address, email, role, status);
-//        try {
-//            boolean isUpdated = model.updateEmployee(employeeDTO);
-//            if (isUpdated) {
-//                new Alert(Alert.AlertType.INFORMATION, "Employee updated successfully!").show();
-//                employeePageController.refreshTable(); // Refresh table after update
-//                closeWindow();
-//            } else {
-//                new Alert(Alert.AlertType.ERROR, "Failed to update employee!").show();
-//            }
-//        } catch (SQLException e) {
-//            new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
-//        }
-//    }
 
     @FXML
     void btnUpdateEmployeeOnAction(ActionEvent event) {
@@ -233,7 +179,7 @@ void btnAddEmployeeOnAction(ActionEvent event) {
 
         EmployeeDTO employeeDTO = new EmployeeDTO(employeeId, name, nic, address, email, role, status);
         try {
-            boolean isUpdated = model.updateEmployee(employeeDTO);
+            boolean isUpdated = employeeBO.updateEmployee(employeeDTO);
             if (isUpdated) {
                 new Alert(Alert.AlertType.INFORMATION, "Employee updated successfully!").show();
                 employeePageController.refreshTable();
@@ -243,6 +189,8 @@ void btnAddEmployeeOnAction(ActionEvent event) {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Database error occurred").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
