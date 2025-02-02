@@ -7,8 +7,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.HealthCheckUpBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.HealthCheckupDTO;
+import lk.ijse.gdse.bbms.entity.HealthCheckUp;
 import lk.ijse.gdse.bbms.model.DonorModel;
 import lk.ijse.gdse.bbms.model.HealthCheckUpModel;
 
@@ -76,19 +79,22 @@ public class HealthCheckUpPageController implements Initializable {
     private DonorDTO donorDTO;
     private HealthCheckUpModel healthCheckUpModel=new HealthCheckUpModel();
     private HealthCheckupDTO healthCheckupDTO;
+    private HealthCheckUpBO healthCheckUpBO= (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
     String colorCode = "#FF0000";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showStatusBtn.setDisable(true);
         try {
-            lblHealthCheckUpId.setText(healthCheckUpModel.getNextHealthCheckUpId());
+            lblHealthCheckUpId.setText(healthCheckUpBO.getNextHealthCheckUpId());
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
     @FXML
-    void btnCheckDonorHealthCheckUpDetail(ActionEvent event) throws SQLException {
+    void btnCheckDonorHealthCheckUpDetail(ActionEvent event) throws Exception {
         String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Valid NIC format (9 digits + V or 12 digits)
         String bloodPressureRegex = "^\\d{1,3}/\\d{1,3}$"; // Blood pressure format: systolic/diastolic
         String weightRegex = "^[1-9][0-9]*([.][0-9]{1,2})?$"; // Weight as a positive decimal number
@@ -233,83 +239,6 @@ public class HealthCheckUpPageController implements Initializable {
         alert.showAndWait();
     }
 
-//    @FXML
-//    void btnCheckDonorHealthCheckUpDetail(ActionEvent event) throws SQLException {
-//        String healthCheckID = lblHealthCheckUpId.getText();
-//        Date checkUpDate = Date.valueOf(LocalDate.now());
-//        double donorWeight = Double.parseDouble(txtWeight.getText());
-//        double sugarLevel = Double.parseDouble(txtSugarLevel.getText());
-//        String bloodPressure = txtBloodPressure.getText();
-//        String donorNic = txtNicDonor.getText();
-//        donorDTO = donorModel.getDonorByNic(donorNic);
-//
-//
-//        if (donorDTO == null) {
-//            clearLabels();
-//            sugerLevelLbl.setText("No donor found with the given National Id Number.");
-//            return;
-//        }
-//
-//        String donorID = donorDTO.getDonorId();
-//        int age = Period.between(donorDTO.getDob().toLocalDate(), LocalDate.now()).getYears();
-//        String gender = donorDTO.getGender();
-//
-//        // Check if age is between 18 and 65 and weight is above 50
-//        if (age < 18 || age > 65 || donorWeight < 50) {
-//            healthStatusLbl.setText("Not Eligible");
-//            healthStatusLbl.setStyle("-fx-text-fill: " + colorCode + ";");
-//            setHealthCheckUpDetailsForLables(age,checkUpDate, donorDTO.getDonorId(),bloodPressure,healthCheckID,donorDTO.getLastDonationDate(),sugarLevel,donorWeight);
-//            return;
-//        }
-//
-//        // Blood pressure separate into systolic and diastolic values
-//        String[] bpParts = bloodPressure.split("/");
-//        int systolic = Integer.parseInt(bpParts[0].trim());
-//        int diastolic = Integer.parseInt(bpParts[1].trim());
-//
-//        // Additional conditions for eligibility
-//        boolean isEligible = false;
-//        if (sugarLevel >= 100 && sugarLevel <= 140) {
-//            if ((age >= 18 && age <= 39) && gender.equalsIgnoreCase("female") && systolic <= 110 && diastolic <= 68) {
-//                isEligible = true;
-//            } else if ((age >= 18 && age <= 39) && gender.equalsIgnoreCase("male") && systolic <= 119 && diastolic <= 70) {
-//                isEligible = true;
-//            } else if ((age >= 40 && age <= 50) && gender.equalsIgnoreCase("female") && systolic <= 122 && diastolic <= 74) {
-//                isEligible = true;
-//            } else if ((age >= 40 && age <= 50) && gender.equalsIgnoreCase("male") && systolic <= 124 && diastolic <= 77) {
-//                isEligible = true;
-//            } else if ((age >= 60 && age <= 65) && gender.equalsIgnoreCase("female") && systolic <= 139 && diastolic <= 68) {
-//                isEligible = true;
-//            } else if ((age >= 60 && age <= 65) && gender.equalsIgnoreCase("male") && systolic <= 133 && diastolic <= 69) {
-//                isEligible = true;
-//            }
-//        }
-//
-//        if (isEligible) {
-//            showStatusBtn.setDisable(false);
-//            healthStatusLbl.setText("The Donor was eligible for a blood Donation");
-//            showStatusBtn.setText("Pass");
-//
-//            healthCheckupDTO=new HealthCheckupDTO();
-//            healthCheckupDTO.setHealthStatus(healthStatusLbl.getText());
-//            healthCheckupDTO.setCheckupDate(checkUpDate);
-//            healthCheckupDTO.setCheckupId(healthCheckID);
-//            healthCheckupDTO.setBloodPressure(bloodPressure);
-//            healthCheckupDTO.setSugarLevel(sugarLevel);
-//            healthCheckupDTO.setDonorId(donorID);
-//            healthCheckupDTO.setWeight(donorWeight);
-//
-//            showStatusBtn.setDisable(false);
-//            saveHealthCheckup(healthCheckID, donorID, "ELIGIBLE", checkUpDate, donorWeight, sugarLevel, bloodPressure);
-//        } else {
-//            healthStatusLbl.setText("Not Eligible");
-//            saveHealthCheckup(healthCheckID, donorID, "NOT_ELIGIBLE", checkUpDate, donorWeight, sugarLevel, bloodPressure);
-//            healthStatusLbl.setStyle("-fx-text-fill: " + colorCode + ";");
-//            setHealthCheckUpDetailsForLables(age,checkUpDate, donorDTO.getDonorId(),bloodPressure,healthCheckID,donorDTO.getLastDonationDate(),sugarLevel,donorWeight);
-//        }
-//        setHealthCheckUpDetailsForLables(age,checkUpDate, donorDTO.getDonorId(),bloodPressure,healthCheckID,donorDTO.getLastDonationDate(),sugarLevel,donorWeight);
-//    }
-
     void setHealthCheckUpDetailsForLables(int age, Date checkUpDate, String donorId, String bloodPressure, String healthCheckID, Date lastDonationDate, double sugarLevel, double donorWeight){
         ageLbl.setText("Donor age: " + age + " years old");
         dateOfCheckUpLbl.setText("Checkup date: " +checkUpDate);
@@ -321,19 +250,21 @@ public class HealthCheckUpPageController implements Initializable {
         weightLbl.setText("Donor weight: " +donorWeight);
     }
 
-    private void saveHealthCheckup(String healthCheckID, String donorID, String status, Date checkUpDate, double donorWeight, double sugarLevel, String bloodPressure) throws SQLException {
+    private void saveHealthCheckup(String healthCheckID, String donorID, String status, Date checkUpDate, double donorWeight, double sugarLevel, String bloodPressure) throws Exception {
         healthCheckupDTO = new HealthCheckupDTO(healthCheckID, donorID, status, checkUpDate, donorWeight, sugarLevel, bloodPressure);
         boolean isSaved;
         try {
-            isSaved = healthCheckUpModel.addHealthCheckup(healthCheckupDTO);
+            isSaved = healthCheckUpBO.addHealthCheckup(healthCheckupDTO);
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Database error while saving health checkup.").show();
             return;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
         if (isSaved) {
             showStatusBtn.setDisable(false);
-            lblHealthCheckUpId.setText(healthCheckUpModel.getNextHealthCheckUpId());
+            lblHealthCheckUpId.setText(healthCheckUpBO.getNextHealthCheckUpId());
             new Alert(Alert.AlertType.INFORMATION, "Health Checkup added successfully").show();
         } else {
             new Alert(Alert.AlertType.ERROR, "Failed to save health checkup details").show();

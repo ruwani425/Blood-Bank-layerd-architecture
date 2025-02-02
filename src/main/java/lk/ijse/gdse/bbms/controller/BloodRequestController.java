@@ -16,6 +16,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.BloodRequestBO;
 import lk.ijse.gdse.bbms.dto.BloodRequestDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodRequestTM;
 import lk.ijse.gdse.bbms.dto.tm.DonorTM;
@@ -78,6 +80,7 @@ public class BloodRequestController implements Initializable {
     BloodRequestModel bloodRequestModel = new BloodRequestModel();
     private HospitalModel hospitalModel = new HospitalModel();
     HomePageViewController homePageViewController;
+    BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
 
     public void setHomePageViewController(HomePageViewController homePageViewController) {
         this.homePageViewController = homePageViewController;
@@ -86,9 +89,11 @@ public class BloodRequestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            lblRequestID.setText(bloodRequestModel.getNextRequestId());
+            lblRequestID.setText(bloodRequestBO.getNextRequestId());
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         populateBloodGroups();
         populateStatus();
@@ -177,10 +182,10 @@ public class BloodRequestController implements Initializable {
                     requestId, hospitalId, bloodType, dateOfRequest, qty, status
             );
 
-            boolean isSaved = bloodRequestModel.addBloodRequest(bloodRequestDTO);
+            boolean isSaved = bloodRequestBO.addBloodRequest(bloodRequestDTO);
 
             if (isSaved) {
-                lblRequestID.setText(bloodRequestModel.getNextRequestId());
+                lblRequestID.setText(bloodRequestBO.getNextRequestId());
                 new Alert(Alert.AlertType.INFORMATION, "Blood request saved successfully!").show();
             } else {
                 new Alert(Alert.AlertType.ERROR, "Failed to save blood request!").show();
@@ -194,6 +199,8 @@ public class BloodRequestController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Database error occurred!").show();
         } catch (NumberFormatException e) {
             new Alert(Alert.AlertType.ERROR, "Invalid quantity value! Please enter a valid number.").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
     private void clearFields() {
@@ -203,12 +210,12 @@ public class BloodRequestController implements Initializable {
             cmbBloodGroup.getSelectionModel().clearSelection();
             cmbStatus.getSelectionModel().clearSelection();
 
-            lblRequestID.setText(bloodRequestModel.getNextRequestId());
+            lblRequestID.setText(bloodRequestBO.getNextRequestId());
 
             LocalDate currentDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             lblRequestDate.setText(currentDate.format(formatter));
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to reset fields!").show();
         }
