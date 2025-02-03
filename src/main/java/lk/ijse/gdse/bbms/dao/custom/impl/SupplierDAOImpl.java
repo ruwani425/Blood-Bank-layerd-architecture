@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.SupplierDAO;
+import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.entity.Supplier;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -11,7 +12,21 @@ import java.util.ArrayList;
 public class SupplierDAOImpl implements SupplierDAO {
     @Override
     public ArrayList<Supplier> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Supplier");
+
+        ArrayList<Supplier> suppliers = new ArrayList<>();
+
+        while (rst.next()) {
+            Supplier supplier = new Supplier(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5)
+            );
+            suppliers.add(supplier);
+        }
+        return suppliers;
     }
 
     @Override

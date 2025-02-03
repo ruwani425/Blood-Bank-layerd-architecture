@@ -28,6 +28,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.SupplierBO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.SupplierTM;
 import lk.ijse.gdse.bbms.model.SupplierModel;
@@ -69,6 +71,7 @@ public class SupplierPageController implements Initializable {
 
     private final SupplierModel supplierModel = new SupplierModel();
     HomePageViewController homePageViewController;
+    SupplierBO supplierBO= (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
 
     public void setHomePageViewController(HomePageViewController homePageViewController) {
         this.homePageViewController=homePageViewController;
@@ -80,6 +83,8 @@ public class SupplierPageController implements Initializable {
         try {
             refreshTable();
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
@@ -94,8 +99,8 @@ public class SupplierPageController implements Initializable {
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<SupplierDTO> supplierDTOs = supplierModel.getAllSuppliers();
+    public void refreshTable() throws Exception {
+        ArrayList<SupplierDTO> supplierDTOs = supplierBO.getAllSuppliers();
         ObservableList<SupplierTM> supplierTMs = FXCollections.observableArrayList();
 
         for (SupplierDTO supplierDTO : supplierDTOs) {
@@ -141,6 +146,8 @@ public class SupplierPageController implements Initializable {
             refreshTable();
         } catch (IOException | SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -166,6 +173,8 @@ public class SupplierPageController implements Initializable {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

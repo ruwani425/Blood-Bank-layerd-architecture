@@ -7,6 +7,7 @@ import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.entity.Supplier;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class SupplierBOImpl implements SupplierBO {
     SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
@@ -41,5 +42,21 @@ public class SupplierBOImpl implements SupplierBO {
         supplier.setDescription(supplierDTO.getDescription());
         supplier.setEmail(supplierDTO.getEmail());
         return supplierDAO.update(supplier);
+    }
+
+    @Override
+    public ArrayList<SupplierDTO> getAllSuppliers() throws Exception {
+        ArrayList<SupplierDTO> supplierDTOs = new ArrayList<>();
+        ArrayList<Supplier>suppliers=supplierDAO.getAllData();
+        for (Supplier supplier : suppliers) {
+            SupplierDTO supplierDTO = new SupplierDTO();
+            supplierDTO.setSupplierId(supplier.getSupplierId());
+            supplierDTO.setSupplierName(supplier.getSupplierName());
+            supplierDTO.setAddress(supplier.getAddress());
+            supplierDTO.setDescription(supplier.getDescription());
+            supplierDTO.setEmail(supplier.getEmail());
+            supplierDTOs.add(supplierDTO);
+        }
+        return supplierDTOs;
     }
 }
