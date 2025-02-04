@@ -6,6 +6,8 @@ import lk.ijse.gdse.bbms.dao.custom.BloodRequestDAO;
 import lk.ijse.gdse.bbms.dto.BloodRequestDTO;
 import lk.ijse.gdse.bbms.entity.BloodRequest;
 
+import java.util.ArrayList;
+
 public class BloodRequestBOImpl implements BloodRequestBO {
 
     BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
@@ -25,5 +27,22 @@ public class BloodRequestBOImpl implements BloodRequestBO {
         bloodRequest.setHospitalId(bloodRequestDTO.getHospitalId());
         bloodRequest.setStatus(bloodRequestDTO.getStatus());
         return bloodRequestDAO.save(bloodRequest);
+    }
+
+    @Override
+    public ArrayList<BloodRequestDTO> getAllRequests(String pending) throws Exception {
+        ArrayList<BloodRequestDTO> bloodRequestDTOS = new ArrayList<>();
+        ArrayList<BloodRequest>bloodRequests=bloodRequestDAO.search(pending);
+        for (BloodRequest bloodRequest : bloodRequests) {
+            BloodRequestDTO bloodRequestDTO = new BloodRequestDTO();
+            bloodRequestDTO.setRequestId(bloodRequest.getRequestId());
+            bloodRequestDTO.setBloodType(bloodRequest.getBloodType());
+            bloodRequestDTO.setDateOfRequest(bloodRequest.getDateOfRequest());
+            bloodRequestDTO.setQty(bloodRequest.getQty());
+            bloodRequestDTO.setHospitalId(bloodRequest.getHospitalId());
+            bloodRequestDTO.setStatus(bloodRequest.getStatus());
+            bloodRequestDTOS.add(bloodRequestDTO);
+        }
+        return bloodRequestDTOS;
     }
 }

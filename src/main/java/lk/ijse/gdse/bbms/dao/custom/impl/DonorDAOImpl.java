@@ -5,6 +5,7 @@ import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.Donor;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -92,5 +93,14 @@ public class DonorDAOImpl implements DonorDAO {
     @Override
     public ArrayList<Donor> search(String newValue) throws SQLException, ClassNotFoundException {
         return null;
+    }
+
+    @Override
+    public boolean updateLastDonationDate(String donorId, Date dateOfDonation) throws Exception {
+        return CrudUtil.execute(
+                "UPDATE Donor SET Last_donation_date = ? WHERE Donor_id = ?",
+                dateOfDonation,
+                donorId
+        );
     }
 }

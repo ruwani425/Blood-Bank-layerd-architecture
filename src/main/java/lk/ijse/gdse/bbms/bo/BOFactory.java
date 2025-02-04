@@ -14,7 +14,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER, INVENTORY, HOSPITAL, HEALTHCHECKUP, BLOODREQUEST
+        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER, INVENTORY, HOSPITAL, HEALTHCHECKUP, BLOODREQUEST, DONATION
     }
 
     public SuperBO getBO(BOType type) {
@@ -35,6 +35,8 @@ public class BOFactory {
                 return new HealthCheckUpBOImpl();
             case BLOODREQUEST:
                 return new BloodRequestBOImpl();
+            case DONATION:
+                return new DonationBOImpl();
             default:
                 return null;
         }

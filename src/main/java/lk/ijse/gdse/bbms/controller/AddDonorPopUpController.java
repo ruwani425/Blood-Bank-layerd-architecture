@@ -64,9 +64,8 @@ public class AddDonorPopUpController implements Initializable {
     @FXML
     private Stage stage;
 
-    DonorModel model = new DonorModel();
     DonorPageViewController donorPageViewController;
-    DonorBO donorBO= (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
+    DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
     public void setDonorPageViewController(DonorPageViewController donorPageViewController) {
         this.donorPageViewController = donorPageViewController;
@@ -89,10 +88,11 @@ public class AddDonorPopUpController implements Initializable {
     }
 
     private void populateDonorGender() {
-        txtDonorGender.getItems().addAll("MALE","FEMALE","OTHER");
+        txtDonorGender.getItems().addAll("MALE", "FEMALE", "OTHER");
     }
+
     private void populateDonorBloodGroup() {
-        txtDonorBloodGroup.getItems().addAll("A_POSITIVE","A_NEGATIVE","B_POSITIVE","B_NEGATIVE","AB_POSITIVE","AB_NEGATIVE","O_POSITIVE","O_NEGATIVE");
+        txtDonorBloodGroup.getItems().addAll("A_POSITIVE", "A_NEGATIVE", "B_POSITIVE", "B_NEGATIVE", "AB_POSITIVE", "AB_NEGATIVE", "O_POSITIVE", "O_NEGATIVE");
     }
 
     @FXML
@@ -123,12 +123,11 @@ public class AddDonorPopUpController implements Initializable {
         String id = lblDonorId.getText();
 
         DonorDTO donorDTO = new DonorDTO(id, name, nic, address, email, bloodGroup, gender, dob, null);
-        boolean isSaved=donorBO.addDonor(donorDTO);
-        //boolean isSaved = model.addDonor(donorDTO);
+        boolean isSaved = donorBO.addDonor(donorDTO);
 
         if (isSaved) {
             try {
-                lblDonorId.setText(model.getNextDonorId());
+                lblDonorId.setText(donorBO.getNextDonorId());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -141,37 +140,6 @@ public class AddDonorPopUpController implements Initializable {
         clearFields();
     }
 
-
-//    @FXML
-//    void btnAddDonorOnAction(ActionEvent event) throws SQLException {
-//        String name = txtDonorName.getText();
-//        String email = txtDonorEmail.getText();
-//        String nic = txtDonorNic.getText();
-//        String bloodGroup = txtDonorBloodGroup.getSelectionModel().getSelectedItem().toString();
-//        String gender = txtDonorGender.getSelectionModel().getSelectedItem().toString();
-//        Date dob = Date.valueOf(txtDonorDob.getValue().toString());
-//        String address=txtDonorAddress.getText();
-//        String id = lblDonorId.getText();
-//
-//        DonorDTO donorDTO = new DonorDTO(id,name,nic,address,email,bloodGroup,gender,dob,null);
-//        boolean isSaved = model.addDonor(donorDTO);
-//
-//        if (isSaved) {
-//
-//            try {
-//                lblDonorId.setText(model.getNextDonorId());
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//
-//            donorPageViewController.refreshTable();
-//            new Alert(Alert.AlertType.INFORMATION, "Donor saved successfully...!").show();
-//        } else {
-//            new Alert(Alert.AlertType.ERROR, "Fail to save Donor...!").show();
-//        }
-//        clearFields();
-//    }
-
     @FXML
     void btnDeleteDonorOnAction(ActionEvent event) throws Exception {
         String donorId = lblDonorId.getText();
@@ -180,8 +148,7 @@ public class AddDonorPopUpController implements Initializable {
         Optional<ButtonType> buttonType = alert.showAndWait();
         if (buttonType.get() == ButtonType.YES) {
 
-            //boolean isDeleted = model.deleteDonor(donorId);
-            boolean isDeleted=donorBO.deleteDonor(donorId);
+            boolean isDeleted = donorBO.deleteDonor(donorId);
 
             if (isDeleted) {
                 donorPageViewController.refreshTable();
@@ -194,31 +161,6 @@ public class AddDonorPopUpController implements Initializable {
         }
         clearFields();
     }
-
-//    @FXML
-//    void btnUpdateDonorOnAction(ActionEvent event) throws SQLException {
-//        String name = txtDonorName.getText();
-//        String email = txtDonorEmail.getText();
-//        String nic = txtDonorNic.getText();
-//        String bloodGroup = txtDonorBloodGroup.getSelectionModel().getSelectedItem().toString();
-//        String gender = txtDonorGender.getSelectionModel().getSelectedItem().toString();
-//        Date dob = Date.valueOf(txtDonorDob.getValue().toString());
-//        String address=txtDonorAddress.getText();
-//        String id = lblDonorId.getText();
-//
-//        DonorDTO donorDTO = new DonorDTO(id,name,nic,address,email,bloodGroup,gender,dob,null);
-//        boolean isUpdate = model.updateDonor(donorDTO);
-//
-//        if (isUpdate) {
-//            donorPageViewController.refreshTable();
-//            new Alert(Alert.AlertType.INFORMATION, "Donor updated successfully...!").show();
-//            stage = (Stage) btnUpdate.getScene().getWindow();
-//            stage.close();
-//        } else {
-//            new Alert(Alert.AlertType.ERROR, "Fail to update Donor...!").show();
-//        }
-//        clearFields();
-//    }
 
     @FXML
     void btnUpdateDonorOnAction(ActionEvent event) throws Exception {
@@ -247,8 +189,7 @@ public class AddDonorPopUpController implements Initializable {
         String id = lblDonorId.getText();
 
         DonorDTO donorDTO = new DonorDTO(id, name, nic, address, email, bloodGroup, gender, dob, null);
-        //boolean isUpdate = model.updateDonor(donorDTO);
-        boolean isUpdate=donorBO.updateDonor(donorDTO);
+        boolean isUpdate = donorBO.updateDonor(donorDTO);
 
         if (isUpdate) {
             donorPageViewController.refreshTable();
@@ -284,7 +225,7 @@ public class AddDonorPopUpController implements Initializable {
     }
 
     @FXML
-    private void clearFields() throws SQLException {
+    private void clearFields() throws Exception {
         txtDonorAddress.clear();
         txtDonorDob.setValue(null);
         txtDonorEmail.clear();
@@ -292,7 +233,7 @@ public class AddDonorPopUpController implements Initializable {
         txtDonorName.clear();
         txtDonorBloodGroup.getSelectionModel().clearSelection();
         txtDonorGender.getSelectionModel().clearSelection();
-        lblDonorId.setText(model.getNextDonorId());
+        lblDonorId.setText(donorBO.getNextDonorId());
 
         resetFieldBorder(txtDonorName);
         resetFieldBorder(txtDonorEmail);

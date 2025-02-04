@@ -6,7 +6,7 @@ import lk.ijse.gdse.bbms.dto.DonorDTO;
 import java.util.ArrayList;
 
 public interface DonorBO extends SuperBO {
-    public boolean addDonor(DonorDTO donorDTO) throws Exception;
+    public boolean addDonor(DonorDTO donorDTO);
 
     public boolean deleteDonor(String donorId) throws Exception;
 

@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.BloodRequestDAO;
+import lk.ijse.gdse.bbms.dto.BloodRequestDTO;
 import lk.ijse.gdse.bbms.entity.BloodRequest;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -58,6 +59,23 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
 
     @Override
     public ArrayList<BloodRequest> search(String newValue) throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Blood_request where Status=?",newValue);
+
+        ArrayList<BloodRequest> bloodRequestList = new ArrayList<>();
+
+        while (rst.next()) {
+            BloodRequest bloodRequest = new BloodRequest(
+                    rst.getString("Request_id"),
+                    rst.getString("Hospital_id"),
+                    rst.getString("Blood_group"),
+                    rst.getDate("Date_of_request"),
+                    rst.getDouble("Qty"),
+                    rst.getString("Status")
+            );
+
+            bloodRequestList.add(bloodRequest);
+        }
+
+        return bloodRequestList;
     }
 }

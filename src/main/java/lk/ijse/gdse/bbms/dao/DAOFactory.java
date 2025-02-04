@@ -13,7 +13,7 @@ public class DAOFactory {
     }
 
     public enum DAOType {
-        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER, INVENTORY, HOSPITAL, HEALTHCHECKUP, BLOODREQUEST
+        DONOR, CAMPAIGN, EMPLOYEE, SUPPLIER, INVENTORY, HOSPITAL, HEALTHCHECKUP, BLOODREQUEST, DONATION, BLOODTEST
     }
 
     public SuperDAO getDAO(DAOType type) {
@@ -34,6 +34,10 @@ public class DAOFactory {
                 return new HealthCheckupDAOImpl();
             case BLOODREQUEST:
                 return new BloodRequestDAOImpl();
+            case DONATION:
+                return new DonationDAOImpl();
+            case BLOODTEST:
+                return new BloodTestDAOImpl();
             default:
                 return null;
         }

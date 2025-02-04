@@ -11,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.DonationBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
@@ -90,6 +92,7 @@ public class DonationPageController implements Initializable {
 
     private DonationModel donationModel = new DonationModel();
     private DonorModel donorModel = new DonorModel();
+    private DonationBO donationBO= (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
     CampaignModel campaignModel = new CampaignModel();
     String checkupId;
@@ -141,16 +144,8 @@ public class DonationPageController implements Initializable {
         tblDonation.setItems(donationTMS);
     }
 
-    //    private void handleRowClick(MouseEvent event) {
-//        if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
-//            DonorTM selectedDonation = tblDonation.getSelectionModel().getSelectedItem();
-//            if (selectedDonor != null) {
-//                openEditDonorWindow(selectedDonation);
-//            }
-//        }
-//    }
     @FXML
-    void btnAddDonationOnAction(ActionEvent event) throws SQLException {
+    void btnAddDonationOnAction(ActionEvent event) throws Exception {
         String campaignId = cmbSelectCampaign.getValue();
         int qty = Integer.parseInt(txtQty.getText());
         Date donationDate = Date.valueOf(LocalDate.now());
@@ -158,7 +153,7 @@ public class DonationPageController implements Initializable {
         System.out.println(campaignId);
         System.out.println(checkupId);
 
-        boolean isSaved = donationModel.addDonation(new DonationDTO(
+        boolean isSaved = donationBO.addDonation(new DonationDTO(
                 lblDonationId.getText(),
                 campaignId,
                 checkupId,

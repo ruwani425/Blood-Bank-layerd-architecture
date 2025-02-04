@@ -138,7 +138,7 @@ public class BloodRequestController implements Initializable {
     }
     private void loadBloodRequests() {
         try {
-            ArrayList<BloodRequestDTO> bloodRequestList = bloodRequestModel.getAllRequests("PENDING");
+            ArrayList<BloodRequestDTO> bloodRequestList = bloodRequestBO.getAllRequests("PENDING");
 
             ObservableList<BloodRequestTM> observableList = FXCollections.observableArrayList();
             for (BloodRequestDTO dto : bloodRequestList) {
@@ -156,6 +156,8 @@ public class BloodRequestController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load blood requests!").show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

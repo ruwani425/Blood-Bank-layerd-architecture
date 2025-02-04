@@ -6,6 +6,7 @@ import lk.ijse.gdse.bbms.dao.custom.DonorDAO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.Donor;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DonorBOImpl implements DonorBO {
@@ -14,7 +15,7 @@ public class DonorBOImpl implements DonorBO {
     Donor donor = new Donor();
 
     @Override
-    public boolean addDonor(DonorDTO donorDTO) throws Exception {
+    public boolean addDonor(DonorDTO donorDTO)  {
         donor.setDonorId(donorDTO.getDonorId());
         donor.setDonorName(donorDTO.getDonorName());
         donor.setDonorEmail(donorDTO.getDonorEmail());
@@ -24,7 +25,13 @@ public class DonorBOImpl implements DonorBO {
         donor.setGender(donorDTO.getGender());
         donor.setDob(donorDTO.getDob());
         donor.setLastDonationDate(donorDTO.getLastDonationDate());
-        return donorDAO.save(donor);
+        try {
+            return donorDAO.save(donor);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

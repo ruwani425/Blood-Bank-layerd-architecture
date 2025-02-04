@@ -35,13 +35,13 @@ public class DonationModel {
                 if (bloodTestModel.addBloodTest(bloodTestDTO)) {
                     if (
                             donorModel.updateLastDonationDate(donorID, donationDTO.getDateOfDonation())) {
-                            if(campaignModel.updateCollectedUnit(donationDTO.getCampaignId(),donationDTO.getQty())){
-                                connection.commit();
-                                return true;
-                            }else {
-                                connection.rollback();
-                                return false;
-                            }
+                        if (campaignModel.updateCollectedUnit(donationDTO.getCampaignId(), donationDTO.getQty())) {
+                            connection.commit();
+                            return true;
+                        } else {
+                            connection.rollback();
+                            return false;
+                        }
                     } else {
                         connection.rollback();
                         return false;

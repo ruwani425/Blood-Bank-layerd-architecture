@@ -66,7 +66,7 @@ public class CampaignDAOImpl implements CampaignDAO {
 
     @Override
     public boolean delete(Campaign campaign) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("delete from Blood_campaign where Blood_campaign_id=?",campaign.getBlood_campaign_id());
+        return CrudUtil.execute("delete from Blood_campaign where Blood_campaign_id=?", campaign.getBlood_campaign_id());
     }
 
     @Override
@@ -86,5 +86,14 @@ public class CampaignDAOImpl implements CampaignDAO {
     @Override
     public ArrayList<Campaign> search(String newValue) throws SQLException, ClassNotFoundException {
         return null;
+    }
+
+    @Override
+    public boolean updateCollectedUnit(String campaignId, int qty) throws Exception {
+        return CrudUtil.execute(
+                "UPDATE Blood_campaign SET Collected_units = Collected_units + ? WHERE Blood_campaign_id = ?",
+                1,
+                campaignId
+        );
     }
 }
