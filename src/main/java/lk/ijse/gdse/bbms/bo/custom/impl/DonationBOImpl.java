@@ -13,12 +13,13 @@ import lk.ijse.gdse.bbms.entity.BloodTest;
 import lk.ijse.gdse.bbms.entity.Donation;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 public class DonationBOImpl implements DonationBO {
 
     DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
     DonationDAO donationDAO = (DonationDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONATION);
-    BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONATION);
+    BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODTEST);
     CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
 
     @Override
@@ -35,6 +36,7 @@ public class DonationBOImpl implements DonationBO {
                     donationDTO.getQty(),
                     donationDTO.getDateOfDonation()))
             ) {
+                System.out.println("Donation added successfully");
                 if (bloodTestDAO.save(new BloodTest(bloodTestDTO.getTestID(),
                         bloodTestDTO.getDonationID(),
                         bloodTestDTO.getCollectedDate(),
@@ -48,34 +50,69 @@ public class DonationBOImpl implements DonationBO {
                         bloodTestDTO.getWhiteBloodCells(),
                         bloodTestDTO.getReportImageUrl(),
                         bloodTestDTO.getBloodType(),
-                        bloodTestDTO.getBloodQty()))) {
-                    if (donorDAO.updateLastDonationDate(donorId, donationDTO.getDateOfDonation())) {
-                        if (campaignDAO.updateCollectedUnit(donationDTO.getCampaignId(), donationDTO.getQty())) {
+                        bloodTestDTO.getBloodQty())))
+                {
+                    System.out.println("blood test added successfully");
+                    if (donorDAO.updateLastDonationDate(donorId, donationDTO.getDateOfDonation()))
+
+                    {
+                        System.out.println("updated last donation successfully");
+                        if (campaignDAO.updateCollectedUnit(donationDTO.getCampaignId(), donationDTO.getQty()))
+
+                        {
+                            System.out.println("updated collected unit successfully");
                             connection.commit();
                             return true;
                         } else {
+                            System.out.println("couldn't update collected unit successfully");
                             connection.rollback();
                             return false;
                         }
                     } else {
+                        System.out.println("couldn't update last donation successfully");
                         connection.rollback();
                         return false;
                     }
 
                 } else {
+                    System.out.println("couldn't update blood test successfully");
                     connection.rollback();
                     return false;
                 }
             } else {
+                System.out.println("couldn't save blood donation successfully");
                 connection.rollback();
                 return false;
             }
         } catch (Exception e) {
+            e.printStackTrace();
             connection.rollback();
             return false;
         } finally {
             connection.setAutoCommit(true);
         }
+    }
+
+    @Override
+    public String getNextDonationId() throws Exception {
+        return donationDAO.getNewId();
+    }
+
+    @Override
+    public ArrayList<DonationDTO> getAllDonations() throws Exception {
+        ArrayList<DonationDTO>donationDTOS=new ArrayList<>();
+        ArrayList<Donation>donations=donationDAO.getAllData();
+        for (Donation donation : donations) {
+            DonationDTO donationDTO=new DonationDTO();
+            donationDTO.setDonationId(donation.getDonationId());
+            donationDTO.setDateOfDonation(donation.getDateOfDonation());
+            donationDTO.setQty(donation.getQty());
+            donationDTO.setBloodGroup(donation.getBloodGroup());
+            donationDTO.setCampaignId(donation.getCampaignId());
+            donationDTO.setHelthCheckupId(donation.getHelthCheckupId());
+            donationDTOS.add(donationDTO);
+        }
+        return donationDTOS;
     }
 
     private BloodTestDTO getBloodTestDTO(DonationDTO donationDTO) throws Exception {

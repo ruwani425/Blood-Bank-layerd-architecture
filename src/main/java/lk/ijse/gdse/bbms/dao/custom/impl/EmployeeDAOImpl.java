@@ -67,7 +67,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public ArrayList<Employee> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Employee> search(Employee newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
 }

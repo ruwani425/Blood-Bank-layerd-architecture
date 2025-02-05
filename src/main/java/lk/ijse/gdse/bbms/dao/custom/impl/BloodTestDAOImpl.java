@@ -15,8 +15,24 @@ public class BloodTestDAOImpl implements BloodTestDAO {
     }
 
     @Override
-    public boolean save(BloodTest Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(BloodTest bloodTest) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "insert into Blood_test values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                bloodTest.getTestID(),
+                bloodTest.getDonationID(),
+                bloodTest.getCollectedDate(),
+                bloodTest.getExpiryDate(),
+                bloodTest.getTestResult(),
+                bloodTest.getHaemoglobin(),
+                bloodTest.getTestDate(),
+                bloodTest.getReportSerialNum(),
+                bloodTest.getPlatelets(),
+                bloodTest.getRedBloodCells(),
+                bloodTest.getWhiteBloodCells(),
+                bloodTest.getReportImageUrl(),
+                bloodTest.getBloodType(),
+                bloodTest.getBloodQty()
+        );
     }
 
     @Override
@@ -40,7 +56,7 @@ public class BloodTestDAOImpl implements BloodTestDAO {
     }
 
     @Override
-    public ArrayList<BloodTest> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<BloodTest> search(BloodTest newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
 

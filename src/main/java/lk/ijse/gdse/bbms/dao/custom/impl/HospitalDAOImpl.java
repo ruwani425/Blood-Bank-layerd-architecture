@@ -65,7 +65,7 @@ public class HospitalDAOImpl implements HospitalDAO {
     }
 
     @Override
-    public ArrayList<Hospital> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Hospital> search(Hospital newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
 }

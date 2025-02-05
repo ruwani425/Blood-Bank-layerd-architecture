@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="BloodBankManagement@localhost" uuid="1b0bf7cf-d989-4c25-b018-904aa24a49eb">
+    <data-source source="LOCAL" name="BloodBankManagement@localhost" uuid="20d849b7-48c4-4480-a921-b625ea833cd3">
       <driver-ref>mysql_aurora.aws_wrapper</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>software.amazon.jdbc.Driver</jdbc-driver>

@@ -91,7 +91,7 @@ public class DonorDAOImpl implements DonorDAO {
     }
 
     @Override
-    public ArrayList<Donor> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Donor> search(Donor newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
 

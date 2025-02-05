@@ -84,7 +84,7 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
-    public ArrayList<Campaign> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Campaign> search(Campaign newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
 

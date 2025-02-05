@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.BloodStockBO;
 import lk.ijse.gdse.bbms.db.DBConnection;
 import lk.ijse.gdse.bbms.dto.BloodStockDTO;
 import lk.ijse.gdse.bbms.dto.HospitalDTO;
@@ -121,6 +123,7 @@ public class BloodStockPageController implements Initializable {
     BloodStockModel bloodStockModel=new BloodStockModel();
     ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
     ArrayList<BloodIssueTM>issuedBlood=new ArrayList<>();
+    BloodStockBO bloodStockBO= (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -128,7 +131,7 @@ public class BloodStockPageController implements Initializable {
         setCellValueFactory();
         try {
             refreshTable();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         tblBloodStock.setOnMouseClicked(this::handleRowClick);
@@ -189,8 +192,8 @@ public class BloodStockPageController implements Initializable {
         tblBloodIssue.getItems().add(bloodIssueTM);
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockModel.getAllBloodStocks("VERIFIED");
+    public void refreshTable() throws Exception {
+        ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockBO.getAllBloodStocks("VERIFIED");
         ObservableList<BloodStockTM> bloodStockTMS = FXCollections.observableArrayList();
 
         for (BloodStockDTO bloodStockDTO : bloodStockDTOS) {
@@ -214,7 +217,7 @@ public class BloodStockPageController implements Initializable {
 
     public void getExpiredBlood(){
         try {
-            ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockModel.getExpiredBloodStocks();
+            ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockBO.getExpiredBloodStocks();
             ObservableList<BloodStockTM> bloodStockTMS = FXCollections.observableArrayList();
 
             for (BloodStockDTO bloodStockDTO : bloodStockDTOS) {
@@ -238,6 +241,8 @@ public class BloodStockPageController implements Initializable {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -250,7 +255,7 @@ public class BloodStockPageController implements Initializable {
     @FXML
     void btnIsVerifiedOnAction(ActionEvent event) {
         try {
-            ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockModel.getAllBloodStocks("VERIFIED");
+            ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockBO.getAllBloodStocks("VERIFIED");
             ObservableList<BloodStockTM> bloodStockTMS = FXCollections.observableArrayList();
 
             for (BloodStockDTO bloodStockDTO : bloodStockDTOS) {
@@ -276,12 +281,14 @@ public class BloodStockPageController implements Initializable {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void btnIssueOnAction(ActionEvent event) throws SQLException {
-            boolean isAdd=bloodStockModel.addBloodIssue(bloodRequestTM,issuedBlood);
+    void btnIssueOnAction(ActionEvent event) throws Exception {
+            boolean isAdd=bloodStockBO.addBloodIssue(bloodRequestTM,issuedBlood);
             if (isAdd){
                 refreshTable();
                 new Alert(Alert.AlertType.INFORMATION, "successfully saved").show();

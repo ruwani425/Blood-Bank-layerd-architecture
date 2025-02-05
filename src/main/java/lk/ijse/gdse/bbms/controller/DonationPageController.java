@@ -90,7 +90,6 @@ public class DonationPageController implements Initializable {
 
     String donorEmail;
 
-    private DonationModel donationModel = new DonationModel();
     private DonorModel donorModel = new DonorModel();
     private DonationBO donationBO= (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
@@ -105,11 +104,13 @@ public class DonationPageController implements Initializable {
             setCellValueFactory();
             refreshTable();
             getDonorById();
-            lblDonationId.setText(donationModel.getNextDonationId());
+            lblDonationId.setText(donationBO.getNextDonationId());
             ArrayList<String> idList = campaignModel.findCampaignIds();
             cmbSelectCampaign.getItems().addAll(idList);
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -126,8 +127,8 @@ public class DonationPageController implements Initializable {
         colDateOfDonation.setCellValueFactory(new PropertyValueFactory<>("dateOfDonation"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<DonationDTO> donationDTOS = donationModel.getAllDonations();
+    public void refreshTable() throws Exception {
+        ArrayList<DonationDTO> donationDTOS = donationBO.getAllDonations();
         ObservableList<DonationTM> donationTMS = FXCollections.observableArrayList();
 
         for (DonationDTO donationDTO : donationDTOS) {
@@ -163,7 +164,7 @@ public class DonationPageController implements Initializable {
         ), donorId);
 
         if (isSaved) {
-            lblDonationId.setText(donationModel.getNextDonationId());
+            lblDonationId.setText(donationBO.getNextDonationId());
             refreshTable();
 
             new Thread(() -> {

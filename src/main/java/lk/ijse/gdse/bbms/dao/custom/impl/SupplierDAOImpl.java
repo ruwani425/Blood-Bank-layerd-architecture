@@ -78,7 +78,8 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public ArrayList<Supplier> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Supplier> search(Supplier newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
 }

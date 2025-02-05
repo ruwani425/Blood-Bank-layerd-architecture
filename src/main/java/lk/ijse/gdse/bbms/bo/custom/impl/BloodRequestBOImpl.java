@@ -31,8 +31,9 @@ public class BloodRequestBOImpl implements BloodRequestBO {
 
     @Override
     public ArrayList<BloodRequestDTO> getAllRequests(String pending) throws Exception {
+        bloodRequest.setStatus(pending);
         ArrayList<BloodRequestDTO> bloodRequestDTOS = new ArrayList<>();
-        ArrayList<BloodRequest>bloodRequests=bloodRequestDAO.search(pending);
+        ArrayList<BloodRequest>bloodRequests=bloodRequestDAO.search(bloodRequest);
         for (BloodRequest bloodRequest : bloodRequests) {
             BloodRequestDTO bloodRequestDTO = new BloodRequestDTO();
             bloodRequestDTO.setRequestId(bloodRequest.getRequestId());

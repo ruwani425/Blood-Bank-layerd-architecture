@@ -56,7 +56,8 @@ public class InventoryDAOImpl implements InventoryDAO {
     }
 
     @Override
-    public ArrayList<Inventory> search(String newValue) throws SQLException, ClassNotFoundException {
+    public ArrayList<Inventory> search(Inventory newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
 }

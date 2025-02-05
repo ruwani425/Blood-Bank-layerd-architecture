@@ -77,7 +77,6 @@ public class BloodRequestController implements Initializable {
     @FXML
     private JFXButton btnAddRequest;
 
-    BloodRequestModel bloodRequestModel = new BloodRequestModel();
     private HospitalModel hospitalModel = new HospitalModel();
     HomePageViewController homePageViewController;
     BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
@@ -222,8 +221,8 @@ public class BloodRequestController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to reset fields!").show();
         }
     }
-    public void refreshTable() throws SQLException {
-        ArrayList<BloodRequestDTO> bloodRequestDTOS = bloodRequestModel.getAllRequests("PENDING");
+    public void refreshTable() throws Exception {
+        ArrayList<BloodRequestDTO> bloodRequestDTOS = bloodRequestBO.getAllRequests("PENDING");
         ObservableList<BloodRequestTM> bloodRequestTMS = FXCollections.observableArrayList();
 
         for (BloodRequestDTO bloodRequestDTO : bloodRequestDTOS) {

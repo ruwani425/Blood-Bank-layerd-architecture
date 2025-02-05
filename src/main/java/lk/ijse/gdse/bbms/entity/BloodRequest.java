@@ -16,4 +16,8 @@ public class BloodRequest {
     private Date dateOfRequest;
     private double qty;
     private String status;
+
+    public BloodRequest(String requestId) {
+        this.requestId = requestId;
+    }
 }

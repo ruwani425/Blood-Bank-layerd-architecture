@@ -57,14 +57,15 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
         return "R001";
     }
 
+
     @Override
-    public ArrayList<BloodRequest> search(String newValue) throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Blood_request where Status=?",newValue);
+    public ArrayList<BloodRequest> search(BloodRequest bloodRequest) throws SQLException, ClassNotFoundException {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Blood_request where Status=?",bloodRequest.getStatus());
 
         ArrayList<BloodRequest> bloodRequestList = new ArrayList<>();
 
         while (rst.next()) {
-            BloodRequest bloodRequest = new BloodRequest(
+            BloodRequest bloodRequest1 = new BloodRequest(
                     rst.getString("Request_id"),
                     rst.getString("Hospital_id"),
                     rst.getString("Blood_group"),
@@ -73,7 +74,7 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
                     rst.getString("Status")
             );
 
-            bloodRequestList.add(bloodRequest);
+            bloodRequestList.add(bloodRequest1);
         }
 
         return bloodRequestList;
