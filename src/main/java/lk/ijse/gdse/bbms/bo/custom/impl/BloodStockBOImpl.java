@@ -2,18 +2,13 @@ package lk.ijse.gdse.bbms.bo.custom.impl;
 
 import lk.ijse.gdse.bbms.bo.custom.BloodStockBO;
 import lk.ijse.gdse.bbms.dao.DAOFactory;
-import lk.ijse.gdse.bbms.dao.custom.BloodRequestDAO;
-import lk.ijse.gdse.bbms.dao.custom.BloodRequestDetailDAO;
-import lk.ijse.gdse.bbms.dao.custom.BloodStockDAO;
-import lk.ijse.gdse.bbms.dao.custom.ReservedBloodDAO;
+import lk.ijse.gdse.bbms.dao.custom.*;
 import lk.ijse.gdse.bbms.db.DBConnection;
 import lk.ijse.gdse.bbms.dto.BloodStockDTO;
+import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodIssueTM;
 import lk.ijse.gdse.bbms.dto.tm.BloodRequestTM;
-import lk.ijse.gdse.bbms.entity.BloodRequest;
-import lk.ijse.gdse.bbms.entity.BloodRequestDetail;
-import lk.ijse.gdse.bbms.entity.BloodStock;
-import lk.ijse.gdse.bbms.entity.ReservedBlood;
+import lk.ijse.gdse.bbms.entity.*;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,7 +21,7 @@ public class BloodStockBOImpl implements BloodStockBO {
     BloodRequestDetailDAO bloodRequestDetailDAO = (BloodRequestDetailDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUESTDETAIL);
     ReservedBloodDAO reservedBloodDAO = (ReservedBloodDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.RESERVEDBLOOD);
     BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
-
+    HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
     BloodStock bloodStock = new BloodStock();
 
     @Override
@@ -117,5 +112,22 @@ public class BloodStockBOImpl implements BloodStockBO {
         } finally {
             connection.setAutoCommit(true);
         }
+    }
+
+    @Override
+    public HospitalDTO getHospitalById(String hospitalId) throws SQLException, ClassNotFoundException {
+        Hospital hospital = hospitalDAO.findById(new Hospital(hospitalId));
+
+        if (hospital != null) {
+            return new HospitalDTO(
+                    hospital.getHospitalId(),
+                    hospital.getHospitalName(),
+                    hospital.getHospitalAddress(),
+                    hospital.getContactNumber(),
+                    hospital.getEmail(),
+                    hospital.getType()
+            );
+        }
+        return null;
     }
 }

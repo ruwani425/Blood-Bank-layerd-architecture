@@ -321,6 +321,8 @@ public class HomePageViewController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to load page!").show();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

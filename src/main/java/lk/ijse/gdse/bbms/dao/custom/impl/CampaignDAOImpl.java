@@ -89,6 +89,11 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
+    public Campaign findById(Campaign entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public boolean updateCollectedUnit(String campaignId, int qty) throws Exception {
         return CrudUtil.execute(
                 "UPDATE Blood_campaign SET Collected_units = Collected_units + ? WHERE Blood_campaign_id = ?",

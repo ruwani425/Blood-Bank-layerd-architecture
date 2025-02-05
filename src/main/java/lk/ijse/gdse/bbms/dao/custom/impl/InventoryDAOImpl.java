@@ -60,4 +60,9 @@ public class InventoryDAOImpl implements InventoryDAO {
         return null;
     }
 
+    @Override
+    public Inventory findById(Inventory entity) throws SQLException {
+        return null;
+    }
+
 }

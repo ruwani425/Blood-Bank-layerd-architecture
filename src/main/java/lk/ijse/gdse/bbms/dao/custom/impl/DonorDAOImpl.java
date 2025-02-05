@@ -96,6 +96,11 @@ public class DonorDAOImpl implements DonorDAO {
     }
 
     @Override
+    public Donor findById(Donor entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public boolean updateLastDonationDate(String donorId, Date dateOfDonation) throws Exception {
         return CrudUtil.execute(
                 "UPDATE Donor SET Last_donation_date = ? WHERE Donor_id = ?",

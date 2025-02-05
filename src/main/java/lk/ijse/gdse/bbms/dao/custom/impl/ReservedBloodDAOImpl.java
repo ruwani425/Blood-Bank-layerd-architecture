@@ -41,4 +41,9 @@ public class ReservedBloodDAOImpl implements ReservedBloodDAO {
     public ArrayList<ReservedBlood> search(ReservedBlood newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public ReservedBlood findById(ReservedBlood entity) throws SQLException {
+        return null;
+    }
 }

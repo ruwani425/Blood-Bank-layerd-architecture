@@ -82,4 +82,9 @@ public class SupplierDAOImpl implements SupplierDAO {
         return null;
     }
 
+    @Override
+    public Supplier findById(Supplier entity) throws SQLException {
+        return null;
+    }
+
 }

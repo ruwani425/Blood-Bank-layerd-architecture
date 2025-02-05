@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.HospitalDAO;
+import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.entity.Hospital;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -79,5 +80,22 @@ public class HospitalDAOImpl implements HospitalDAO {
             hospitalIds.add(rst.getString("Hospital_id"));
         }
         return hospitalIds;
+    }
+
+    @Override
+    public Hospital findById(Hospital hospital) throws SQLException {
+        ResultSet rst = CrudUtil.execute("select * from Hospital where Hospital_id=?", hospital.getHospitalId());
+
+        if (rst.next()) {
+            return new Hospital(
+                    rst.getString("Hospital_id"),
+                    rst.getString("Name"),
+                    rst.getString("Address"),
+                    rst.getString("Contact_number"),
+                    rst.getString("Email"),
+                    rst.getString("Type")
+            );
+        }
+        return null;
     }
 }

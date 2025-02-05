@@ -82,4 +82,9 @@ public class DonationDAOImpl implements DonationDAO {
     public ArrayList<Donation> search(Donation newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public Donation findById(Donation entity) throws SQLException {
+        return null;
+    }
 }

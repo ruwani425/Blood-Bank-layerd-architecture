@@ -61,4 +61,9 @@ public class HealthCheckupDAOImpl implements HealthCheckUpDAO {
     public ArrayList<HealthCheckUp> search(HealthCheckUp newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public HealthCheckUp findById(HealthCheckUp entity) throws SQLException {
+        return null;
+    }
 }

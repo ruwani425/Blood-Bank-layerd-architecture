@@ -79,4 +79,9 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
 
         return bloodRequestList;
     }
+
+    @Override
+    public BloodRequest findById(BloodRequest entity) throws SQLException {
+        return null;
+    }
 }

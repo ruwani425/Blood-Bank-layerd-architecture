@@ -65,6 +65,11 @@ public class BloodStockDAOImpl implements BloodStockDAO {
     }
 
     @Override
+    public BloodStock findById(BloodStock entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public boolean updateBloodStockStatusAfterIssued(String bloodID) throws Exception {
         boolean rowsUpdated = CrudUtil.execute(
                 "UPDATE Blood_stock SET status = 'ISSUED' WHERE Blood_id=?", bloodID

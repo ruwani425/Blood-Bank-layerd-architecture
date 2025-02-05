@@ -120,7 +120,6 @@ public class BloodStockPageController implements Initializable {
     String hospitalEmail;
     HospitalModel hospitalModel=new HospitalModel();
 
-    BloodStockModel bloodStockModel=new BloodStockModel();
     ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
     ArrayList<BloodIssueTM>issuedBlood=new ArrayList<>();
     BloodStockBO bloodStockBO= (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
@@ -137,11 +136,11 @@ public class BloodStockPageController implements Initializable {
         tblBloodStock.setOnMouseClicked(this::handleRowClick);
     }
 
-    public void setRequestID(BloodRequestTM bloodRequestTM) throws SQLException {
+    public void setRequestID(BloodRequestTM bloodRequestTM) throws Exception {
         this.bloodRequestTM = bloodRequestTM;
         lblRequestID.setText(bloodRequestTM.getRequestId());
         System.out.println(bloodRequestTM);
-        HospitalDTO hospitalById = hospitalModel.getHospitalById(bloodRequestTM.getHospitalId());
+        HospitalDTO hospitalById = bloodStockBO.getHospitalById(bloodRequestTM.getHospitalId());
         hospitalEmail=hospitalById.getEmail();
         bloodType=bloodRequestTM.getBloodType();
     }

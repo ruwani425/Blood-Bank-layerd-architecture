@@ -61,6 +61,11 @@ public class BloodTestDAOImpl implements BloodTestDAO {
     }
 
     @Override
+    public BloodTest findById(BloodTest entity) throws SQLException {
+        return null;
+    }
+
+    @Override
     public String getNextBloodTesdtID() throws SQLException {
         ResultSet rst = CrudUtil.execute("select Test_id from Blood_test order by Test_id desc limit 1");
 

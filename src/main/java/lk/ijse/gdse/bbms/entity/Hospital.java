@@ -14,4 +14,8 @@ public class Hospital {
     private String contactNumber;
     private String email;
     private String type;
+
+    public Hospital(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
 }

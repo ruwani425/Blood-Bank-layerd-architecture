@@ -41,4 +41,9 @@ public class BloodRequestDetailDAOImpl implements BloodRequestDetailDAO {
     public ArrayList<BloodRequestDetail> search(BloodRequestDetail newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public BloodRequestDetail findById(BloodRequestDetail entity) throws SQLException {
+        return null;
+    }
 }
