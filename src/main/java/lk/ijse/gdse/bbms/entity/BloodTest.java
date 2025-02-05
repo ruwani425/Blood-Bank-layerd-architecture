@@ -26,4 +26,19 @@ public class BloodTest {
     private String bloodType;
     private double bloodQty;
 
+    public BloodTest(Date collectedDate, Date expiryDate, String testResult, double haemoglobin, Date testDate, String reportSerialNum, float platelets, double redBloodCells, double whiteBloodCells, String reportImageUrl, String bloodType, double bloodQty, String testID) {
+        this.collectedDate = collectedDate;
+        this.expiryDate = expiryDate;
+        this.testResult = testResult;
+        this.haemoglobin = haemoglobin;
+        this.testDate = testDate;
+        this.reportSerialNum = reportSerialNum;
+        this.platelets = platelets;
+        this.redBloodCells = redBloodCells;
+        this.whiteBloodCells = whiteBloodCells;
+        this.reportImageUrl = reportImageUrl;
+        this.bloodType = bloodType;
+        this.bloodQty = bloodQty;
+        this.testID = testID;
+    }
 }

@@ -16,8 +16,20 @@ public class BloodStockDAOImpl implements BloodStockDAO {
     }
 
     @Override
-    public boolean save(BloodStock Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(BloodStock bloodStock) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "INSERT INTO Blood_stock VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                bloodStock.getBloodID(),
+                bloodStock.getTestID(),
+                bloodStock.getBloodGroup(),
+                bloodStock.getQty(),
+                bloodStock.getHaemoglobin(),
+                bloodStock.getPlatelets(),
+                bloodStock.getRedBloodCells(),
+                bloodStock.getWhiteBloodCells(),
+                bloodStock.getExpiryDate(),
+                bloodStock.getStatus()
+        );
     }
 
     @Override
@@ -75,5 +87,19 @@ public class BloodStockDAOImpl implements BloodStockDAO {
                 "UPDATE Blood_stock SET status = 'ISSUED' WHERE Blood_id=?", bloodID
         );
         return rowsUpdated;
+    }
+
+    @Override
+    public String getNextBloodId() throws Exception {
+        ResultSet rst = CrudUtil.execute("select Blood_id from Blood_stock order by Blood_id desc limit 1");
+
+        if (rst.next()) {
+            String lastId = rst.getString(1); // Last blood ID
+            String substring = lastId.substring(1); // Extract the numeric part
+            int i = Integer.parseInt(substring); // Convert the numeric part to integer
+            int newIdIndex = i + 1; // Increment the number by 1
+            return String.format("B%03d", newIdIndex); // Return the new Blood ID in format Bnnn
+        }
+        return "B001"; // Return the default Blood ID if no data is found
     }
 }

@@ -1,4 +1,5 @@
 package lk.ijse.gdse.bbms.controller;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.BloodTestBO;
 import lk.ijse.gdse.bbms.dto.BloodTestDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodTestTM;
 import lk.ijse.gdse.bbms.model.BloodTestModel;
@@ -38,37 +41,37 @@ public class BloodTestPageController implements Initializable {
     private TableView<BloodTestTM> tblBloodTest;
 
     @FXML
-    private TableColumn<BloodTestTM,String> colTestId;
+    private TableColumn<BloodTestTM, String> colTestId;
 
     @FXML
-    private TableColumn<BloodTestTM,String> colDonationID;
+    private TableColumn<BloodTestTM, String> colDonationID;
 
     @FXML
     private TableColumn<BloodTestTM, Date> coltestdate;
 
     @FXML
-    private TableColumn<BloodTestTM,String> colResult;
+    private TableColumn<BloodTestTM, String> colResult;
 
     @FXML
-    private TableColumn<BloodTestTM,Double> colHaemoglobin;
+    private TableColumn<BloodTestTM, Double> colHaemoglobin;
 
     @FXML
-    private TableColumn<BloodTestTM,Date> colCollectedDate;
+    private TableColumn<BloodTestTM, Date> colCollectedDate;
 
     @FXML
     private TableColumn<BloodTestTM, String> colSerialNum;
 
     @FXML
-    private TableColumn<BloodTestTM,Float> colPlatelets;
+    private TableColumn<BloodTestTM, Float> colPlatelets;
 
     @FXML
-    private TableColumn<BloodTestTM,Double> colRedBloodCells;
+    private TableColumn<BloodTestTM, Double> colRedBloodCells;
 
     @FXML
-    private TableColumn<BloodTestTM,Double> colWhiteBloodCells;
+    private TableColumn<BloodTestTM, Double> colWhiteBloodCells;
 
     @FXML
-    private TableColumn<BloodTestTM,Double> colBloodQty;
+    private TableColumn<BloodTestTM, Double> colBloodQty;
 
     @FXML
     private Label lblTestId;
@@ -120,7 +123,7 @@ public class BloodTestPageController implements Initializable {
 
     String imageUrl;
 
-    BloodTestModel bloodTestModel = new BloodTestModel();
+    BloodTestBO bloodTestBO = (BloodTestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODTEST);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,6 +136,8 @@ public class BloodTestPageController implements Initializable {
             refreshTable();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         try {
             setComboBoxValues();
@@ -144,18 +149,19 @@ public class BloodTestPageController implements Initializable {
                 try {
                     populateFields(newValue);
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         });
     }
+
     private void setComboBoxValues() {
         cmbResult.setItems(FXCollections.observableArrayList("PASS", "FAIL"));
     }
 
     private void populateFields(BloodTestTM selectedTest) throws SQLException {
         lblTestId.setText(selectedTest.getTestID());
-        BloodTestDTO bloodTestDetails = bloodTestModel.getBloodTestDetailById(selectedTest.getTestID());
+        BloodTestDTO bloodTestDetails = bloodTestBO.getBloodTestDetailById(selectedTest.getTestID());
         lblCollectedDate.setText(String.valueOf(bloodTestDetails.getCollectedDate()));
         txtHaemoglobin.setText(String.valueOf(selectedTest.getHaemoglobin()));
         txtSerialNum.setText(selectedTest.getReportSerialNum());
@@ -180,8 +186,8 @@ public class BloodTestPageController implements Initializable {
         colBloodQty.setCellValueFactory(new PropertyValueFactory<>("bloodQty"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestModel.getAllBloodTests("PENDING");
+    public void refreshTable() throws SQLException, ClassNotFoundException {
+        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestBO.getAllBloodTestsBystatus("PENDING");
         ObservableList<BloodTestTM> bloodTestTMS = FXCollections.observableArrayList();
 
         for (BloodTestDTO bloodTestDTO : bloodTestDTOS) {
@@ -203,8 +209,9 @@ public class BloodTestPageController implements Initializable {
 
         tblBloodTest.setItems(bloodTestTMS);
     }
-    public void getByStatus(String result) throws SQLException {
-        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestModel.getAllBloodTests(result);
+
+    public void getByStatus(String result) throws SQLException, ClassNotFoundException {
+        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestBO.getAllBloodTestsBystatus(result);
         ObservableList<BloodTestTM> bloodTestTMS = FXCollections.observableArrayList();
 
         for (BloodTestDTO bloodTestDTO : bloodTestDTOS) {
@@ -255,7 +262,7 @@ public class BloodTestPageController implements Initializable {
                 Files.copy(selectedFile.toPath(), targetFile);
 
                 System.out.println("File copied to: " + targetFile.toAbsolutePath());
-                imageUrl=targetFile.toAbsolutePath().toString();
+                imageUrl = targetFile.toAbsolutePath().toString();
             } catch (IOException e) {
                 System.err.println("Failed to copy file: " + e.getMessage());
             }
@@ -265,12 +272,12 @@ public class BloodTestPageController implements Initializable {
     }
 
     @FXML
-    void btnFinishedOnAction(ActionEvent event) throws SQLException {
+    void btnFinishedOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         getByStatus();
     }
 
-    private void getByStatus() throws SQLException {
-        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestModel.getAllBloodTests();
+    private void getByStatus() throws SQLException, ClassNotFoundException {
+        ArrayList<BloodTestDTO> bloodTestDTOS = bloodTestBO.getAllBloodTests();
         ObservableList<BloodTestTM> bloodTestTMS = FXCollections.observableArrayList();
 
         for (BloodTestDTO bloodTestDTO : bloodTestDTOS) {
@@ -294,9 +301,10 @@ public class BloodTestPageController implements Initializable {
     }
 
     @FXML
-    void btnPendingOnAction(ActionEvent event) throws SQLException {
+    void btnPendingOnAction(ActionEvent event) throws SQLException, ClassNotFoundException {
         getByStatus("PENDING");
     }
+
     @FXML
     void BtnUpdateBloodTestOnAction(ActionEvent event) throws SQLException {
         try {
@@ -317,7 +325,7 @@ public class BloodTestPageController implements Initializable {
                     Double.parseDouble(txtBloodQty.getText())
             );
 
-            boolean isUpdate = bloodTestModel.updateBloodTest(bloodTestDTO);
+            boolean isUpdate = bloodTestBO.updateBloodTest(bloodTestDTO);
 
             if (isUpdate) {
                 refreshTable();

@@ -118,7 +118,6 @@ public class BloodStockPageController implements Initializable {
     String bloodType;
 
     String hospitalEmail;
-    HospitalModel hospitalModel=new HospitalModel();
 
     ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
     ArrayList<BloodIssueTM>issuedBlood=new ArrayList<>();
