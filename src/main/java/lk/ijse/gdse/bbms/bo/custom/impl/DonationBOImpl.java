@@ -9,8 +9,10 @@ import lk.ijse.gdse.bbms.dao.custom.DonorDAO;
 import lk.ijse.gdse.bbms.db.DBConnection;
 import lk.ijse.gdse.bbms.dto.BloodTestDTO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
+import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.BloodTest;
 import lk.ijse.gdse.bbms.entity.Donation;
+import lk.ijse.gdse.bbms.entity.Donor;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -50,16 +52,11 @@ public class DonationBOImpl implements DonationBO {
                         bloodTestDTO.getWhiteBloodCells(),
                         bloodTestDTO.getReportImageUrl(),
                         bloodTestDTO.getBloodType(),
-                        bloodTestDTO.getBloodQty())))
-                {
+                        bloodTestDTO.getBloodQty()))) {
                     System.out.println("blood test added successfully");
-                    if (donorDAO.updateLastDonationDate(donorId, donationDTO.getDateOfDonation()))
-
-                    {
+                    if (donorDAO.updateLastDonationDate(donorId, donationDTO.getDateOfDonation())) {
                         System.out.println("updated last donation successfully");
-                        if (campaignDAO.updateCollectedUnit(donationDTO.getCampaignId(), donationDTO.getQty()))
-
-                        {
+                        if (campaignDAO.updateCollectedUnit(donationDTO.getCampaignId(), donationDTO.getQty())) {
                             System.out.println("updated collected unit successfully");
                             connection.commit();
                             return true;
@@ -100,10 +97,10 @@ public class DonationBOImpl implements DonationBO {
 
     @Override
     public ArrayList<DonationDTO> getAllDonations() throws Exception {
-        ArrayList<DonationDTO>donationDTOS=new ArrayList<>();
-        ArrayList<Donation>donations=donationDAO.getAllData();
+        ArrayList<DonationDTO> donationDTOS = new ArrayList<>();
+        ArrayList<Donation> donations = donationDAO.getAllData();
         for (Donation donation : donations) {
-            DonationDTO donationDTO=new DonationDTO();
+            DonationDTO donationDTO = new DonationDTO();
             donationDTO.setDonationId(donation.getDonationId());
             donationDTO.setDateOfDonation(donation.getDateOfDonation());
             donationDTO.setQty(donation.getQty());
@@ -113,6 +110,22 @@ public class DonationBOImpl implements DonationBO {
             donationDTOS.add(donationDTO);
         }
         return donationDTOS;
+    }
+
+    @Override
+    public DonorDTO getDonorById(String id) throws Exception {
+        Donor donor = donorDAO.findById(new Donor(id));
+        DonorDTO donorDTO = new DonorDTO();
+        donorDTO.setDonorId(donor.getDonorId());
+        donorDTO.setDonorNic(donor.getDonorNic());
+        donorDTO.setDonorName(donor.getDonorName());
+        donorDTO.setDonorEmail(donor.getDonorEmail());
+        donorDTO.setDonorAddress(donor.getDonorAddress());
+        donorDTO.setBloodGroup(donor.getBloodGroup());
+        donorDTO.setGender(donor.getGender());
+        donorDTO.setDob(donor.getDob());
+        donorDTO.setLastDonationDate(donor.getLastDonationDate());
+        return donorDTO;
     }
 
     private BloodTestDTO getBloodTestDTO(DonationDTO donationDTO) throws Exception {

@@ -21,6 +21,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.EmployeeBO;
 import lk.ijse.gdse.bbms.dto.EmployeeDTO;
 import lk.ijse.gdse.bbms.dto.tm.EmployeeTM;
 import lk.ijse.gdse.bbms.model.EmployeeModel;
@@ -63,16 +65,15 @@ public class EmployeePageController implements Initializable {
     @FXML
     private TableColumn<EmployeeTM, String> colStatus;
 
-    private EmployeeModel employeeModel = new EmployeeModel();
-
+    EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         try {
             refreshTable();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         tblEmployee.setOnMouseClicked(event -> {
@@ -115,8 +116,8 @@ public class EmployeePageController implements Initializable {
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<EmployeeDTO> employeeDTOS = employeeModel.getAllEmployees(); // Assuming you have a method like this
+    public void refreshTable() throws Exception {
+        ArrayList<EmployeeDTO> employeeDTOS = employeeBO.getAllEmployees(); // Assuming you have a method like this
         ObservableList<EmployeeTM> employeeTMS = FXCollections.observableArrayList();
 
         for (EmployeeDTO employeeDTO : employeeDTOS) {

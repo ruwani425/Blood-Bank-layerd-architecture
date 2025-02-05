@@ -41,7 +41,23 @@ public class BloodTestDAOImpl implements BloodTestDAO {
 
     @Override
     public boolean save(BloodTest bloodTest) throws SQLException, ClassNotFoundException {
-        return false;
+        return CrudUtil.execute(
+                "insert into Blood_test values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                bloodTest.getTestID(),
+                bloodTest.getDonationID(),
+                bloodTest.getCollectedDate(),
+                bloodTest.getExpiryDate(),
+                bloodTest.getTestResult(),
+                bloodTest.getHaemoglobin(),
+                bloodTest.getTestDate(),
+                bloodTest.getReportSerialNum(),
+                bloodTest.getPlatelets(),
+                bloodTest.getRedBloodCells(),
+                bloodTest.getWhiteBloodCells(),
+                bloodTest.getReportImageUrl(),
+                bloodTest.getBloodType(),
+                bloodTest.getBloodQty()
+        );
     }
 
     @Override

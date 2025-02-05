@@ -2,6 +2,7 @@ package lk.ijse.gdse.bbms.bo.custom;
 
 import lk.ijse.gdse.bbms.bo.SuperBO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
+import lk.ijse.gdse.bbms.dto.DonorDTO;
 
 import java.util.ArrayList;
 
@@ -11,4 +12,6 @@ public interface DonationBO extends SuperBO {
     String getNextDonationId() throws Exception;
 
     ArrayList<DonationDTO> getAllDonations()throws Exception;
+
+    DonorDTO getDonorById(String id)throws Exception;
 }

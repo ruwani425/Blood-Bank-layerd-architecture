@@ -67,7 +67,6 @@ public class CampaignPopUpWindowController implements Initializable {
     @FXML
     private Stage stage;
 
-    CampaignModel model = new CampaignModel();
     CampaignPageController campaignPageController;
     CampaignDTO dto=new CampaignDTO();
     CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
@@ -159,7 +158,7 @@ public class CampaignPopUpWindowController implements Initializable {
         if (isSaved) {
 
             try {
-                lblCampaignId.setText(model.getNextCampaignId());
+                lblCampaignId.setText(campaignBO.getNextCampaignId());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -173,7 +172,7 @@ public class CampaignPopUpWindowController implements Initializable {
     }
 
     @FXML
-    private void clearFields() throws SQLException {
+    private void clearFields() throws Exception {
         txtCampaignAddress.clear();
         txtCampaignName.clear();
         datePikerStartDate.setValue(null);
@@ -181,7 +180,7 @@ public class CampaignPopUpWindowController implements Initializable {
 
         ToggleGroup statusGroup = btnRadioActive.getToggleGroup();
         statusGroup.selectToggle(null);
-        lblCampaignId.setText(model.getNextCampaignId());
+        lblCampaignId.setText(campaignBO.getNextCampaignId());
     }
 
     @FXML
@@ -239,7 +238,7 @@ public class CampaignPopUpWindowController implements Initializable {
         if (isSaved) {
 
             try {
-                lblCampaignId.setText(model.getNextCampaignId());
+                lblCampaignId.setText(campaignBO.getNextCampaignId());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

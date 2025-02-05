@@ -64,7 +64,6 @@ public class DonorPageViewController implements Initializable {
     @FXML
     private TableColumn<DonorTM, String> colNic;
 
-    DonorModel donorModel = new DonorModel();
     DonorBO donorBO= (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
 

@@ -90,7 +90,6 @@ public class DonationPageController implements Initializable {
 
     String donorEmail;
 
-    private DonorModel donorModel = new DonorModel();
     private DonationBO donationBO= (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
     CampaignModel campaignModel = new CampaignModel();
@@ -193,7 +192,7 @@ public class DonationPageController implements Initializable {
         this.donorId = id;
         System.out.println("HealthCheckupDTO initialized in DonationPageController: ");
         try {
-            DonorDTO donorById = donorModel.getDonorById(id);
+            DonorDTO donorById = donationBO.getDonorById(id);
             lblBloodGroup.setText(donorById.getBloodGroup());
             lblDonorAddress.setText(donorById.getDonorAddress());
             lblDonorNic.setText(donorById.getDonorNic());
@@ -201,6 +200,8 @@ public class DonationPageController implements Initializable {
             donorEmail = donorById.getDonorEmail();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

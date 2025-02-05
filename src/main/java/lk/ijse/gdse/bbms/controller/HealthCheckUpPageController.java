@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.DonorBO;
 import lk.ijse.gdse.bbms.bo.custom.HealthCheckUpBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.HealthCheckupDTO;
@@ -75,11 +76,11 @@ public class HealthCheckUpPageController implements Initializable {
 
     private HomePageViewController homePageViewController;
 
-    private DonorModel donorModel=new DonorModel();
     private DonorDTO donorDTO;
-    private HealthCheckUpModel healthCheckUpModel=new HealthCheckUpModel();
     private HealthCheckupDTO healthCheckupDTO;
-    private HealthCheckUpBO healthCheckUpBO= (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
+    private HealthCheckUpBO healthCheckUpBO = (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
+    private DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
+
     String colorCode = "#FF0000";
 
     @Override
@@ -93,6 +94,7 @@ public class HealthCheckUpPageController implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
     @FXML
     void btnCheckDonorHealthCheckUpDetail(ActionEvent event) throws Exception {
         String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Valid NIC format (9 digits + V or 12 digits)
@@ -172,7 +174,7 @@ public class HealthCheckUpPageController implements Initializable {
             return;
         }
 
-        donorDTO = donorModel.getDonorByNic(donorNic);
+        donorDTO = donorBO.getDonorByNic(donorNic);
         if (donorDTO == null) {
             clearLabels();
             sugerLevelLbl.setText("No donor found with the given National ID Number.");
@@ -239,15 +241,15 @@ public class HealthCheckUpPageController implements Initializable {
         alert.showAndWait();
     }
 
-    void setHealthCheckUpDetailsForLables(int age, Date checkUpDate, String donorId, String bloodPressure, String healthCheckID, Date lastDonationDate, double sugarLevel, double donorWeight){
+    void setHealthCheckUpDetailsForLables(int age, Date checkUpDate, String donorId, String bloodPressure, String healthCheckID, Date lastDonationDate, double sugarLevel, double donorWeight) {
         ageLbl.setText("Donor age: " + age + " years old");
-        dateOfCheckUpLbl.setText("Checkup date: " +checkUpDate);
+        dateOfCheckUpLbl.setText("Checkup date: " + checkUpDate);
         donorIdLbl.setText("Donor ID: " + donorDTO.getDonorId());
         bloodPresureLbl.setText("Donor blood Pressure: " + bloodPressure);
-        healthCheckupIdLbl.setText("Donor HealthCheckup ID: " +healthCheckID);
+        healthCheckupIdLbl.setText("Donor HealthCheckup ID: " + healthCheckID);
         lastDonationDateLbl.setText("Last Donation Date: " + donorDTO.getLastDonationDate());
-        sugerLevelLbl.setText("Donor sugar Level: " +sugarLevel);
-        weightLbl.setText("Donor weight: " +donorWeight);
+        sugerLevelLbl.setText("Donor sugar Level: " + sugarLevel);
+        weightLbl.setText("Donor weight: " + donorWeight);
     }
 
     private void saveHealthCheckup(String healthCheckID, String donorID, String status, Date checkUpDate, double donorWeight, double sugarLevel, String bloodPressure) throws Exception {
@@ -290,6 +292,6 @@ public class HealthCheckUpPageController implements Initializable {
 
     @FXML
     void btnNavigateToDonationPage(ActionEvent event) {
-        homePageViewController.navigateToDonationsPageByButton(healthCheckupDTO.getCheckupId(),donorDTO.getBloodGroup(),donorDTO.getDonorId());
+        homePageViewController.navigateToDonationsPageByButton(healthCheckupDTO.getCheckupId(), donorDTO.getBloodGroup(), donorDTO.getDonorId());
     }
 }

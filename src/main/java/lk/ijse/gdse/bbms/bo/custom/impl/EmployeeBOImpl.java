@@ -7,6 +7,8 @@ import lk.ijse.gdse.bbms.dao.custom.impl.EmployeeDAOImpl;
 import lk.ijse.gdse.bbms.dto.EmployeeDTO;
 import lk.ijse.gdse.bbms.entity.Employee;
 
+import java.util.ArrayList;
+
 public class EmployeeBOImpl implements EmployeeBO {
     EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
     Employee employee = new Employee();
@@ -44,5 +46,23 @@ public class EmployeeBOImpl implements EmployeeBO {
     @Override
     public String getNextEmployeeId() throws Exception {
         return employeeDAO.getNewId();
+    }
+
+    @Override
+    public ArrayList<EmployeeDTO> getAllEmployees() throws Exception {
+        ArrayList<EmployeeDTO>employeeDTOS = new ArrayList<>();
+        ArrayList<Employee>employees=employeeDAO.getAllData();
+        for (Employee employee : employees) {
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setEmployeeID(employee.getEmployeeID());
+            employeeDTO.setStatus(employee.getStatus());
+            employeeDTO.setAddress(employee.getAddress());
+            employeeDTO.setName(employee.getName());
+            employeeDTO.setNic(employee.getNic());
+            employeeDTO.setEmail(employee.getEmail());
+            employeeDTO.setRole(employee.getRole());
+            employeeDTOS.add(employeeDTO);
+        }
+        return employeeDTOS;
     }
 }

@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.EmployeeDAO;
+import lk.ijse.gdse.bbms.dto.EmployeeDTO;
 import lk.ijse.gdse.bbms.entity.Employee;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -11,7 +12,24 @@ import java.util.ArrayList;
 public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public ArrayList<Employee> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ArrayList<Employee> employeeList = new ArrayList<>();
+
+        ResultSet rst = CrudUtil.execute("SELECT Employee_id, Name, Nic, Address, E_mail, Role, Status FROM Employee");
+
+        while (rst.next()) {
+            String employeeId = rst.getString("Employee_id");
+            String name = rst.getString("Name");
+            String nic = rst.getString("Nic");
+            String address = rst.getString("Address");
+            String email = rst.getString("E_mail");
+            String role = rst.getString("Role");
+            String status = rst.getString("Status");
+
+            Employee employee = new Employee(employeeId, name, nic, address, email, role, status);
+            employeeList.add(employee);
+        }
+
+        return employeeList;
     }
 
     @Override

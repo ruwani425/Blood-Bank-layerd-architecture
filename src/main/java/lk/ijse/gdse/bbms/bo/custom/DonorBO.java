@@ -15,5 +15,7 @@ public interface DonorBO extends SuperBO {
     public String getNextDonorId() throws Exception;
 
     public ArrayList<DonorDTO> getAllDonors()throws Exception;
+
+    DonorDTO getDonorByNic(String donorNic)throws Exception;
 }
 

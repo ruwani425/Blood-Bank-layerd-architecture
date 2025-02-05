@@ -96,8 +96,24 @@ public class DonorDAOImpl implements DonorDAO {
     }
 
     @Override
-    public Donor findById(Donor entity) throws SQLException {
-        return null;
+    public Donor findById(Donor donor) throws SQLException {
+        System.out.println(donor.getDonorId());
+        ResultSet rst = CrudUtil.execute("select * from Donor where Donor_id=?", donor.getDonorId());
+
+        if (rst.next()) {
+            return new Donor(
+                    rst.getString("Donor_id"),
+                    rst.getString(2), // Name (not required in this method)
+                    rst.getString(3),  // NIC
+                    rst.getString(4), // Address
+                    rst.getString(5), // E_mail
+                    rst.getString("Blood_group"), // Blood_group
+                    rst.getString("Gender"), // Gender
+                    rst.getDate("Dob"), // Date of Birth
+                    rst.getDate("Last_donation_date") // Last Donation Date
+            );
+        }
+        return null; // Return null if no donor with the given NIC is found
     }
 
     @Override
@@ -107,5 +123,25 @@ public class DonorDAOImpl implements DonorDAO {
                 dateOfDonation,
                 donorId
         );
+    }
+
+    @Override
+    public Donor findDonorByNic(Donor donor) throws Exception {
+        ResultSet rst = CrudUtil.execute("select Donor_id, Dob, Last_donation_date,Blood_group,gender from Donor where Donor_nic=?", donor.getDonorNic());
+
+        if (rst.next()) {
+            return new Donor(
+                    rst.getString("Donor_id"),
+                    null, // Name (not required in this method)
+                    donor.getDonorNic(),  // NIC
+                    null, // Address
+                    null, // E_mail
+                    rst.getString("Blood_group"), // Blood_group
+                    rst.getString("Gender"), // Gender
+                    rst.getDate("Dob"), // Date of Birth
+                    rst.getDate("Last_donation_date") // Last Donation Date
+            );
+        }
+        return null; // Return null if no donor with the given NIC is found
     }
 }

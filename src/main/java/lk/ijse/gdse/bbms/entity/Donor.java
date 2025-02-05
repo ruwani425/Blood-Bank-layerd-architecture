@@ -19,4 +19,8 @@ public class Donor {
     private String gender;
     private Date dob;
     private Date lastDonationDate;
+
+    public Donor(String id) {
+        this.donorId = id;
+    }
 }

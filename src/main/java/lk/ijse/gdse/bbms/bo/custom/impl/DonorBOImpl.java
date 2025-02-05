@@ -78,4 +78,24 @@ public class DonorBOImpl implements DonorBO {
         }
         return donorDTOS;
     }
+
+    @Override
+    public DonorDTO getDonorByNic(String donorNic) throws Exception {
+        donor.setDonorNic(donorNic);
+        donor=donorDAO.findDonorByNic(donor);
+
+        DonorDTO donorDTO=new DonorDTO();
+
+        donorDTO.setDonorId(donor.getDonorId());
+        donorDTO.setDonorName(donor.getDonorName());
+        donorDTO.setDonorEmail(donor.getDonorEmail());
+        donorDTO.setDonorAddress(donor.getDonorAddress());
+        donorDTO.setDonorNic(donor.getDonorNic());
+        donorDTO.setBloodGroup(donor.getBloodGroup());
+        donorDTO.setGender(donor.getGender());
+        donorDTO.setDob(donor.getDob());
+        donorDTO.setLastDonationDate(donor.getLastDonationDate());
+
+        return donorDTO;
+    }
 }

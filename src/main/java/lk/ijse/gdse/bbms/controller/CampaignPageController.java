@@ -66,7 +66,6 @@ public class CampaignPageController implements Initializable {
     @FXML
     private TableColumn<CampaignTM,Integer> colCollectedUnit;
 
-    CampaignModel campaignModel = new CampaignModel();
     CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     @Override
