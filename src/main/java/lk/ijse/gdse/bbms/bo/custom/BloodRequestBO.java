@@ -3,6 +3,7 @@ package lk.ijse.gdse.bbms.bo.custom;
 import lk.ijse.gdse.bbms.bo.SuperBO;
 import lk.ijse.gdse.bbms.dto.BloodRequestDTO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface BloodRequestBO extends SuperBO {
@@ -11,4 +12,6 @@ public interface BloodRequestBO extends SuperBO {
     boolean addBloodRequest(BloodRequestDTO bloodRequestDTO)throws Exception;
 
     ArrayList<BloodRequestDTO> getAllRequests(String pending)throws Exception;
+
+    ArrayList<String> getAllHospitalIDs() throws SQLException;
 }

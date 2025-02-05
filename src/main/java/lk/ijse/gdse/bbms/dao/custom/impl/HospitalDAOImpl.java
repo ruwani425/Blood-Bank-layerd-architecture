@@ -68,4 +68,16 @@ public class HospitalDAOImpl implements HospitalDAO {
     public ArrayList<Hospital> search(Hospital newValue) throws SQLException, ClassNotFoundException {
         return null;
     }
+
+    @Override
+    public ArrayList<String> getAllHospitalIDs() throws SQLException {
+        ResultSet rst = CrudUtil.execute("select Hospital_id from Hospital");
+
+        ArrayList<String> hospitalIds = new ArrayList<>();
+
+        while (rst.next()) {
+            hospitalIds.add(rst.getString("Hospital_id"));
+        }
+        return hospitalIds;
+    }
 }

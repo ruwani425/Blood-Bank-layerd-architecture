@@ -194,6 +194,7 @@ public class HomePageViewController implements Initializable {
             controller.setHomePageViewController(this);
 
         } catch (IOException e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Failed to load page!").show();
         }
     }

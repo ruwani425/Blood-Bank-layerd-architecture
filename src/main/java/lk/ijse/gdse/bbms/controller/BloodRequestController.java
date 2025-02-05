@@ -77,7 +77,6 @@ public class BloodRequestController implements Initializable {
     @FXML
     private JFXButton btnAddRequest;
 
-    private HospitalModel hospitalModel = new HospitalModel();
     HomePageViewController homePageViewController;
     BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
 
@@ -87,12 +86,13 @@ public class BloodRequestController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("run initialize");
         try {
             lblRequestID.setText(bloodRequestBO.getNextRequestId());
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         populateBloodGroups();
         populateStatus();
@@ -106,10 +106,12 @@ public class BloodRequestController implements Initializable {
         lblRequestDate.setText(formattedDate);
 
         try {
-            ArrayList<String> idList = hospitalModel.getAllHospitalIDs();
+            System.out.println("run try block");
+            ArrayList<String> idList = bloodRequestBO.getAllHospitalIDs();
             cmbHospital.getItems().addAll(idList); // Add items to ComboBox
+            System.out.println("hospital ids " + idList);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         tblRequest.setOnMouseClicked(this::handleRowClick);
     }

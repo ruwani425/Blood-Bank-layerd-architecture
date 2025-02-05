@@ -3,15 +3,18 @@ package lk.ijse.gdse.bbms.bo.custom.impl;
 import lk.ijse.gdse.bbms.bo.custom.BloodRequestBO;
 import lk.ijse.gdse.bbms.dao.DAOFactory;
 import lk.ijse.gdse.bbms.dao.custom.BloodRequestDAO;
+import lk.ijse.gdse.bbms.dao.custom.HospitalDAO;
 import lk.ijse.gdse.bbms.dto.BloodRequestDTO;
 import lk.ijse.gdse.bbms.entity.BloodRequest;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BloodRequestBOImpl implements BloodRequestBO {
 
     BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
     BloodRequest bloodRequest = new BloodRequest();
+    HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public String getNextRequestId() throws Exception {
@@ -33,7 +36,7 @@ public class BloodRequestBOImpl implements BloodRequestBO {
     public ArrayList<BloodRequestDTO> getAllRequests(String pending) throws Exception {
         bloodRequest.setStatus(pending);
         ArrayList<BloodRequestDTO> bloodRequestDTOS = new ArrayList<>();
-        ArrayList<BloodRequest>bloodRequests=bloodRequestDAO.search(bloodRequest);
+        ArrayList<BloodRequest> bloodRequests = bloodRequestDAO.search(bloodRequest);
         for (BloodRequest bloodRequest : bloodRequests) {
             BloodRequestDTO bloodRequestDTO = new BloodRequestDTO();
             bloodRequestDTO.setRequestId(bloodRequest.getRequestId());
@@ -45,5 +48,11 @@ public class BloodRequestBOImpl implements BloodRequestBO {
             bloodRequestDTOS.add(bloodRequestDTO);
         }
         return bloodRequestDTOS;
+    }
+
+    @Override
+    public ArrayList<String> getAllHospitalIDs() throws SQLException {
+        System.out.println("getAllHospitalIDs");
+        return hospitalDAO.getAllHospitalIDs();
     }
 }
