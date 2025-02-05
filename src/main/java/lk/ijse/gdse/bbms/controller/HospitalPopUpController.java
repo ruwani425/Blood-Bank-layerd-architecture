@@ -10,7 +10,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.HospitalBO;
 import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.dto.tm.HospitalTM;
-import lk.ijse.gdse.bbms.model.HospitalModel;
 import lk.ijse.gdse.bbms.util.Validation;
 
 import java.net.URL;
@@ -51,7 +50,6 @@ public class HospitalPopUpController implements Initializable {
 
     private Stage stage=new Stage();
 
-    HospitalModel hospitalModel=new HospitalModel();
     HospitalPageController hospitalPageController;
     HospitalBO hospitalBO= (HospitalBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOSPITAL);
 

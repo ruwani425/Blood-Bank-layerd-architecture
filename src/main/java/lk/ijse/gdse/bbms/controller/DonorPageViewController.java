@@ -23,7 +23,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.DonorBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.tm.DonorTM;
-import lk.ijse.gdse.bbms.model.DonorModel;
 import javafx.scene.control.TableView;
 
 import java.io.IOException;

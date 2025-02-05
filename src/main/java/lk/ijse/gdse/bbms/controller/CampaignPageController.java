@@ -25,8 +25,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.CampaignBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.tm.CampaignTM;
-import lk.ijse.gdse.bbms.model.CampaignModel;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;

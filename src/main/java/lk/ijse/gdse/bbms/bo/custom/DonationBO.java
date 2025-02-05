@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.bo.custom;
 
 import lk.ijse.gdse.bbms.bo.SuperBO;
+import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 
@@ -14,4 +15,8 @@ public interface DonationBO extends SuperBO {
     ArrayList<DonationDTO> getAllDonations()throws Exception;
 
     DonorDTO getDonorById(String id)throws Exception;
+
+    ArrayList<String> findCampaignIds()throws Exception;
+
+    CampaignDTO getCampaignById(String value)throws Exception;
 }

@@ -10,7 +10,6 @@ module lk.ijse.gdse.bbms {
     requires jdk.jfr;
 
     opens lk.ijse.gdse.bbms.controller to javafx.fxml;
-    opens lk.ijse.gdse.bbms.model to javafx.base;
     opens lk.ijse.gdse.bbms.dto.tm to javafx.base;
     exports lk.ijse.gdse.bbms;
 }

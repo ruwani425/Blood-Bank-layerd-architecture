@@ -16,4 +16,5 @@ public interface BloodStockBO extends SuperBO {
     boolean addBloodIssue(BloodRequestTM bloodRequestTM, ArrayList<BloodIssueTM> issuedBlood)throws Exception;
 
     HospitalDTO getHospitalById(String hospitalId)throws Exception;
+
 }

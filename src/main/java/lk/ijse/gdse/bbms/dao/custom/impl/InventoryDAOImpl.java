@@ -1,6 +1,7 @@
 package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.InventoryDAO;
+import lk.ijse.gdse.bbms.dto.InventoryDTO;
 import lk.ijse.gdse.bbms.entity.Inventory;
 import lk.ijse.gdse.bbms.util.CrudUtil;
 
@@ -11,12 +12,33 @@ import java.util.ArrayList;
 public class InventoryDAOImpl implements InventoryDAO {
     @Override
     public ArrayList<Inventory> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Inventory");
+
+        ArrayList<Inventory> inventoryList = new ArrayList<>();
+
+        while (rst.next()) {
+            Inventory inventory = new Inventory(
+                    rst.getString("Inventory_id"),
+                    rst.getString("Item_name"),
+                    rst.getString("Status"),
+                    rst.getDate("Expiry_date"),
+                    rst.getInt("Qty")
+            );
+            inventoryList.add(inventory);
+        }
+        return inventoryList;
     }
 
     @Override
-    public boolean save(Inventory Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(Inventory inventory) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute(
+                "INSERT INTO Inventory VALUES (?,?,?,?,?)",
+                inventory.getInventoryId(),
+                inventory.getItemName(),
+                inventory.getStatus(),
+                inventory.getExpiryDate(),
+                inventory.getQty()
+        );
     }
 
     @Override

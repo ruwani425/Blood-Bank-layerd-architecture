@@ -24,10 +24,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.InventoryBO;
 import lk.ijse.gdse.bbms.dto.InventoryDTO;
 import lk.ijse.gdse.bbms.dto.tm.InventoryTM;
-import lk.ijse.gdse.bbms.model.InventoryModel;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
@@ -66,7 +66,7 @@ public class InventoryPageController implements Initializable {
 
     HomePageViewController homePageViewController;
 
-    private final InventoryModel inventoryModel = new InventoryModel();
+    private final InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
 
     public void setHomePageViewController(HomePageViewController homePageViewController) {
         this.homePageViewController = homePageViewController;
@@ -79,6 +79,8 @@ public class InventoryPageController implements Initializable {
             refreshTable();
         } catch (SQLException e) {
             throw new RuntimeException("Failed to load inventory data", e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         tblInventory.setOnMouseClicked(this::handleRowClick);
@@ -92,8 +94,8 @@ public class InventoryPageController implements Initializable {
         colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<InventoryDTO> inventoryDTOs = inventoryModel.getAllInventoryItems();
+    public void refreshTable() throws Exception {
+        ArrayList<InventoryDTO> inventoryDTOs = inventoryBO.getAllInventoryItems();
         ObservableList<InventoryTM> inventoryTMs = FXCollections.observableArrayList();
 
         for (InventoryDTO dto : inventoryDTOs) {
@@ -138,6 +140,8 @@ public class InventoryPageController implements Initializable {
 
             refreshTable();
         } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -12,7 +12,22 @@ import java.util.ArrayList;
 public class HospitalDAOImpl implements HospitalDAO {
     @Override
     public ArrayList<Hospital> getAllData() throws SQLException, ClassNotFoundException {
-        return null;
+        ResultSet rst = CrudUtil.execute("select * from Hospital");
+
+        ArrayList<Hospital> hospitals = new ArrayList<>();
+
+        while (rst.next()) {
+            Hospital hospital = new Hospital(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            );
+            hospitals.add(hospital);
+        }
+        return hospitals;
     }
 
     @Override

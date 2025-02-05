@@ -32,8 +32,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.SupplierBO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.SupplierTM;
-import lk.ijse.gdse.bbms.model.SupplierModel;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -69,7 +67,6 @@ public class SupplierPageController implements Initializable {
     @FXML
     private ImageView backArrow;
 
-    private final SupplierModel supplierModel = new SupplierModel();
     HomePageViewController homePageViewController;
     SupplierBO supplierBO= (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
 

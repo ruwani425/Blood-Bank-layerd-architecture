@@ -18,9 +18,6 @@ import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodIssueTM;
 import lk.ijse.gdse.bbms.dto.tm.BloodRequestTM;
 import lk.ijse.gdse.bbms.dto.tm.BloodStockTM;
-import lk.ijse.gdse.bbms.dto.tm.DonorTM;
-import lk.ijse.gdse.bbms.model.BloodStockModel;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -29,8 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
-
-import lk.ijse.gdse.bbms.model.HospitalModel;
 import lk.ijse.gdse.bbms.util.MailUtil;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;

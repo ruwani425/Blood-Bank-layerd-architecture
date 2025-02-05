@@ -17,4 +17,8 @@ public class Campaign {
     private Date endDate;
     private String status;
     private int collectedUnits;
+
+    public Campaign(String value) {
+        this.Blood_campaign_id = value;
+    }
 }

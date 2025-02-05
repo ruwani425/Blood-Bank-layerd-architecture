@@ -12,8 +12,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.SupplierBO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.SupplierTM;
-import lk.ijse.gdse.bbms.model.SupplierModel;
-
 import java.sql.SQLException;
 import java.util.Optional;
 

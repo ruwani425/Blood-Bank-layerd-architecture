@@ -102,4 +102,24 @@ public class BloodStockDAOImpl implements BloodStockDAO {
         }
         return "B001"; // Return the default Blood ID if no data is found
     }
+
+    @Override
+    public int getTotalBloodIDCount() throws Exception {
+        ResultSet rst = CrudUtil.execute("SELECT COUNT(*) FROM Blood_stock");
+
+        if (rst.next()) {
+            return rst.getInt(1);
+        }
+        return 0;
+    }
+
+    @Override
+    public int getTotalIssuedBloodIDCount() throws Exception {
+        ResultSet rst = CrudUtil.execute("SELECT COUNT(*) FROM Reserved_blood");
+
+        if (rst.next()) {
+            return rst.getInt(1);
+        }
+        return 0;
+    }
 }

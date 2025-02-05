@@ -13,21 +13,12 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.BloodTestBO;
 import lk.ijse.gdse.bbms.dto.BloodTestDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodTestTM;
-import lk.ijse.gdse.bbms.model.BloodTestModel;
-
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import javafx.application.Application;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

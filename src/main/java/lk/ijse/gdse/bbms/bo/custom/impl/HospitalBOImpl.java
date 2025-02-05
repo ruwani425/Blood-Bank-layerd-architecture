@@ -6,6 +6,8 @@ import lk.ijse.gdse.bbms.dao.custom.HospitalDAO;
 import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.entity.Hospital;
 
+import java.util.ArrayList;
+
 public class HospitalBOImpl implements HospitalBO {
     HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
     Hospital hospital = new Hospital();
@@ -41,5 +43,22 @@ public class HospitalBOImpl implements HospitalBO {
         hospital.setEmail(hospitalDTO.getEmail());
         hospital.setContactNumber(hospitalDTO.getContactNumber());
         return hospitalDAO.update(hospital);
+    }
+
+    @Override
+    public ArrayList<HospitalDTO> getAllHospitals() throws Exception {
+        ArrayList<HospitalDTO>hospitalDTOS = new ArrayList<>();
+        ArrayList<Hospital>hospitals=hospitalDAO.getAllData();
+        for (Hospital hospital : hospitals) {
+            HospitalDTO hospitalDTO = new HospitalDTO();
+            hospitalDTO.setHospitalId(hospital.getHospitalId());
+            hospitalDTO.setHospitalAddress(hospital.getHospitalAddress());
+            hospitalDTO.setHospitalName(hospital.getHospitalName());
+            hospitalDTO.setType(hospital.getType());
+            hospitalDTO.setEmail(hospital.getEmail());
+            hospitalDTO.setContactNumber(hospital.getContactNumber());
+            hospitalDTOS.add(hospitalDTO);
+        }
+        return hospitalDTOS;
     }
 }

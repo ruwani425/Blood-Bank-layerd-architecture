@@ -83,8 +83,30 @@ public class SupplierDAOImpl implements SupplierDAO {
     }
 
     @Override
-    public Supplier findById(Supplier entity) throws SQLException {
+    public Supplier findById(Supplier supplier) throws SQLException {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Supplier WHERE Supplier_id=?", supplier.getSupplierId());
+
+        if (rst.next()) {
+            return new Supplier(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5)
+            );
+        }
         return null;
     }
 
+    @Override
+    public ArrayList<String> getAllIDs() throws Exception {
+        ResultSet rst = CrudUtil.execute("SELECT Supplier_id FROM Supplier");
+
+        ArrayList<String> supplierIds = new ArrayList<>();
+
+        while (rst.next()) {
+            supplierIds.add(rst.getString("Supplier_id"));
+        }
+        return supplierIds;
+    }
 }

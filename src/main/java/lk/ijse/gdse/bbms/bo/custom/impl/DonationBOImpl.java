@@ -8,9 +8,11 @@ import lk.ijse.gdse.bbms.dao.custom.DonationDAO;
 import lk.ijse.gdse.bbms.dao.custom.DonorDAO;
 import lk.ijse.gdse.bbms.db.DBConnection;
 import lk.ijse.gdse.bbms.dto.BloodTestDTO;
+import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.entity.BloodTest;
+import lk.ijse.gdse.bbms.entity.Campaign;
 import lk.ijse.gdse.bbms.entity.Donation;
 import lk.ijse.gdse.bbms.entity.Donor;
 
@@ -126,6 +128,27 @@ public class DonationBOImpl implements DonationBO {
         donorDTO.setDob(donor.getDob());
         donorDTO.setLastDonationDate(donor.getLastDonationDate());
         return donorDTO;
+    }
+
+    @Override
+    public ArrayList<String> findCampaignIds() throws Exception {
+        return campaignDAO.getCampaignIDs();
+    }
+
+    @Override
+    public CampaignDTO getCampaignById(String value) throws Exception {
+        Campaign campaign = campaignDAO.findById(new Campaign(value));
+        CampaignDTO campaignDTO = new CampaignDTO();
+
+        campaignDTO.setCampaign_name(campaign.getCampaign_name());
+        campaignDTO.setBlood_campaign_id(value);
+        campaignDTO.setAddress(campaign.getAddress());
+        campaignDTO.setStatus(campaign.getStatus());
+        campaignDTO.setCollectedUnits(campaign.getCollectedUnits());
+        campaignDTO.setEndDate(campaign.getEndDate());
+        campaignDTO.setStartDate(campaign.getStartDate());
+
+        return campaignDTO;
     }
 
     private BloodTestDTO getBloodTestDTO(DonationDTO donationDTO) throws Exception {

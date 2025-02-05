@@ -12,10 +12,6 @@ import lk.ijse.gdse.bbms.bo.custom.DonorBO;
 import lk.ijse.gdse.bbms.bo.custom.HealthCheckUpBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.HealthCheckupDTO;
-import lk.ijse.gdse.bbms.entity.HealthCheckUp;
-import lk.ijse.gdse.bbms.model.DonorModel;
-import lk.ijse.gdse.bbms.model.HealthCheckUpModel;
-
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;

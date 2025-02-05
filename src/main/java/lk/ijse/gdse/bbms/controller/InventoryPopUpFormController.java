@@ -14,8 +14,6 @@ import lk.ijse.gdse.bbms.bo.custom.InventoryBO;
 import lk.ijse.gdse.bbms.dto.InventoryDTO;
 import lk.ijse.gdse.bbms.dto.SupplierDTO;
 import lk.ijse.gdse.bbms.dto.tm.InventoryTM;
-import lk.ijse.gdse.bbms.model.InventoryModel;
-import lk.ijse.gdse.bbms.model.SupplierModel;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -58,7 +56,6 @@ public class InventoryPopUpFormController {
 
     Stage stage = new Stage();
 
-    private final SupplierModel supplierModel = new SupplierModel();
     InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
 
     private InventoryPageController inventoryPageController;
@@ -84,9 +81,9 @@ public class InventoryPopUpFormController {
         }
     }
 
-    private void init() throws SQLException {
+    private void init() throws Exception {
         cmbStatus.getItems().addAll("AVAILABLE", "RESERVED", "EXPIRED", "DAMAGED");
-        cmbSupplier.getItems().addAll(supplierModel.getAllSupplierIDs());
+        cmbSupplier.getItems().addAll(inventoryBO.getAllSupplierIDs());
     }
 
     @FXML
@@ -191,8 +188,8 @@ public class InventoryPopUpFormController {
     }
 
     @FXML
-    void cmbSupplierOnAction(ActionEvent event) throws SQLException {
-        SupplierDTO supplierDTO = supplierModel.getSupplierById(cmbSupplier.getValue());
+    void cmbSupplierOnAction(ActionEvent event) throws Exception {
+        SupplierDTO supplierDTO = inventoryBO.getSupplierById(cmbSupplier.getValue());
         lblSupplierName.setText(supplierDTO.getSupplierName());
     }
 }

@@ -14,7 +14,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.EmployeeBO;
 import lk.ijse.gdse.bbms.dto.EmployeeDTO;
 import lk.ijse.gdse.bbms.dto.tm.EmployeeTM;
-import lk.ijse.gdse.bbms.model.EmployeeModel;
 import lk.ijse.gdse.bbms.util.Validation;
 
 import java.net.URL;

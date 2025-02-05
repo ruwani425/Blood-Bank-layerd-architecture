@@ -60,7 +60,7 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
 
     @Override
     public ArrayList<BloodRequest> search(BloodRequest bloodRequest) throws SQLException, ClassNotFoundException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM Blood_request where Status=?",bloodRequest.getStatus());
+        ResultSet rst = CrudUtil.execute("SELECT * FROM Blood_request where Status=?", bloodRequest.getStatus());
 
         ArrayList<BloodRequest> bloodRequestList = new ArrayList<>();
 
@@ -83,5 +83,15 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
     @Override
     public BloodRequest findById(BloodRequest entity) throws SQLException {
         return null;
+    }
+
+    @Override
+    public int getTotalRequestBloodCount() throws Exception {
+        ResultSet rst = CrudUtil.execute("SELECT COUNT(Request_id) FROM Blood_request");
+
+        if (rst.next()) {
+            return rst.getInt(1);
+        }
+        return 0;
     }
 }

@@ -20,14 +20,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import lk.ijse.gdse.bbms.bo.BOFactory;
+import lk.ijse.gdse.bbms.bo.custom.HospitalBO;
 import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.dto.tm.HospitalTM;
-import lk.ijse.gdse.bbms.model.HospitalModel;
 
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -60,15 +59,15 @@ public class HospitalPageController implements Initializable {
     @FXML
     private TextField txtSearchBar;
 
-    private final HospitalModel hospitalModel = new HospitalModel();
+    private final HospitalBO hospitalBO = (HospitalBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOSPITAL);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValueFactory();
         try {
             refreshTable();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         tblHospital.setOnMouseClicked(this::handleRowClick);
@@ -83,8 +82,8 @@ public class HospitalPageController implements Initializable {
         colType.setCellValueFactory(new PropertyValueFactory<>("type"));
     }
 
-    public void refreshTable() throws SQLException {
-        ArrayList<HospitalDTO> hospitalDTOS = hospitalModel.getAllHospitals();
+    public void refreshTable() throws Exception {
+        ArrayList<HospitalDTO> hospitalDTOS = hospitalBO.getAllHospitals();
         ObservableList<HospitalTM> hospitalTMS = FXCollections.observableArrayList();
 
         for (HospitalDTO hospitalDTO : hospitalDTOS) {
@@ -106,8 +105,8 @@ public class HospitalPageController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/hospitalPopUp-view.fxml"));
             Parent root = fxmlLoader.load();
-             HospitalPopUpController hospitalPopUpController = fxmlLoader.getController();
-             hospitalPopUpController.setHospitalPageController(this);
+            HospitalPopUpController hospitalPopUpController = fxmlLoader.getController();
+            hospitalPopUpController.setHospitalPageController(this);
 
             Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);

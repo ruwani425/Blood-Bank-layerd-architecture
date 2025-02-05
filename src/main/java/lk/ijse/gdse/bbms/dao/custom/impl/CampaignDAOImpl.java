@@ -89,7 +89,19 @@ public class CampaignDAOImpl implements CampaignDAO {
     }
 
     @Override
-    public Campaign findById(Campaign entity) throws SQLException {
+    public Campaign findById(Campaign campaign) throws SQLException {
+        ResultSet rst = CrudUtil.execute("select * from Blood_campaign where Blood_campaign_id=?",campaign.getBlood_campaign_id());
+        if (rst.next()) {
+            return new Campaign(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getDate(4),
+                    rst.getDate(5),
+                    rst.getString(6),
+                    rst.getInt(7)
+            );
+        }
         return null;
     }
 
@@ -100,5 +112,15 @@ public class CampaignDAOImpl implements CampaignDAO {
                 1,
                 campaignId
         );
+    }
+
+    @Override
+    public ArrayList<String> getCampaignIDs() throws Exception {
+        ResultSet rst = CrudUtil.execute("select Blood_campaign_id from Blood_campaign");
+        ArrayList<String> campaignIds = new ArrayList<>();
+        while (rst.next()) {
+            campaignIds.add(rst.getString(1));
+        }
+        return campaignIds;
     }
 }

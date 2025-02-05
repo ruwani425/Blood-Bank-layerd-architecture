@@ -11,12 +11,7 @@ import javafx.stage.Stage;
 import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.CampaignBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
-import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.tm.CampaignTM;
-import lk.ijse.gdse.bbms.dto.tm.DonorTM;
-import lk.ijse.gdse.bbms.model.CampaignModel;
-import lk.ijse.gdse.bbms.model.DonorModel;
-
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;

@@ -12,7 +12,6 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.DonorBO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
 import lk.ijse.gdse.bbms.dto.tm.DonorTM;
-import lk.ijse.gdse.bbms.model.DonorModel;
 import lk.ijse.gdse.bbms.util.Validation;
 
 import java.net.URL;

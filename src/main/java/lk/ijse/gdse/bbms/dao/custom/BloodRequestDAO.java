@@ -5,4 +5,5 @@ import lk.ijse.gdse.bbms.dao.SuperDAO;
 import lk.ijse.gdse.bbms.entity.BloodRequest;
 
 public interface BloodRequestDAO extends SuperDAO , CrudDAO<BloodRequest> {
+    int getTotalRequestBloodCount()throws Exception;
 }

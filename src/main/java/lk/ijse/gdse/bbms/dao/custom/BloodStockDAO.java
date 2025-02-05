@@ -8,4 +8,8 @@ public interface BloodStockDAO extends SuperDAO, CrudDAO<BloodStock> {
     boolean updateBloodStockStatusAfterIssued(String bloodID)throws Exception;
 
     String getNextBloodId() throws Exception;
+
+    int getTotalBloodIDCount()throws Exception;
+
+    int getTotalIssuedBloodIDCount()throws Exception;
 }

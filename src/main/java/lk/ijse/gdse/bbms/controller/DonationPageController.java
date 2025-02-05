@@ -16,12 +16,7 @@ import lk.ijse.gdse.bbms.bo.custom.DonationBO;
 import lk.ijse.gdse.bbms.dto.CampaignDTO;
 import lk.ijse.gdse.bbms.dto.DonationDTO;
 import lk.ijse.gdse.bbms.dto.DonorDTO;
-import lk.ijse.gdse.bbms.dto.HealthCheckupDTO;
 import lk.ijse.gdse.bbms.dto.tm.DonationTM;
-import lk.ijse.gdse.bbms.dto.tm.DonorTM;
-import lk.ijse.gdse.bbms.model.CampaignModel;
-import lk.ijse.gdse.bbms.model.DonationModel;
-import lk.ijse.gdse.bbms.model.DonorModel;
 import lk.ijse.gdse.bbms.util.MailUtil;
 
 import java.net.URL;
@@ -90,9 +85,8 @@ public class DonationPageController implements Initializable {
 
     String donorEmail;
 
-    private DonationBO donationBO= (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
+    private DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
-    CampaignModel campaignModel = new CampaignModel();
     String checkupId;
     String bloodGroup;
     String donorId;
@@ -104,7 +98,7 @@ public class DonationPageController implements Initializable {
             refreshTable();
             getDonorById();
             lblDonationId.setText(donationBO.getNextDonationId());
-            ArrayList<String> idList = campaignModel.findCampaignIds();
+            ArrayList<String> idList = donationBO.findCampaignIds();
             cmbSelectCampaign.getItems().addAll(idList);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,8 +200,8 @@ public class DonationPageController implements Initializable {
     }
 
     @FXML
-    void cmbSelectOnAction(ActionEvent event) throws SQLException {
-        CampaignDTO campaignDTO = campaignModel.getCampaignById(cmbSelectCampaign.getValue());
+    void cmbSelectOnAction(ActionEvent event) throws Exception {
+        CampaignDTO campaignDTO = donationBO.getCampaignById(cmbSelectCampaign.getValue());
         lblCampaignID.setText(campaignDTO.getBlood_campaign_id());
         lblCampaignName.setText(campaignDTO.getCampaign_name());
         lblCollectedUnits.setText(String.valueOf(campaignDTO.getCollectedUnits()));
