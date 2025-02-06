@@ -118,7 +118,7 @@ public class BloodStockPageController implements Initializable {
 
     private ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
     private ArrayList<BloodIssueTM> issuedBlood = new ArrayList<>();
-    private BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
+    private final BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

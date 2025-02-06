@@ -64,7 +64,7 @@ public class AddDonorPopUpController implements Initializable {
     private Stage stage;
 
     private DonorPageViewController donorPageViewController;
-    private DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
+    private final DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
     public void setDonorPageViewController(DonorPageViewController donorPageViewController) {
         this.donorPageViewController = donorPageViewController;

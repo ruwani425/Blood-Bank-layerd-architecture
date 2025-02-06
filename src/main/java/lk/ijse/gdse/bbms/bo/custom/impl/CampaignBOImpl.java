@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CampaignBOImpl implements CampaignBO {
 
-    private CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
+    private final CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
 
     @Override
     public String getNextCampaignId() throws Exception {

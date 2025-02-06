@@ -51,7 +51,7 @@ public class HospitalPopUpController implements Initializable {
     private Stage stage=new Stage();
 
     private HospitalPageController hospitalPageController;
-    private HospitalBO hospitalBO= (HospitalBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOSPITAL);
+    private final HospitalBO hospitalBO= (HospitalBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOSPITAL);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

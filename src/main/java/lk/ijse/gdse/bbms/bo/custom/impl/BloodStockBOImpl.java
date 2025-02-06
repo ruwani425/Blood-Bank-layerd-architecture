@@ -17,11 +17,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BloodStockBOImpl implements BloodStockBO {
-    private BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
-    private BloodRequestDetailDAO bloodRequestDetailDAO = (BloodRequestDetailDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUESTDETAIL);
-    private ReservedBloodDAO reservedBloodDAO = (ReservedBloodDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.RESERVEDBLOOD);
-    private BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
-    private HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
+    private final BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
+    private final BloodRequestDetailDAO bloodRequestDetailDAO = (BloodRequestDetailDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUESTDETAIL);
+    private final ReservedBloodDAO reservedBloodDAO = (ReservedBloodDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.RESERVEDBLOOD);
+    private final BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
+    private final HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public ArrayList<BloodStockDTO> getAllBloodStocks(String status) throws SQLException, ClassNotFoundException {

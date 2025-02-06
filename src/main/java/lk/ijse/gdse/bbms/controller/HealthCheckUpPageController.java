@@ -74,8 +74,8 @@ public class HealthCheckUpPageController implements Initializable {
 
     private DonorDTO donorDTO;
     private HealthCheckupDTO healthCheckupDTO;
-    private HealthCheckUpBO healthCheckUpBO = (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
-    private DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
+    private final HealthCheckUpBO healthCheckUpBO = (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
+    private final DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
     private String colorCode = "#FF0000";
 

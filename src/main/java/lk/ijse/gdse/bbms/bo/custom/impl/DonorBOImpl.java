@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DonorBOImpl implements DonorBO {
 
-    private DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
+    private final DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
 
     @Override
     public boolean addDonor(DonorDTO donorDTO)  {

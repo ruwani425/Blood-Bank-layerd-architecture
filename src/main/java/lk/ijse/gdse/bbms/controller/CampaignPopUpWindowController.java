@@ -64,7 +64,7 @@ public class CampaignPopUpWindowController implements Initializable {
 
     private CampaignPageController campaignPageController;
     private CampaignDTO dto=new CampaignDTO();
-    private CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
+    private final CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     public void setCampainPageController(CampaignPageController campaignPageController) {
         this.campaignPageController = campaignPageController;

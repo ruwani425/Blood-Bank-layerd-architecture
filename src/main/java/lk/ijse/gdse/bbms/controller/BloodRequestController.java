@@ -67,7 +67,7 @@ public class BloodRequestController implements Initializable {
     private JFXButton btnAddRequest;
 
     private HomePageViewController homePageViewController;
-    private BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
+    private final BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
 
     public void setHomePageViewController(HomePageViewController homePageViewController) {
         this.homePageViewController = homePageViewController;

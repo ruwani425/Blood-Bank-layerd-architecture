@@ -21,10 +21,10 @@ import java.util.ArrayList;
 
 public class DonationBOImpl implements DonationBO {
 
-    private DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
-    private DonationDAO donationDAO = (DonationDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONATION);
-    private BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODTEST);
-    private CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
+    private final DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
+    private final DonationDAO donationDAO = (DonationDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONATION);
+    private final BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODTEST);
+    private final CampaignDAO campaignDAO = (CampaignDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.CAMPAIGN);
 
     @Override
     public boolean addDonation(DonationDTO donationDTO, String donorId) throws Exception {

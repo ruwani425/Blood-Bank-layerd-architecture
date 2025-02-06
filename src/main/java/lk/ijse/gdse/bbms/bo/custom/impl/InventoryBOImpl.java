@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class InventoryBOImpl implements InventoryBO {
 
-    private InventoryDAO inventoryDAO = (InventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.INVENTORY);
-    private SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
-    private SupplierInventoryDAO supplierInventoryDAO = (SupplierInventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIERINVENTORY);
+    private final InventoryDAO inventoryDAO = (InventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.INVENTORY);
+    private final SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
+    private final SupplierInventoryDAO supplierInventoryDAO = (SupplierInventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIERINVENTORY);
 
     @Override
     public String getNextInventoryId() throws Exception {

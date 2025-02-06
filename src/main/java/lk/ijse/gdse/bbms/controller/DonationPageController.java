@@ -85,7 +85,7 @@ public class DonationPageController implements Initializable {
 
     private String donorEmail;
 
-    private DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
+    private final DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
     private String checkupId;
     private String bloodGroup;

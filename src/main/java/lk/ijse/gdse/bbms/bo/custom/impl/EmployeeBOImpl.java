@@ -10,7 +10,7 @@ import lk.ijse.gdse.bbms.entity.Employee;
 import java.util.ArrayList;
 
 public class EmployeeBOImpl implements EmployeeBO {
-    private EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
+    private final EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
 
     @Override
     public boolean addEmployee(EmployeeDTO employeeDTO) throws Exception {

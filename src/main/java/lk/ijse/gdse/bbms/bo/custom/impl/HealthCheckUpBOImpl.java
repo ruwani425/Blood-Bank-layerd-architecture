@@ -9,7 +9,7 @@ import lk.ijse.gdse.bbms.entity.HealthCheckUp;
 import java.sql.SQLException;
 
 public class HealthCheckUpBOImpl implements HealthCheckUpBO {
-    private HealthCheckUpDAO healthCheckUpDAO = (HealthCheckUpDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HEALTHCHECKUP);
+    private final HealthCheckUpDAO healthCheckUpDAO = (HealthCheckUpDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HEALTHCHECKUP);
 
     @Override
     public String getNextHealthCheckUpId() throws SQLException, ClassNotFoundException {

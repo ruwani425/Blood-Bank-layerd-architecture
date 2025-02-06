@@ -9,7 +9,7 @@ import lk.ijse.gdse.bbms.entity.Hospital;
 import java.util.ArrayList;
 
 public class HospitalBOImpl implements HospitalBO {
-    private HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
+    private final HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public String getNextHospitalId() throws Exception {

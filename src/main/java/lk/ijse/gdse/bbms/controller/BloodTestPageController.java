@@ -114,7 +114,7 @@ public class BloodTestPageController implements Initializable {
 
     private String imageUrl;
 
-    private BloodTestBO bloodTestBO = (BloodTestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODTEST);
+    private final BloodTestBO bloodTestBO = (BloodTestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODTEST);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

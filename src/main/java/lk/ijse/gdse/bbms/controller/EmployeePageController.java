@@ -63,7 +63,7 @@ public class EmployeePageController implements Initializable {
     @FXML
     private TableColumn<EmployeeTM, String> colStatus;
 
-    private EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
+    private final EmployeeBO employeeBO = (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

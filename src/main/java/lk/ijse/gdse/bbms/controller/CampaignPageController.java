@@ -64,7 +64,7 @@ public class CampaignPageController implements Initializable {
     @FXML
     private TableColumn<CampaignTM,Integer> colCollectedUnit;
 
-    private CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
+    private final CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -46,7 +46,7 @@ public class SupplierPopUpController {
 
     private Stage stage=new Stage();
 
-    private SupplierBO supplierBO = (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
+    private final SupplierBO supplierBO = (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
     private SupplierPageController supplierPageController;
 
     public void setSupplierPageController(SupplierPageController supplierPageController) {
