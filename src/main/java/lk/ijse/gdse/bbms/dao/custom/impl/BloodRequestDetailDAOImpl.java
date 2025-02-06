@@ -2,6 +2,7 @@ package lk.ijse.gdse.bbms.dao.custom.impl;
 
 import lk.ijse.gdse.bbms.dao.custom.BloodRequestDetailDAO;
 import lk.ijse.gdse.bbms.entity.BloodRequestDetail;
+import lk.ijse.gdse.bbms.util.CrudUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -13,8 +14,11 @@ public class BloodRequestDetailDAOImpl implements BloodRequestDetailDAO {
     }
 
     @Override
-    public boolean save(BloodRequestDetail Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean save(BloodRequestDetail bloodRequestDetail) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("insert into Blood_request_detail values(?,?)",
+                bloodRequestDetail.getBlood_request_id(),
+                bloodRequestDetail.getBlood_id()
+        );
     }
 
     @Override

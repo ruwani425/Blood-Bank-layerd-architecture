@@ -85,7 +85,6 @@ public class BloodStockBOImpl implements BloodStockBO {
                             issuedBlood1.getBloodQty()))) {
                         if (bloodStockDAO.updateBloodStockStatusAfterIssued(issuedBlood1.getBloodID())) {
                             if (bloodRequestDAO.update(new BloodRequest(bloodRequestTM.getRequestId()))) {
-
                             } else {
                                 connection.rollback();
                                 return false;

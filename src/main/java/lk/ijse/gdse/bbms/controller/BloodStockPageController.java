@@ -18,6 +18,7 @@ import lk.ijse.gdse.bbms.dto.HospitalDTO;
 import lk.ijse.gdse.bbms.dto.tm.BloodIssueTM;
 import lk.ijse.gdse.bbms.dto.tm.BloodRequestTM;
 import lk.ijse.gdse.bbms.dto.tm.BloodStockTM;
+
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+
 import lk.ijse.gdse.bbms.util.MailUtil;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -43,34 +45,34 @@ public class BloodStockPageController implements Initializable {
     private TableView<BloodStockTM> tblBloodStock;
 
     @FXML
-    private TableColumn<BloodStockTM,String> colBloodID;
+    private TableColumn<BloodStockTM, String> colBloodID;
 
     @FXML
-    private TableColumn<BloodStockTM,String> colTestID;
+    private TableColumn<BloodStockTM, String> colTestID;
 
     @FXML
-    private TableColumn<BloodStockTM,String> colBloodGroup;
+    private TableColumn<BloodStockTM, String> colBloodGroup;
 
     @FXML
-    private TableColumn<BloodStockTM,Integer> colQty;
+    private TableColumn<BloodStockTM, Integer> colQty;
 
     @FXML
-    private TableColumn<BloodStockTM,Double> colHaemoglobin;
+    private TableColumn<BloodStockTM, Double> colHaemoglobin;
 
     @FXML
-    private TableColumn<BloodStockTM,Float> colPlatelets;
+    private TableColumn<BloodStockTM, Float> colPlatelets;
 
     @FXML
-    private TableColumn<BloodStockTM,Double> colRedBloodCells;
+    private TableColumn<BloodStockTM, Double> colRedBloodCells;
 
     @FXML
-    private TableColumn<BloodStockTM,Double> colWhiteBloodCells;
+    private TableColumn<BloodStockTM, Double> colWhiteBloodCells;
 
     @FXML
     private TableColumn<BloodStockTM, Date> colExpiryDate;
 
     @FXML
-    private TableColumn<BloodStockTM,String> colStatus;
+    private TableColumn<BloodStockTM, String> colStatus;
 
     @FXML
     private JFXButton btnVerified;
@@ -115,8 +117,8 @@ public class BloodStockPageController implements Initializable {
     String hospitalEmail;
 
     ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
-    ArrayList<BloodIssueTM>issuedBlood=new ArrayList<>();
-    BloodStockBO bloodStockBO= (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
+    ArrayList<BloodIssueTM> issuedBlood = new ArrayList<>();
+    BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -135,8 +137,8 @@ public class BloodStockPageController implements Initializable {
         lblRequestID.setText(bloodRequestTM.getRequestId());
         System.out.println(bloodRequestTM);
         HospitalDTO hospitalById = bloodStockBO.getHospitalById(bloodRequestTM.getHospitalId());
-        hospitalEmail=hospitalById.getEmail();
-        bloodType=bloodRequestTM.getBloodType();
+        hospitalEmail = hospitalById.getEmail();
+        bloodType = bloodRequestTM.getBloodType();
     }
 
     private void setCellValueFactory() {
@@ -162,7 +164,7 @@ public class BloodStockPageController implements Initializable {
         if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
             BloodStockTM selectedItem = tblBloodStock.getSelectionModel().getSelectedItem();
             if (selectedItem != null) {
-                BloodIssueTM bloodIssueTM=new BloodIssueTM(selectedItem.getBloodID(),selectedItem.getBloodGroup(),selectedItem.getQty(),selectedItem.getExpiryDate(),null);
+                BloodIssueTM bloodIssueTM = new BloodIssueTM(selectedItem.getBloodID(), selectedItem.getBloodGroup(), selectedItem.getQty(), selectedItem.getExpiryDate(), null);
                 bloodIssueTM.setBloodID(selectedItem.getBloodID());
                 addIssueItem(bloodIssueTM);
             }
@@ -208,7 +210,7 @@ public class BloodStockPageController implements Initializable {
         tblBloodStock.setItems(bloodStockTMS);
     }
 
-    public void getExpiredBlood(){
+    public void getExpiredBlood() {
         try {
             ArrayList<BloodStockDTO> bloodStockDTOS = bloodStockBO.getExpiredBloodStocks();
             ObservableList<BloodStockTM> bloodStockTMS = FXCollections.observableArrayList();
@@ -241,7 +243,7 @@ public class BloodStockPageController implements Initializable {
 
     @FXML
     void btnIsExpiredOnAction(ActionEvent event) {
-      getExpiredBlood();
+        getExpiredBlood();
     }
 
 
@@ -281,13 +283,13 @@ public class BloodStockPageController implements Initializable {
 
     @FXML
     void btnIssueOnAction(ActionEvent event) throws Exception {
-            boolean isAdd=bloodStockBO.addBloodIssue(bloodRequestTM,issuedBlood);
-            if (isAdd){
-                refreshTable();
-                new Alert(Alert.AlertType.INFORMATION, "successfully saved").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Failed to saved blood issue").show();
-            }
+        boolean isAdd = bloodStockBO.addBloodIssue(bloodRequestTM, issuedBlood);
+        if (isAdd) {
+            refreshTable();
+            new Alert(Alert.AlertType.INFORMATION, "successfully saved").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Failed to saved blood issue").show();
+        }
     }
 
     @FXML
@@ -319,10 +321,10 @@ public class BloodStockPageController implements Initializable {
         new Thread(() -> {
             MailUtil.sendEmail(
                     hospitalEmail,
-                    "Urgent Blood Requirement: "+bloodType+"Out of Stock",
+                    "Urgent Blood Requirement: " + bloodType + "Out of Stock",
                     "We hope this message finds you well.\n" +
                             "\n" +
-                            "We regret to inform you that the requested blood type "+bloodType+"is currently unavailable in our stock at this moment. We are working diligently to replenish our supply and will notify you as soon as it becomes available.\n" +
+                            "We regret to inform you that the requested blood type " + bloodType + "is currently unavailable in our stock at this moment. We are working diligently to replenish our supply and will notify you as soon as it becomes available.\n" +
                             "\n" +
                             "If there’s anything else we can assist you with, please don’t hesitate to reach out.\n" +
                             "\n" +

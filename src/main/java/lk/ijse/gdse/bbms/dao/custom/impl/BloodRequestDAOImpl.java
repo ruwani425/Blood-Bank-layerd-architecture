@@ -29,8 +29,8 @@ public class BloodRequestDAOImpl implements BloodRequestDAO {
     }
 
     @Override
-    public boolean update(BloodRequest Dto) throws SQLException, ClassNotFoundException {
-        return false;
+    public boolean update(BloodRequest bloodRequest) throws SQLException, ClassNotFoundException {
+        return CrudUtil.execute("UPDATE Blood_request SET Status='COMPLETED' WHERE Request_id=?",bloodRequest.getRequestId());
     }
 
     @Override
