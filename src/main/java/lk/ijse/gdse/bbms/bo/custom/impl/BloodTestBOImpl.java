@@ -56,14 +56,11 @@ public class BloodTestBOImpl implements BloodTestBO {
             bloodTestDTO.setWhiteBloodCells(bloodTest1.getWhiteBloodCells());
             bloodTestDTO.setRedBloodCells(bloodTest1.getRedBloodCells());
             bloodTestDTO.setBloodQty(bloodTest1.getBloodQty());
-            bloodTestDTO.setBloodType(bloodTest1.getBloodType());
-            bloodTestDTO.setWhiteBloodCells(bloodTest1.getWhiteBloodCells());
-            bloodTestDTO.setRedBloodCells(bloodTest1.getRedBloodCells());
-            bloodTestDTO.setBloodQty(bloodTest1.getBloodQty());
             bloodTestDTO.setReportImageUrl(bloodTest1.getReportImageUrl());
             bloodTestDTO.setDonationID(bloodTest1.getDonationID());
             bloodTestDTO.setPlatelets(bloodTest1.getPlatelets());
             bloodTestDTO.setReportSerialNum(bloodTest1.getReportSerialNum());
+            bloodTestDTO.setCollectedDate(bloodTest1.getCollectedDate());
             bloodTestDTOS.add(bloodTestDTO);
         }
         return bloodTestDTOS;
@@ -74,6 +71,7 @@ public class BloodTestBOImpl implements BloodTestBO {
         ArrayList<BloodTestDTO> bloodTestDTOS = new ArrayList<>();
         ArrayList<BloodTest> bloodTests = bloodTestDAO.getAllData();
         for (BloodTest bloodTest1 : bloodTests) {
+
             BloodTestDTO bloodTestDTO = new BloodTestDTO();
             bloodTestDTO.setTestID(bloodTest1.getTestID());
             bloodTestDTO.setTestResult(bloodTest1.getTestResult());
@@ -82,14 +80,11 @@ public class BloodTestBOImpl implements BloodTestBO {
             bloodTestDTO.setWhiteBloodCells(bloodTest1.getWhiteBloodCells());
             bloodTestDTO.setRedBloodCells(bloodTest1.getRedBloodCells());
             bloodTestDTO.setBloodQty(bloodTest1.getBloodQty());
-            bloodTestDTO.setBloodType(bloodTest1.getBloodType());
-            bloodTestDTO.setWhiteBloodCells(bloodTest1.getWhiteBloodCells());
-            bloodTestDTO.setRedBloodCells(bloodTest1.getRedBloodCells());
-            bloodTestDTO.setBloodQty(bloodTest1.getBloodQty());
             bloodTestDTO.setReportImageUrl(bloodTest1.getReportImageUrl());
             bloodTestDTO.setDonationID(bloodTest1.getDonationID());
             bloodTestDTO.setPlatelets(bloodTest1.getPlatelets());
             bloodTestDTO.setReportSerialNum(bloodTest1.getReportSerialNum());
+            bloodTestDTO.setCollectedDate(bloodTest1.getCollectedDate());
             bloodTestDTOS.add(bloodTestDTO);
         }
         return bloodTestDTOS;

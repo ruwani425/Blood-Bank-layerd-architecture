@@ -195,6 +195,7 @@ public class BloodTestPageController implements Initializable {
                     bloodTestDTO.getWhiteBloodCells(),
                     bloodTestDTO.getBloodQty()
             );
+            System.out.println(bloodTestDTO.getTestDate()+" "+bloodTestDTO.getCollectedDate());
             bloodTestTMS.add(bloodTestTM);
         }
 
