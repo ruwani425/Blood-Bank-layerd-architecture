@@ -54,9 +54,9 @@ public class InventoryPopUpFormController {
     private Label lblSupplierName;
 
 
-    Stage stage = new Stage();
+    private Stage stage = new Stage();
 
-    InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
+    private InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
 
     private InventoryPageController inventoryPageController;
 

@@ -12,9 +12,8 @@ import java.util.ArrayList;
 
 public class BloodRequestBOImpl implements BloodRequestBO {
 
-    BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
-    BloodRequest bloodRequest = new BloodRequest();
-    HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
+    private BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
+    private HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public String getNextRequestId() throws Exception {
@@ -23,6 +22,7 @@ public class BloodRequestBOImpl implements BloodRequestBO {
 
     @Override
     public boolean addBloodRequest(BloodRequestDTO bloodRequestDTO) throws Exception {
+        BloodRequest bloodRequest = new BloodRequest();
         bloodRequest.setRequestId(getNextRequestId());
         bloodRequest.setBloodType(bloodRequestDTO.getBloodType());
         bloodRequest.setDateOfRequest(bloodRequestDTO.getDateOfRequest());
@@ -34,17 +34,18 @@ public class BloodRequestBOImpl implements BloodRequestBO {
 
     @Override
     public ArrayList<BloodRequestDTO> getAllRequests(String pending) throws Exception {
+        BloodRequest bloodRequest = new BloodRequest();
         bloodRequest.setStatus(pending);
         ArrayList<BloodRequestDTO> bloodRequestDTOS = new ArrayList<>();
         ArrayList<BloodRequest> bloodRequests = bloodRequestDAO.search(bloodRequest);
-        for (BloodRequest bloodRequest : bloodRequests) {
+        for (BloodRequest bloodRequest1 : bloodRequests) {
             BloodRequestDTO bloodRequestDTO = new BloodRequestDTO();
-            bloodRequestDTO.setRequestId(bloodRequest.getRequestId());
-            bloodRequestDTO.setBloodType(bloodRequest.getBloodType());
-            bloodRequestDTO.setDateOfRequest(bloodRequest.getDateOfRequest());
-            bloodRequestDTO.setQty(bloodRequest.getQty());
-            bloodRequestDTO.setHospitalId(bloodRequest.getHospitalId());
-            bloodRequestDTO.setStatus(bloodRequest.getStatus());
+            bloodRequestDTO.setRequestId(bloodRequest1.getRequestId());
+            bloodRequestDTO.setBloodType(bloodRequest1.getBloodType());
+            bloodRequestDTO.setDateOfRequest(bloodRequest1.getDateOfRequest());
+            bloodRequestDTO.setQty(bloodRequest1.getQty());
+            bloodRequestDTO.setHospitalId(bloodRequest1.getHospitalId());
+            bloodRequestDTO.setStatus(bloodRequest1.getStatus());
             bloodRequestDTOS.add(bloodRequestDTO);
         }
         return bloodRequestDTOS;

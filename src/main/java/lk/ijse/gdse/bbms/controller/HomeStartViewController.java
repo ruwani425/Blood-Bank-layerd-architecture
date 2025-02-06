@@ -12,6 +12,7 @@ import lk.ijse.gdse.bbms.bo.BOFactory;
 import lk.ijse.gdse.bbms.bo.custom.BloodRequestBO;
 import lk.ijse.gdse.bbms.bo.custom.BloodStockBO;
 import lk.ijse.gdse.bbms.bo.custom.HomeBO;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -20,9 +21,9 @@ import java.util.ResourceBundle;
 
 public class HomeStartViewController implements Initializable {
 
-    boolean run = true;
+    private boolean run = true;
 
-    Thread thread;
+    private Thread thread;
     @FXML
     private Label lblTime;
     @FXML
@@ -40,9 +41,9 @@ public class HomeStartViewController implements Initializable {
     @FXML
     private Label lblResived;
 
-    HomeBO homeBO= (HomeBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOME);
-    BloodRequestBO bloodRequestBO= (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
-    BloodStockBO bloodStockBO= (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
+    private HomeBO homeBO = (HomeBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOME);
+    private BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
+    private BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

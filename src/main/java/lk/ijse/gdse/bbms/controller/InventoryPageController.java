@@ -64,7 +64,7 @@ public class InventoryPageController implements Initializable {
     @FXML
     private JFXButton btnAddSupplier;
 
-    HomePageViewController homePageViewController;
+    private HomePageViewController homePageViewController;
 
     private final InventoryBO inventoryBO= (InventoryBO) BOFactory.getInstance().getBO(BOFactory.BOType.INVENTORY);
 

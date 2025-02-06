@@ -112,13 +112,13 @@ public class BloodStockPageController implements Initializable {
     @FXML
     private JFXButton btnSendMail;
 
-    String bloodType;
+    private String bloodType;
 
-    String hospitalEmail;
+    private String hospitalEmail;
 
-    ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
-    ArrayList<BloodIssueTM> issuedBlood = new ArrayList<>();
-    BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
+    private ObservableList<BloodIssueTM> bloodIssueTMS = FXCollections.observableArrayList();
+    private ArrayList<BloodIssueTM> issuedBlood = new ArrayList<>();
+    private BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

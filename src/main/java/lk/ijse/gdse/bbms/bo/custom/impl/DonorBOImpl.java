@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class DonorBOImpl implements DonorBO {
 
-    DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
-    Donor donor = new Donor();
+    private DonorDAO donorDAO = (DonorDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.DONOR);
 
     @Override
     public boolean addDonor(DonorDTO donorDTO)  {
+        Donor donor = new Donor();
         donor.setDonorId(donorDTO.getDonorId());
         donor.setDonorName(donorDTO.getDonorName());
         donor.setDonorEmail(donorDTO.getDonorEmail());
@@ -36,12 +36,14 @@ public class DonorBOImpl implements DonorBO {
 
     @Override
     public boolean deleteDonor(String donorId) throws Exception {
+        Donor donor = new Donor();
         donor.setDonorId(donorId);
         return donorDAO.delete(donor);
     }
 
     @Override
     public boolean updateDonor(DonorDTO donorDTO) throws Exception {
+        Donor donor = new Donor();
         donor.setDonorId(donorDTO.getDonorId());
         donor.setDonorName(donorDTO.getDonorName());
         donor.setDonorEmail(donorDTO.getDonorEmail());
@@ -81,6 +83,7 @@ public class DonorBOImpl implements DonorBO {
 
     @Override
     public DonorDTO getDonorByNic(String donorNic) throws Exception {
+        Donor donor = new Donor();
         donor.setDonorNic(donorNic);
         donor=donorDAO.findDonorByNic(donor);
 

@@ -10,8 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SupplierBOImpl implements SupplierBO {
-    SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
-    Supplier supplier = new Supplier();
+    private SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
 
     @Override
     public String getNextSupplierId() throws SQLException, ClassNotFoundException {
@@ -20,12 +19,14 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public boolean deleteSupplier(String supplierID) throws SQLException, ClassNotFoundException {
+        Supplier supplier = new Supplier();
         supplier.setSupplierId(supplierID);
         return supplierDAO.delete(supplier);
     }
 
     @Override
     public boolean addSupplier(SupplierDTO supplierDTO) throws SQLException, ClassNotFoundException {
+        Supplier supplier = new Supplier();
         supplier.setSupplierName(supplierDTO.getSupplierName());
         supplier.setAddress(supplierDTO.getAddress());
         supplier.setSupplierId(supplierDTO.getSupplierId());
@@ -36,6 +37,7 @@ public class SupplierBOImpl implements SupplierBO {
 
     @Override
     public boolean updateSupplier(SupplierDTO supplierDTO) throws SQLException, ClassNotFoundException {
+        Supplier supplier = new Supplier();
         supplier.setSupplierName(supplierDTO.getSupplierName());
         supplier.setAddress(supplierDTO.getAddress());
         supplier.setSupplierId(supplierDTO.getSupplierId());
@@ -47,7 +49,7 @@ public class SupplierBOImpl implements SupplierBO {
     @Override
     public ArrayList<SupplierDTO> getAllSuppliers() throws Exception {
         ArrayList<SupplierDTO> supplierDTOs = new ArrayList<>();
-        ArrayList<Supplier>suppliers=supplierDAO.getAllData();
+        ArrayList<Supplier> suppliers = supplierDAO.getAllData();
         for (Supplier supplier : suppliers) {
             SupplierDTO supplierDTO = new SupplierDTO();
             supplierDTO.setSupplierId(supplier.getSupplierId());

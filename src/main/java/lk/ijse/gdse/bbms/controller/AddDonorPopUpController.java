@@ -63,8 +63,8 @@ public class AddDonorPopUpController implements Initializable {
     @FXML
     private Stage stage;
 
-    DonorPageViewController donorPageViewController;
-    DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
+    private DonorPageViewController donorPageViewController;
+    private DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
     public void setDonorPageViewController(DonorPageViewController donorPageViewController) {
         this.donorPageViewController = donorPageViewController;

@@ -112,9 +112,9 @@ public class BloodTestPageController implements Initializable {
     @FXML
     private TextField txtBloodQty;
 
-    String imageUrl;
+    private String imageUrl;
 
-    BloodTestBO bloodTestBO = (BloodTestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODTEST);
+    private BloodTestBO bloodTestBO = (BloodTestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODTEST);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

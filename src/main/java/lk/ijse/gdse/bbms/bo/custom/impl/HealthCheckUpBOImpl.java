@@ -9,8 +9,7 @@ import lk.ijse.gdse.bbms.entity.HealthCheckUp;
 import java.sql.SQLException;
 
 public class HealthCheckUpBOImpl implements HealthCheckUpBO {
-    HealthCheckUpDAO healthCheckUpDAO = (HealthCheckUpDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HEALTHCHECKUP);
-    HealthCheckUp healthCheckUp = new HealthCheckUp();
+    private HealthCheckUpDAO healthCheckUpDAO = (HealthCheckUpDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HEALTHCHECKUP);
 
     @Override
     public String getNextHealthCheckUpId() throws SQLException, ClassNotFoundException {
@@ -19,6 +18,7 @@ public class HealthCheckUpBOImpl implements HealthCheckUpBO {
 
     @Override
     public boolean addHealthCheckup(HealthCheckupDTO healthCheckupDTO) throws Exception {
+        HealthCheckUp healthCheckUp = new HealthCheckUp();
         healthCheckUp.setCheckupId(healthCheckupDTO.getCheckupId());
         healthCheckUp.setHealthStatus(healthCheckupDTO.getHealthStatus());
         healthCheckUp.setCheckupDate(healthCheckupDTO.getCheckupDate());

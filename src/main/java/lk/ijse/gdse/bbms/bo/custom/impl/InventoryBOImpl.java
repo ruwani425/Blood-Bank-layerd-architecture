@@ -19,10 +19,9 @@ import java.util.ArrayList;
 
 public class InventoryBOImpl implements InventoryBO {
 
-    InventoryDAO inventoryDAO = (InventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.INVENTORY);
-    SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
-    SupplierInventoryDAO supplierInventoryDAO = (SupplierInventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIERINVENTORY);
-    Inventory inventory = new Inventory();
+    private InventoryDAO inventoryDAO = (InventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.INVENTORY);
+    private SupplierDAO supplierDAO = (SupplierDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIER);
+    private SupplierInventoryDAO supplierInventoryDAO = (SupplierInventoryDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.SUPPLIERINVENTORY);
 
     @Override
     public String getNextInventoryId() throws Exception {
@@ -71,12 +70,14 @@ public class InventoryBOImpl implements InventoryBO {
 
     @Override
     public boolean deleteInventoryItem(String inventoryId) throws Exception {
+        Inventory inventory = new Inventory();
         inventory.setInventoryId(inventoryId);
         return inventoryDAO.delete(inventory);
     }
 
     @Override
     public boolean updateInventoryItem(InventoryDTO inventoryDTO) throws Exception {
+        Inventory inventory = new Inventory();
         inventory.setInventoryId(inventoryDTO.getInventoryId());
         inventory.setExpiryDate(inventoryDTO.getExpiryDate());
         inventory.setItemName(inventoryDTO.getItemName());

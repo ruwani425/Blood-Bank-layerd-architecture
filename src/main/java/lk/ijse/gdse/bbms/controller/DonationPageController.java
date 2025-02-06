@@ -83,13 +83,13 @@ public class DonationPageController implements Initializable {
     @FXML
     private Label lblCollectedUnits;
 
-    String donorEmail;
+    private String donorEmail;
 
     private DonationBO donationBO = (DonationBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONATION);
 
-    String checkupId;
-    String bloodGroup;
-    String donorId;
+    private String checkupId;
+    private String bloodGroup;
+    private String donorId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

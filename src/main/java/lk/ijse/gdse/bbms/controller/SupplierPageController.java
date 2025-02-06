@@ -67,8 +67,8 @@ public class SupplierPageController implements Initializable {
     @FXML
     private ImageView backArrow;
 
-    HomePageViewController homePageViewController;
-    SupplierBO supplierBO= (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
+    private HomePageViewController homePageViewController;
+    private SupplierBO supplierBO= (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
 
     public void setHomePageViewController(HomePageViewController homePageViewController) {
         this.homePageViewController=homePageViewController;

@@ -62,9 +62,9 @@ public class CampaignPopUpWindowController implements Initializable {
     @FXML
     private Stage stage;
 
-    CampaignPageController campaignPageController;
-    CampaignDTO dto=new CampaignDTO();
-    CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
+    private CampaignPageController campaignPageController;
+    private CampaignDTO dto=new CampaignDTO();
+    private CampaignBO campaignBO= (CampaignBO) BOFactory.getInstance().getBO(BOFactory.BOType.CAMPAIGN);
 
     public void setCampainPageController(CampaignPageController campaignPageController) {
         this.campaignPageController = campaignPageController;

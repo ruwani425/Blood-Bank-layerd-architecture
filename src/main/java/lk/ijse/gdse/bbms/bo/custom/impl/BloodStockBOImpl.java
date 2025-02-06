@@ -17,15 +17,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BloodStockBOImpl implements BloodStockBO {
-    BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
-    BloodRequestDetailDAO bloodRequestDetailDAO = (BloodRequestDetailDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUESTDETAIL);
-    ReservedBloodDAO reservedBloodDAO = (ReservedBloodDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.RESERVEDBLOOD);
-    BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
-    HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
-    BloodStock bloodStock = new BloodStock();
+    private BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
+    private BloodRequestDetailDAO bloodRequestDetailDAO = (BloodRequestDetailDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUESTDETAIL);
+    private ReservedBloodDAO reservedBloodDAO = (ReservedBloodDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.RESERVEDBLOOD);
+    private BloodRequestDAO bloodRequestDAO = (BloodRequestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODREQUEST);
+    private HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public ArrayList<BloodStockDTO> getAllBloodStocks(String status) throws SQLException, ClassNotFoundException {
+
+        BloodStock bloodStock = new BloodStock();
+
         bloodStock.setStatus(status);
         ArrayList<BloodStockDTO> bloodStockDTOs = new ArrayList<>();
         ArrayList<BloodStock> bloodStocks = bloodStockDAO.search(bloodStock);
@@ -48,6 +50,7 @@ public class BloodStockBOImpl implements BloodStockBO {
 
     @Override
     public ArrayList<BloodStockDTO> getExpiredBloodStocks() throws Exception {
+        BloodStock bloodStock = new BloodStock();
         bloodStock.setStatus("Expired");
         ArrayList<BloodStockDTO> bloodStockDTOs = new ArrayList<>();
         ArrayList<BloodStock> bloodStocks = bloodStockDAO.search(bloodStock);

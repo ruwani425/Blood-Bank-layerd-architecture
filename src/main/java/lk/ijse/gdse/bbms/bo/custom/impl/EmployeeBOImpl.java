@@ -10,11 +10,11 @@ import lk.ijse.gdse.bbms.entity.Employee;
 import java.util.ArrayList;
 
 public class EmployeeBOImpl implements EmployeeBO {
-    EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
-    Employee employee = new Employee();
+    private EmployeeDAO employeeDAO = (EmployeeDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.EMPLOYEE);
 
     @Override
     public boolean addEmployee(EmployeeDTO employeeDTO) throws Exception {
+        Employee employee = new Employee();
         employee.setEmployeeID(employeeDTO.getEmployeeID());
         employee.setStatus(employeeDTO.getStatus());
         employee.setAddress(employeeDTO.getAddress());
@@ -27,12 +27,14 @@ public class EmployeeBOImpl implements EmployeeBO {
 
     @Override
     public boolean deleteEmployee(String employeeId) throws Exception {
+        Employee employee = new Employee();
         employee.setEmployeeID(employeeId);
         return employeeDAO.delete(employee);
     }
 
     @Override
     public boolean updateEmployee(EmployeeDTO employeeDTO) throws Exception {
+        Employee employee = new Employee();
         employee.setEmployeeID(employeeDTO.getEmployeeID());
         employee.setStatus(employeeDTO.getStatus());
         employee.setAddress(employeeDTO.getAddress());

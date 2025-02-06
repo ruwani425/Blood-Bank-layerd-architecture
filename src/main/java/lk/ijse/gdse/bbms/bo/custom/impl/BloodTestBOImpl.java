@@ -14,12 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class BloodTestBOImpl implements BloodTestBO {
-    BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
-    BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODTEST);
-    BloodTest bloodTest = new BloodTest();
+
+    private BloodStockDAO bloodStockDAO = (BloodStockDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODSTOCK);
+    private BloodTestDAO bloodTestDAO = (BloodTestDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.BLOODTEST);
 
     @Override
     public BloodTestDTO getBloodTestDetailById(String testID) throws SQLException {
+        BloodTest bloodTest = new BloodTest();
         bloodTest.setTestID(testID);
         bloodTest = bloodTestDAO.findById(bloodTest);
         BloodTestDTO bloodTestDTO = new BloodTestDTO();
@@ -43,6 +44,7 @@ public class BloodTestBOImpl implements BloodTestBO {
 
     @Override
     public ArrayList<BloodTestDTO> getAllBloodTestsBystatus(String pending) throws SQLException, ClassNotFoundException {
+        BloodTest bloodTest = new BloodTest();
         bloodTest.setTestResult(pending);
         ArrayList<BloodTestDTO> bloodTestDTOS = new ArrayList<>();
         ArrayList<BloodTest> bloodTests = bloodTestDAO.search(bloodTest);

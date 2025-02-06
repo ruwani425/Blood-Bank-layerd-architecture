@@ -77,7 +77,7 @@ public class HealthCheckUpPageController implements Initializable {
     private HealthCheckUpBO healthCheckUpBO = (HealthCheckUpBO) BOFactory.getInstance().getBO(BOFactory.BOType.HEALTHCHECKUP);
     private DonorBO donorBO = (DonorBO) BOFactory.getInstance().getBO(BOFactory.BOType.DONOR);
 
-    String colorCode = "#FF0000";
+    private String colorCode = "#FF0000";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

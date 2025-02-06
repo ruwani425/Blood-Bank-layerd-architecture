@@ -44,9 +44,9 @@ public class SupplierPopUpController {
     @FXML
     private TextField txtEmail;
 
-    Stage stage=new Stage();
+    private Stage stage=new Stage();
 
-    SupplierBO supplierBO = (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
+    private SupplierBO supplierBO = (SupplierBO) BOFactory.getInstance().getBO(BOFactory.BOType.SUPPLIER);
     private SupplierPageController supplierPageController;
 
     public void setSupplierPageController(SupplierPageController supplierPageController) {

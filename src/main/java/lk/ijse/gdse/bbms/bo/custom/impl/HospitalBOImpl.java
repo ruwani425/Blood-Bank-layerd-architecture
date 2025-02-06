@@ -9,8 +9,7 @@ import lk.ijse.gdse.bbms.entity.Hospital;
 import java.util.ArrayList;
 
 public class HospitalBOImpl implements HospitalBO {
-    HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
-    Hospital hospital = new Hospital();
+    private HospitalDAO hospitalDAO = (HospitalDAO) DAOFactory.getInstance().getDAO(DAOFactory.DAOType.HOSPITAL);
 
     @Override
     public String getNextHospitalId() throws Exception {
@@ -19,6 +18,7 @@ public class HospitalBOImpl implements HospitalBO {
 
     @Override
     public boolean addHospital(HospitalDTO hospitalDTO) throws Exception {
+        Hospital hospital = new Hospital();
         hospital.setHospitalId(hospitalDTO.getHospitalId());
         hospital.setHospitalAddress(hospitalDTO.getHospitalAddress());
         hospital.setHospitalName(hospitalDTO.getHospitalName());
@@ -30,12 +30,14 @@ public class HospitalBOImpl implements HospitalBO {
 
     @Override
     public boolean deleteHospital(String hospitalId) throws Exception {
+        Hospital hospital = new Hospital();
         hospital.setHospitalId(hospitalId);
         return hospitalDAO.delete(hospital);
     }
 
     @Override
     public boolean updateHospital(HospitalDTO hospitalDTO) throws Exception {
+        Hospital hospital = new Hospital();
         hospital.setHospitalId(hospitalDTO.getHospitalId());
         hospital.setHospitalAddress(hospitalDTO.getHospitalAddress());
         hospital.setHospitalName(hospitalDTO.getHospitalName());
@@ -47,8 +49,8 @@ public class HospitalBOImpl implements HospitalBO {
 
     @Override
     public ArrayList<HospitalDTO> getAllHospitals() throws Exception {
-        ArrayList<HospitalDTO>hospitalDTOS = new ArrayList<>();
-        ArrayList<Hospital>hospitals=hospitalDAO.getAllData();
+        ArrayList<HospitalDTO> hospitalDTOS = new ArrayList<>();
+        ArrayList<Hospital> hospitals = hospitalDAO.getAllData();
         for (Hospital hospital : hospitals) {
             HospitalDTO hospitalDTO = new HospitalDTO();
             hospitalDTO.setHospitalId(hospital.getHospitalId());

@@ -57,7 +57,7 @@ public class EmployeePopUpViewController implements Initializable {
     private TextField txtEmpRole;
 
     private EmployeePageController employeePageController;
-    EmployeeBO employeeBO= (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
+    private EmployeeBO employeeBO= (EmployeeBO) BOFactory.getInstance().getBO(BOFactory.BOType.EMPLOYEE);
 
     public void setEmployeePageViewController(EmployeePageController employeePageController) {
         this.employeePageController = employeePageController;
