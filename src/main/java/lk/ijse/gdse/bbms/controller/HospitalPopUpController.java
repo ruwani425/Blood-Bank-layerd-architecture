@@ -76,7 +76,7 @@ public class HospitalPopUpController implements Initializable {
 
     @FXML
     void btnAddHospitalOnAction(ActionEvent event) {
-        String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
+        String nameRegex = "^[A-Za-z.\\s()-]{3,100}(Hospital|Medical Center|Clinic|Nursing Home)$";
         String addressRegex = "^.{5,100}$"; // At least 5 characters for address
         String contactNumberRegex = "^[0-9]{10}$"; // 10 digits for Sri Lankan contact numbers
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format
@@ -152,7 +152,7 @@ public class HospitalPopUpController implements Initializable {
 
     @FXML
     void btnUpdateHospitalOnAction(ActionEvent event) {
-        String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
+        String nameRegex = "^[A-Za-z.\\s()-]{3,100}(Hospital|Medical Center|Clinic|Nursing Home)$";
         String addressRegex = "^.{5,100}$"; // At least 5 characters for address
         String contactNumberRegex = "^[0-9]{10}$"; // 10 digits for Sri Lankan contact numbers
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format

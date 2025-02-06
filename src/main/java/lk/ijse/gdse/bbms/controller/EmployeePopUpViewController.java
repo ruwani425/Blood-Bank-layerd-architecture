@@ -82,7 +82,7 @@ public class EmployeePopUpViewController implements Initializable {
 
     @FXML
     void btnAddEmployeeOnAction(ActionEvent event) {
-        String nameRegex = "^[A-Za-z\\s]{3,50}$"; // Only letters and spaces, 3-50 characters
+        String nameRegex = "^[A-Za-zÀ-ɏ\\s'.-]{2,50}(\\s[A-Za-zÀ-ɏ\\s'.-]{2,50})*$";// Only letters and spaces, 3-50 characters
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"; // Standard email format
         String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$"; // Sri Lankan NIC format
         String addressRegex = "^.{5,100}$"; // Address should be between 5 and 100 characters
@@ -151,7 +151,7 @@ public class EmployeePopUpViewController implements Initializable {
 
     @FXML
     void btnUpdateEmployeeOnAction(ActionEvent event) {
-        String nameRegex = "^[A-Za-z\\s]{3,50}$";
+        String nameRegex = "^[A-Za-zÀ-ɏ\\s'.-]{2,50}(\\s[A-Za-zÀ-ɏ\\s'.-]{2,50})*$";
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         String nicRegex = "^[0-9]{9}[vVxX]|[0-9]{12}$";
         String addressRegex = "^.{5,100}$";
