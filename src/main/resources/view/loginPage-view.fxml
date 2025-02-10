@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,12 +18,29 @@
          </image>
       </ImageView>
       <JFXTextField fx:id="userNameTxt" layoutX="516.0" layoutY="272.0" prefHeight="28.0" prefWidth="327.0" promptText="Enter User Name" />
-      <JFXPasswordField fx:id="passwordTxt" layoutX="515.0" layoutY="337.0" prefHeight="28.0" prefWidth="328.0" promptText="Enter Password" />
-      <Label fx:id="lblFogotPassword" layoutX="739.0" layoutY="382.0" onMouseClicked="#forgotPasswordClicked" text="Fogot Password?" textFill="#041c86" />
+      <JFXPasswordField fx:id="passwordTxt" layoutX="515.0" layoutY="334.0" onKeyReleased="#hidePasswordOnAction" prefHeight="28.0" prefWidth="328.0" promptText="Enter Password" />
+      <Label fx:id="lblFogotPassword" layoutX="739.0" layoutY="371.0" onMouseClicked="#forgotPasswordClicked" text="Fogot Password?" textFill="#041c86" />
       <JFXButton id="bevel" fx:id="loginBtn" layoutX="635.0" layoutY="455.0" onAction="#navigateToHomePage" prefHeight="33.0" prefWidth="90.0" stylesheets="@../lk/ijse/gdse/bbms/styleSheets/blueButtonCss.css" text="Login">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
+      <JFXTextField fx:id="txtShowPassword" layoutX="515.0" layoutY="334.0" onKeyReleased="#showPasswordOnAction" prefHeight="28.0" prefWidth="328.0" promptText="Enter Password" />
+      <ImageView fx:id="closeEye" fitHeight="28.0" fitWidth="23.0" layoutX="819.0" layoutY="339.0" onMouseClicked="#closeEyeClickOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/close%20eye.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fx:id="openEye" fitHeight="28.0" fitWidth="23.0" layoutX="819.0" layoutY="339.0" onMouseClicked="#openEyeClickOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../lk/ijse/gdse/bbms/assert/open%20eye.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

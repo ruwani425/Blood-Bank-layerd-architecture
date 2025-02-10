@@ -29,17 +29,17 @@
       </Label>
       <ImageView fitHeight="140.0" fitWidth="225.0" layoutX="305.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangleForDashBoard.png" />
+            <Image url="@../lk/ijse/gdse/bbms/assert/new%20rect.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="140.0" fitWidth="225.0" layoutX="568.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangleForDashBoard.png" />
+            <Image url="@../lk/ijse/gdse/bbms/assert/new%20rect.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="140.0" fitWidth="225.0" layoutX="830.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk/ijse/gdse/bbms/assert/blueRectangleForDashBoard.png" />
+            <Image url="@../lk/ijse/gdse/bbms/assert/new%20rect.png" />
          </image>
       </ImageView>
       <Label layoutX="346.0" layoutY="116.0" text="Total Requests" textFill="#0b0117">

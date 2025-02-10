@@ -9,7 +9,7 @@
    <children>
       <ImageView fitHeight="701.0" fitWidth="1369.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk/ijse/gdse/bbms/assert/backgroundImgHome.png" />
+            <Image url="@../lk/ijse/gdse/bbms/assert/sky%20background.png" />
          </image>
       </ImageView>
       <AnchorPane fx:id="homeAnchor" layoutX="186.0" prefHeight="693.0" prefWidth="1176.0" />

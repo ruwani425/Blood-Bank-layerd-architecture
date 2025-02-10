@@ -1,5 +1,7 @@
 package lk.ijse.gdse.bbms.controller;
+
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -21,6 +26,10 @@ import java.util.ResourceBundle;
 public class LoginPageViewController implements Initializable {
 
     public Label lblFogotPassword;
+    public JFXTextField txtShowPassword;
+    public ImageView openEye;
+    public ImageView closeEye;
+    String validPassword;
 
     @FXML
     private TextField userNameTxt;
@@ -41,6 +50,8 @@ public class LoginPageViewController implements Initializable {
 
         rootPane.setPrefWidth(screenWidth);
         rootPane.setPrefHeight(screenHeight);
+        txtShowPassword.setVisible(false);
+        openEye.setVisible(false);
     }
 
     @FXML
@@ -93,25 +104,24 @@ public class LoginPageViewController implements Initializable {
     }
 
 
-
     @FXML
     void navigateToHomePage(ActionEvent event) throws IOException {
 
         String passwordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=!])[A-Za-z\\d@#$%^&+=!]{8,}$";
         String usernameRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
 
-        String validUsername = "";//enter valid e mail
-        String validPassword = "Strong@123";//enter valid password
+        String validUsername = "ruwanielv@gmail.com";//enter valid e mail
+        validPassword = "Strong@123";//enter valid password
 
         String enteredUsername = userNameTxt.getText();
         String enteredPassword = passwordTxt.getText();
 
-        boolean isValidate=Validation.validateTextField(userNameTxt,usernameRegex,enteredUsername);
-        boolean isValidatePassword=Validation.validateTextField(passwordTxt,passwordRegex,enteredPassword);
+        boolean isValidate = Validation.validateTextField(userNameTxt, usernameRegex, enteredUsername);
+        boolean isValidatePassword = Validation.validateTextField(passwordTxt, passwordRegex, enteredPassword);
 
-        if(isValidate && isValidatePassword){
+        if (isValidate && isValidatePassword) {
             System.out.println("Password is valid");
-        }else {
+        } else {
             System.out.println("Password is invalid");
             return;
         }
@@ -124,8 +134,6 @@ public class LoginPageViewController implements Initializable {
 
             stage.setScene(new Scene(homeView));
 
-            stage.setTitle("BBMS Home Page");
-
             stage.show();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -134,5 +142,29 @@ public class LoginPageViewController implements Initializable {
             alert.setContentText("Invalid username or password. Please try again.");
             alert.showAndWait();
         }
+    }
+
+    public void hidePasswordOnAction(KeyEvent keyEvent) {
+        validPassword = passwordTxt.getText();
+        txtShowPassword.setText(validPassword);
+    }
+
+    public void showPasswordOnAction(KeyEvent keyEvent) {
+        validPassword = txtShowPassword.getText();
+        passwordTxt.setText(validPassword);
+    }
+
+    public void closeEyeClickOnAction(MouseEvent mouseEvent) {
+        txtShowPassword.setVisible(true);
+        openEye.setVisible(true);
+        closeEye.setVisible(false);
+        passwordTxt.setVisible(false);
+    }
+
+    public void openEyeClickOnAction(MouseEvent mouseEvent) {
+        txtShowPassword.setVisible(false);
+        openEye.setVisible(false);
+        closeEye.setVisible(true);
+        passwordTxt.setVisible(true);
     }
 }
