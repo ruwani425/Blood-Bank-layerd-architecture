@@ -42,8 +42,6 @@ public class HomeStartViewController implements Initializable {
     private Label lblResived;
 
     private final HomeBO homeBO = (HomeBO) BOFactory.getInstance().getBO(BOFactory.BOType.HOME);
-    private final BloodRequestBO bloodRequestBO = (BloodRequestBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODREQUEST);
-    private final BloodStockBO bloodStockBO = (BloodStockBO) BOFactory.getInstance().getBO(BOFactory.BOType.BLOODSTOCK);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

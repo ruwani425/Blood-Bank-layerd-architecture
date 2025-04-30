@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="738.0" fitWidth="1137.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../lk/ijse/gdse/bbms/assert/dashboardBackground.png" />
+            <Image url="@../lk/ijse/gdse/bbms/assert/loginblueskycolour.png" />
          </image></ImageView>
       <Label fx:id="lblTime" layoutX="34.0" layoutY="519.0" prefHeight="105.0" prefWidth="360.0" text="00.00.00" textFill="#08090a">
          <font>
